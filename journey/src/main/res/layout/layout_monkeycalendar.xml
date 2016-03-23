@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#52d2c4"
+    android:orientation="vertical"
+    android:stretchColumns="*" >
+
+    <TableRow
+        android:id="@+id/tr_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            style="@style/calendar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="星期日" />
+
+        <TextView
+            style="@style/calendar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="星期一" />
+
+        <TextView
+            style="@style/calendar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="星期二" />
+
+        <TextView
+            style="@style/calendar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="星期三" />
+
+        <TextView
+            style="@style/calendar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="星期四" />
+
+        <TextView
+            style="@style/calendar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="星期五" />
+
+        <TextView
+            style="@style/calendar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="星期六" />
+    </TableRow>
+
+    <ViewSwitcher
+        android:id="@+id/vs_calendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ViewSwitcher>
+
+</TableLayout>

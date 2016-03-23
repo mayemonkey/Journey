@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_monkeydate"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:background="#52d2c4"
+    android:orientation="vertical" >
+    
+    <TextView 
+        android:layout_gravity="center"
+        android:id="@+id/tv_date_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="11"/>
+    
+    <ImageView 
+        android:id="@+id/iv_date_point"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/icon_point_white"
+        android:layout_marginTop="3dp"
+        />
+
+</LinearLayout><!-- From: file:/E:/studiospace/Journey/journey/src/main/res/layout/layout_monkeydate.xml -->
