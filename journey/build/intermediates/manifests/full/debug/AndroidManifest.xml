@@ -41,6 +41,7 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
  <!-- 百度地图 -->
     <application
         android:name="com.wipe.zc.journey.global.MyApplication"
@@ -102,6 +103,11 @@
             android:value="ssdd050#journey" />
         <!-- 声明sdk所需的service SDK核心功能 -->
         <service android:name="com.easemob.chat.EMChatService" />
+
+        <activity
+            android:name="com.wipe.zc.journey.ui.activity.ChatActivity"
+            android:label="@string/title_activity_chat" >
+        </activity>
     </application>
 
 </manifest>

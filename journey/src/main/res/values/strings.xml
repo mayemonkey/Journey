@@ -6,5 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_change_password">ChangePasswordActivity</string>
     <string name="title_activity_friends">FriendsActivity</string>
+    <string name="title_activity_chat">ChatActivity</string>
 
 </resources>

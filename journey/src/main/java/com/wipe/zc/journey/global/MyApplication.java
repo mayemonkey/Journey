@@ -3,31 +3,21 @@ package com.wipe.zc.journey.global;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Handler;
 
 import com.baidu.mapapi.SDKInitializer;
-import com.easemob.EMConnectionListener;
 import com.easemob.chat.EMChat;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMChatOptions;
-import com.easemob.chat.EMContactListener;
-import com.easemob.chat.EMContactManager;
-import com.easemob.chat.core.EMConnectionManager;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.wipe.zc.journey.ui.activity.HomeActivity;
-import com.wipe.zc.journey.ui.fragment.FriendsFragment;
-import com.wipe.zc.journey.util.JsonUtil;
-import com.wipe.zc.journey.util.LogUtil;
 
 import android.app.ActivityManager;
 import android.app.Application;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.util.Log;
 
 public class MyApplication extends Application {
@@ -38,6 +28,16 @@ public class MyApplication extends Application {
 
     //登陆完成，全局使用昵称
     private static String nickname;
+
+    private static Handler AppHandler;
+
+    public static void setHandler(Handler handler){
+        AppHandler = handler;
+    }
+
+    public static Handler getHandler(){
+        return AppHandler;
+    }
 
     @Override
     public void onCreate() {

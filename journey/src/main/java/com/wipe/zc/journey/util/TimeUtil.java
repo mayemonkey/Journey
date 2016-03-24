@@ -64,9 +64,52 @@ public class TimeUtil {
         int month = calendar.get(Calendar.MONTH) + 1;
         int date = calendar.get(Calendar.DAY_OF_MONTH);
         if (needYear) {
-            return year + ":" + month + ":" + date;
+            return year + "-" + month + "-" + date;
         } else {
-            return month + ":" + date;
+            return month + "-" + date;
+        }
+    }
+
+    /**
+     * 比较是否为10分钟时差
+     * @param now
+     * @param last
+     * @return -1:显示年月时分  0：显示月时分   1：显示时分    2：不显示
+     *
+     */
+    public static int compareCalendar10(Calendar now, Calendar last) {
+        int year1 = now.get(Calendar.YEAR);
+        int month1 = now.get(Calendar.MONTH) + 1;
+        int date1 = now.get(Calendar.DAY_OF_MONTH);
+        int hour1 = now.get(Calendar.HOUR_OF_DAY);
+        int minute1 = now.get(Calendar.MINUTE);
+
+        int year2 = last.get(Calendar.YEAR);
+        int month2 = last.get(Calendar.MONTH) + 1;
+        int date2 = last.get(Calendar.DAY_OF_MONTH);
+        int hour2 = last.get(Calendar.HOUR_OF_DAY);
+        int minute2 = last.get(Calendar.MINUTE);
+
+        if (year1 >= year2) {   //小于当前年，一年前通话
+            return -1;
+        } else {
+            if (month1 >= month2) {     //小于当前月，一月前通话
+                return 0;
+            } else {
+                if (date1 >= date2) {       //小于当前日，一天前通话
+                    return 0;
+                } else {
+                    if (hour1 >= hour2) {   //一小时前
+                        return 1;
+                    } else {
+                        if (minute1 - minute2 >= 10) {  //10分钟前
+                            return 1;
+                        } else {
+                            return 2;
+                        }
+                    }
+                }
+            }
         }
     }
 

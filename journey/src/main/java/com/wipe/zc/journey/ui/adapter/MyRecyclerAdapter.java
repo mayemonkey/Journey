@@ -1,9 +1,11 @@
 package com.wipe.zc.journey.ui.adapter;
 
+import android.content.Intent;
 import android.support.v4.util.TimeUtils;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.easemob.chat.EMChat;
@@ -15,6 +17,8 @@ import com.wipe.zc.journey.R;
 import com.wipe.zc.journey.global.MyApplication;
 import com.wipe.zc.journey.http.AppURL;
 import com.wipe.zc.journey.lib.CircleImageView;
+import com.wipe.zc.journey.ui.activity.ChatActivity;
+import com.wipe.zc.journey.ui.activity.HomeActivity;
 import com.wipe.zc.journey.util.ImageLoaderOption;
 import com.wipe.zc.journey.util.TimeUtil;
 
@@ -29,9 +33,11 @@ import java.util.List;
 public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.FriendsViewHolder> {
 
     private List list;
+    private HomeActivity activity;
 
-    public MyRecyclerAdapter(List list) {
+    public MyRecyclerAdapter(List list,HomeActivity activity) {
         this.list = list;
+        this.activity = activity;
     }
 
     @Override
@@ -43,7 +49,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Fr
 
     @Override
     public void onBindViewHolder(FriendsViewHolder holder, int position) {
-        String name = (String) list.get(position);
+        final String name = (String) list.get(position);
         //处理View的显示
 
         ImageLoader.getInstance().displayImage(AppURL.getimage + "?nickname=" + name, holder
@@ -73,6 +79,16 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Fr
             holder.tv_friends_message.setText("[快去和好友聊天吧]");
             holder.tv_friends_time.setVisibility(View.INVISIBLE);
         }
+
+        //整体条目点击事件
+        holder.rl_list_friends.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, ChatActivity.class);
+                intent.putExtra("receiver",name);
+                activity.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -85,6 +101,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Fr
         public TextView tv_friends_name;
         public TextView tv_friends_message;
         public TextView tv_friends_time;
+        public RelativeLayout rl_list_friends;
 
         public FriendsViewHolder(View convertView) {
             super(convertView);
@@ -92,6 +109,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Fr
             tv_friends_name = (TextView) convertView.findViewById(R.id.tv_friends_name);
             tv_friends_message = (TextView) convertView.findViewById(R.id.tv_friends_message);
             tv_friends_time = (TextView) convertView.findViewById(R.id.tv_friends_time);
+            rl_list_friends = (RelativeLayout) convertView.findViewById(R.id.rl_list_friends);
         }
 
         public static FriendsViewHolder getHolder(View convertView) {

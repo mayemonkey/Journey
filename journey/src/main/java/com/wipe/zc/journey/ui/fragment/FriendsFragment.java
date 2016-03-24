@@ -118,7 +118,7 @@ public class FriendsFragment extends Fragment implements SwipeRefreshLayout.OnRe
         rv_friends.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         //创建适配器
-        adapter = new MyRecyclerAdapter(list);
+        adapter = new MyRecyclerAdapter(list, (HomeActivity) getActivity());
 
         //设置适配器
         rv_friends.setAdapter(adapter);
@@ -238,10 +238,10 @@ public class FriendsFragment extends Fragment implements SwipeRefreshLayout.OnRe
         public void onReceive(Context context, Intent intent) {
             String result = intent.getExtras().getString("data");
             list.clear();
-            if(result.contains("-")){
+            if (result.contains("-")) {
                 String[] results = result.split("-");
                 list.addAll(Arrays.asList(results));
-            }else{
+            } else {
                 list.add(result);
             }
         }

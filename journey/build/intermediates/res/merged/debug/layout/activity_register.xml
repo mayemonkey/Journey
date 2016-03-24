@@ -7,21 +7,22 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp" >
+        android:layout_height="45dp" >
 
         <ImageView
             android:id="@+id/iv_register_cancel"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_centerVertical="true"
+            android:layout_margin="10dp"
             android:background="@drawable/icon_cancel" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
             android:text="注册"
+            android:textColor="#000000"
             android:textSize="20sp" />
     </RelativeLayout>
 

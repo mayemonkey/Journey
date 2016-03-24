@@ -22,6 +22,7 @@
     <string name="app_name">行程</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_change_password">ChangePasswordActivity</string>
+    <string name="title_activity_chat">ChatActivity</string>
     <string name="title_activity_friends">FriendsActivity</string>
     <!-- From: file:/E:/studiospace/Journey/journey/src/main/res/values/styles.xml -->
     <eat-comment/>

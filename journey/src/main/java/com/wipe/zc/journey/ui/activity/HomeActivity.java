@@ -3,38 +3,31 @@ package com.wipe.zc.journey.ui.activity;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.List;
 
 import android.app.DatePickerDialog.OnDateSetListener;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.easemob.chat.EMChat;
-import com.easemob.chat.EMContactListener;
-import com.easemob.chat.EMContactManager;
+import com.easemob.chat.EMChatManager;
+import com.easemob.chat.EMMessage;
+import com.easemob.chat.TextMessageBody;
 import com.wipe.zc.journey.dao.InviteDao;
-import com.wipe.zc.journey.domain.Invite;
 import com.wipe.zc.journey.domain.User;
 import com.wipe.zc.journey.global.MyApplication;
 import com.wipe.zc.journey.http.AppURL;
@@ -47,6 +40,7 @@ import com.wipe.zc.journey.ui.fragment.FragmentFactory;
 import com.wipe.zc.journey.ui.fragment.HomeFragment;
 import com.wipe.zc.journey.ui.fragment.TotalFragment;
 import com.wipe.zc.journey.util.HttpUtil;
+import com.wipe.zc.journey.util.IMUtil;
 import com.wipe.zc.journey.util.LogUtil;
 import com.wipe.zc.journey.util.ToastUtil;
 import com.wipe.zc.journey.view.MonthPickerDialog;
@@ -133,8 +127,11 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         initLeftView();
         initContentView();
 
-        setHXListener();
+        //设置邀请监听
+        IMUtil.setHXInviteListener(this);
+
     }
+
 
     /**
      * 初始化左侧视图
@@ -248,6 +245,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     public void setTitleText(CharSequence text) {
         tv_title_text.setText(text);
     }
+
 
 
     /**
@@ -420,81 +418,6 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         iv_title_right.setVisibility(right ? View.VISIBLE : View.INVISIBLE);
         iv_title_right.setEnabled(right);
         tv_title_text.setEnabled(text);
-    }
-
-
-    /**
-     * 监听方法
-     */
-    private void setHXListener() {
-        //环信初始化
-        EMContactManager.getInstance().setContactListener(new EMContactListener() {
-            @Override
-            public void onContactAdded(List<String> list) {
-                if (list != null && list.size() > 0) {
-                    Intent intent = new Intent("im.add.broadcast.action");
-                    String name_result = "";
-                    int i = 0;
-                    for (String name : list) {
-                        if (i == 0) {
-                            name_result = name;
-                        } else {
-                            name_result += "-" + name;
-                        }
-                    }
-                    intent.putExtra("data", name_result);
-                    sendBroadcast(intent);
-                }
-            }
-
-            @Override
-            public void onContactDeleted(List<String> list) {
-
-            }
-
-            @Override
-            public void onContactInvited(String inviter, String reason) {
-                LogUtil.i("环信好友", "好友:" + inviter + "申请说明" + reason);
-                System.out.println("环信好友------好友:" + inviter + "申请说明" + reason);
-
-                if (InviteDao.checkInvite(inviter)) {
-                    return;
-                }
-                InviteDao.addInvite(inviter, reason);
-
-                NotificationManager nManager = (NotificationManager) getSystemService(Context
-                        .NOTIFICATION_SERVICE);
-
-                Notification notification = new Notification(R.drawable.icon_icon, "行程好友邀请",
-                        System.currentTimeMillis());
-
-                Intent notificationIntent = new Intent(HomeActivity.this, MessageActivity.class);
-
-                PendingIntent contentIntent = PendingIntent.getActivity(HomeActivity.this, 0,
-                        notificationIntent, 0);
-
-                Context context = getApplicationContext();
-
-                CharSequence contentTitle = "好友邀请提示";
-
-                CharSequence contentText = inviter + "  想要添加你为好友";
-
-                notification.setLatestEventInfo(context, contentTitle, contentText, contentIntent);
-
-                nManager.notify(0, notification);
-            }
-
-            @Override
-            public void onContactAgreed(String s) {
-
-            }
-
-            @Override
-            public void onContactRefused(String s) {
-
-            }
-        });
-        EMChat.getInstance().setAppInited();
     }
 
     protected void onStart() {
