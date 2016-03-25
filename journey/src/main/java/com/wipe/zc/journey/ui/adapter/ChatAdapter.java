@@ -12,6 +12,7 @@ import com.wipe.zc.journey.global.MyApplication;
 import com.wipe.zc.journey.http.AppURL;
 import com.wipe.zc.journey.lib.CircleImageView;
 import com.wipe.zc.journey.util.ImageLoaderOption;
+import com.wipe.zc.journey.util.LogUtil;
 import com.wipe.zc.journey.util.TimeUtil;
 
 import java.util.List;
@@ -45,7 +46,7 @@ public class ChatAdapter extends BaseAdapter {
 
     @Override
     public int getViewTypeCount() {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -78,6 +79,7 @@ public class ChatAdapter extends BaseAdapter {
                 }
                 setRightHolder(convertView, chatMessage, position);
         }
+        LogUtil.i("ChatListView", position + "");
         return convertView;
     }
 
@@ -152,7 +154,7 @@ public class ChatAdapter extends BaseAdapter {
     public void setRightHolder(View convertView, ChatMessage chatMessage, int position) {
         RightViewHolder holder_right = RightViewHolder.getHolder(convertView);
         //头像加载
-        ImageLoader.getInstance().displayImage(AppURL.getimage + "/?nickname=" +
+        ImageLoader.getInstance().displayImage(AppURL.getimage + "?nickname=" +
                         chatMessage.getSendAvatar(),
                 holder_right
                         .civ_chat_right_icon, ImageLoaderOption.list_options);
@@ -164,7 +166,8 @@ public class ChatAdapter extends BaseAdapter {
             showRightTime(chatMessage, holder_right, position);
         } else {
             holder_right.tv_chat_right_time.setVisibility(View.VISIBLE);
-            holder_right.tv_chat_right_time.setText(TimeUtil.getFromatTime(chatMessage
+            holder_right.tv_chat_right_time.setText(TimeUtil.getFromatDate(chatMessage
+                    .getChatTime(), false) + "   "+ TimeUtil.getFromatTime(chatMessage
                     .getChatTime(), false));
         }
     }
@@ -179,7 +182,7 @@ public class ChatAdapter extends BaseAdapter {
     public void showRightTime(ChatMessage chatMessage, RightViewHolder holder_right, int position) {
         String time = new String();
         switch (TimeUtil.compareCalendar10(chatMessage.getChatTime(),
-                list.get(position - 1).getChatTime())) {
+                list.get(position-1).getChatTime())) {
             case -1:
                 time = TimeUtil.getFromatDate(chatMessage.getChatTime(), true);
                 holder_right.tv_chat_right_time.setText(time);

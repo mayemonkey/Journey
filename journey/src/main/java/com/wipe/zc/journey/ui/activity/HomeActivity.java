@@ -289,7 +289,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_menu_home:
-                setTitleStyle(true, true, false);
+                setTitleStyle(false, true, true);
                 currentPage = Page_Home;
                 // 替换Fragment
                 ft = getSupportFragmentManager().beginTransaction();
@@ -299,7 +299,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
                 break;
 
             case R.id.tv_menu_calendar:
-                setTitleStyle(true, false, true);
+                setTitleStyle(false, true, true);
                 currentPage = Page_Calendar;
                 // 替换Fragment
                 ft = getSupportFragmentManager().beginTransaction();

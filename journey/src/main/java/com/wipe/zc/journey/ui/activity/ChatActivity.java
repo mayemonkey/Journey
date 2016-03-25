@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Handler;
@@ -14,7 +16,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.easemob.EMCallBack;
@@ -27,8 +28,8 @@ import com.wipe.zc.journey.R;
 import com.wipe.zc.journey.domain.ChatMessage;
 import com.wipe.zc.journey.global.MyApplication;
 import com.wipe.zc.journey.ui.adapter.ChatAdapter;
-import com.wipe.zc.journey.util.IMUtil;
-import com.wipe.zc.journey.util.LogUtil;
+import com.wipe.zc.journey.util.TimeUtil;
+import com.wipe.zc.journey.view.RefreshListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,14 +37,15 @@ import java.util.List;
 public class ChatActivity extends Activity implements View.OnClickListener {
 
     private ImageView iv_chat_cancel;
-    private ListView lv_chat;
+    private RefreshListView rlv_chat;
     private ChatAdapter adapter;
     private List<ChatMessage> list = new ArrayList<>();
     private TextView tv_chat_name;
-
+    private String friendName;
 
     private EditText et_chat_content;
     private TextView tv_chat_send;
+    private boolean isRefreshing = false;       //标记ListView刷新状态
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +53,13 @@ public class ChatActivity extends Activity implements View.OnClickListener {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_chat);
 
+        friendName = getIntent().getStringExtra("receiver");
+
         initWidget();
         setIM();
+        requestRecord(null, 20);
+        setListViewPosition(list.size() - 1);
     }
-
 
 
     /**
@@ -71,15 +76,20 @@ public class ChatActivity extends Activity implements View.OnClickListener {
         iv_chat_cancel = (ImageView) findViewById(R.id.iv_chat_cancel);
         iv_chat_cancel.setOnClickListener(this);
         tv_chat_name = (TextView) findViewById(R.id.tv_chat_name);
-        tv_chat_name.setText(getIntent().getStringExtra("receiver"));
+        tv_chat_name.setText(friendName);
 
         et_chat_content = (EditText) findViewById(R.id.et_chat_content);
         tv_chat_send = (TextView) findViewById(R.id.tv_chat_send);
         tv_chat_send.setOnClickListener(this);
 
-        lv_chat = (ListView) findViewById(R.id.lv_chat);
+        rlv_chat = (RefreshListView) findViewById(R.id.rlv_chat);
+        rlv_chat.setOnRefreshListener(new MyRefreshListener());
+        rlv_chat.setDividerHeight(0);
+        rlv_chat.setVerticalScrollBarEnabled(true);
+        rlv_chat.setSelector(android.R.color.transparent);
+
         adapter = new ChatAdapter(list);
-        lv_chat.setAdapter(adapter);
+        rlv_chat.setAdapter(adapter);
     }
 
     @Override
@@ -91,8 +101,8 @@ public class ChatActivity extends Activity implements View.OnClickListener {
 
             case R.id.tv_chat_send:     //发送消息
                 String content = et_chat_content.getText().toString();
-                if(!TextUtils.isEmpty(content)){
-                    sendMessage(getIntent().getStringExtra("receiver"),content);
+                if (!TextUtils.isEmpty(content)) {
+                    sendMessage(friendName, content);
                 }
                 break;
         }
@@ -100,15 +110,16 @@ public class ChatActivity extends Activity implements View.OnClickListener {
 
     /**
      * 发送消息
+     *
      * @param receiver
      * @param content
      */
-    private void sendMessage(String receiver, String content) {
+    private void sendMessage(String receiver, final String content) {
         // 获取到与聊天人的会话对象。参数username为聊天人的userid或者groupid，后文中的username皆是如此
         EMConversation conversation = EMChatManager.getInstance()
                 .getConversation(receiver);
         // 创建一条文本消息
-        EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
+        final EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
         // // 如果是群聊，设置chattype,默认是单聊
         // message.setChatType(ChatType.GroupChat);
         // 设置消息body
@@ -138,11 +149,16 @@ public class ChatActivity extends Activity implements View.OnClickListener {
             public void onSuccess() {
                 // TODO Auto-generated method stub
                 Log.i("TAG", "消息发送成功");
-//                ChatMessage data = new ChatMessage();
-//                data.setSendContent(content);
-//                data.setType(1);
-//                mListData.add(data);
-//                mHandler.sendEmptyMessage(0x00001);
+
+                //提取EMMessage数据至ChatMessage中
+                ChatMessage data = setChatMessageData(message);
+
+                //data.setType(EMMessage.Type.TXT);
+                list.add(data);
+
+                //TODO ListView刷新
+
+                //mHandler.sendEmptyMessage(0x00001);
             }
         });
     }
@@ -173,11 +189,107 @@ public class ChatActivity extends Activity implements View.OnClickListener {
             Log.d("main", "new message id:" + msgId + " from:" + msgFrom + " type:" + msgType);
             //更方便的方法是通过msgId直接获取整个message
             EMMessage message = EMChatManager.getInstance().getMessage(msgId);
-            Message msg = new Message();
-            Handler handler = MyApplication.getHandler();
-            msg.obj = message;
-            handler.sendMessage(msg);
+
+            //TODO 添加至集合，更新ListView
+
+
+
         }
     }
+
+    /**
+     * 自定义刷新监听
+     */
+    private class MyRefreshListener implements RefreshListView.OnRefreshListener {
+        @Override
+        public void refreshing() {
+            //改变刷新状态
+            isRefreshing = true;
+            //加载更多消息记录
+            requestRecord(list.get(0).getMessageId(), 10);
+        }
+    }
+
+    private void requestRecord(String start, int size) {
+        //获取此会话的所有消息
+        EMConversation conversation = EMChatManager.getInstance().getConversation(friendName);
+        int count = conversation.getAllMsgCount();
+        if (start == null) {
+            //sdk初始化加载的聊天记录为20条，到顶时需要去db里获取更多
+            List<EMMessage> messages = conversation.getAllMessages();
+            addMessageToList(messages, count);
+        } else {
+            //获取startMsgId之前的pagesize条消息，此方法获取的messages sdk会自动存入到此会话中，app中无需再次把获取到的messages添加到会话中
+            List<EMMessage> messages = conversation.loadMoreMsgFromDB(start, size);
+            addMessageToList(messages, count);
+        }
+
+    }
+
+    /**
+     * 将消息添加给显示List
+     *
+     * @param messages
+     */
+    private void addMessageToList(final List<EMMessage> messages, int count) {
+        if (messages != null) {
+            int index = 0;
+            for (EMMessage message : messages) {
+                if (list.size() < count) {
+                    ChatMessage data = setChatMessageData(message);
+                    list.add(0, data);
+                    index++;
+                    adapter.notifyDataSetChanged();
+                } else {
+                    break;
+                }
+            }
+            setListViewPosition(index);
+        }
+        cancelHeadView();
+    }
+
+    /**
+     * 从EMMessage中提取数据封装至ChatMessage对象中
+     *
+     * @param message
+     * @return
+     */
+    private ChatMessage setChatMessageData(EMMessage message) {
+        ChatMessage data = new ChatMessage();
+        data.setSendAvatar(MyApplication.getNickname());
+        data.setReceiveAvatar(friendName);
+        if (message.getType() == EMMessage.Type.TXT) {
+            data.setSendContent(((TextMessageBody) message.getBody()).getMessage());
+        }
+        data.setMessageId(message.getMsgId());
+        data.setChatTime(TimeUtil.longToTime(message.getMsgTime()));
+        return data;
+    }
+
+    /**
+     * 隐藏ListView头视图
+     */
+    private void cancelHeadView() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (isRefreshing) {
+                    rlv_chat.reviewHeader();
+                    isRefreshing = false;
+                }
+            }
+        });
+    }
+
+    /**
+     * 设置ListView视图位置
+     *
+     * @param selection
+     */
+    public void setListViewPosition(int selection) {
+        rlv_chat.setSelection(selection);
+    }
+
 }
 

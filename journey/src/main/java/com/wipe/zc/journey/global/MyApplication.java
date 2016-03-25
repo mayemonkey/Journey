@@ -29,16 +29,6 @@ public class MyApplication extends Application {
     //登陆完成，全局使用昵称
     private static String nickname;
 
-    private static Handler AppHandler;
-
-    public static void setHandler(Handler handler){
-        AppHandler = handler;
-    }
-
-    public static Handler getHandler(){
-        return AppHandler;
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();

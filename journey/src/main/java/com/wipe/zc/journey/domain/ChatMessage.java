@@ -12,6 +12,15 @@ public class ChatMessage {
     Calendar chatTime;
     String sendAvatar;
     String sendContent;
+    String messageId;
+
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
 
     public String getReceiveAvatar() {
         return receiveAvatar;

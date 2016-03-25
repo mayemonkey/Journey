@@ -90,19 +90,19 @@ public class TimeUtil {
         int hour2 = last.get(Calendar.HOUR_OF_DAY);
         int minute2 = last.get(Calendar.MINUTE);
 
-        if (year1 >= year2) {   //小于当前年，一年前通话
+        if (year1 > year2) {   //小于当前年，一年前通话
             return -1;
         } else {
-            if (month1 >= month2) {     //小于当前月，一月前通话
+            if (month1 > month2) {     //小于当前月，一月前通话
                 return 0;
             } else {
-                if (date1 >= date2) {       //小于当前日，一天前通话
+                if (date1 > date2) {       //小于当前日，一天前通话
                     return 0;
                 } else {
-                    if (hour1 >= hour2) {   //一小时前
+                    if (hour1 > hour2) {   //一小时前
                         return 1;
                     } else {
-                        if (minute1 - minute2 >= 10) {  //10分钟前
+                        if (minute1 - minute2 > 10) {  //10分钟前
                             return 1;
                         } else {
                             return 2;

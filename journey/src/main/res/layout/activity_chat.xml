@@ -28,8 +28,8 @@
             android:textSize="20sp" />
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/lv_chat"
+    <com.wipe.zc.journey.view.RefreshListView
+        android:id="@+id/rlv_chat"
         android:layout_width="match_parent"
         android:layout_weight="1"
         android:layout_height="0dp"/>

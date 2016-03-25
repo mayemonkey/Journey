@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -20,33 +19,23 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.easemob.chat.EMChat;
 import com.easemob.chat.EMContactListener;
 import com.easemob.chat.EMContactManager;
 import com.easemob.chat.EMNotifier;
 import com.easemob.exceptions.EaseMobException;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.wipe.zc.journey.R;
 
 
-import com.wipe.zc.journey.domain.Journey;
 import com.wipe.zc.journey.global.MyApplication;
 import com.wipe.zc.journey.ui.activity.HomeActivity;
-import com.wipe.zc.journey.ui.adapter.MyRecyclerAdapter;
-import com.wipe.zc.journey.util.JsonUtil;
+import com.wipe.zc.journey.ui.adapter.FriendsAdapter;
 import com.wipe.zc.journey.util.LogUtil;
 import com.wipe.zc.journey.util.ToastUtil;
 import com.wipe.zc.journey.util.ViewUtil;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
 public class FriendsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,
         View.OnClickListener {
@@ -54,7 +43,7 @@ public class FriendsFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private View view;
     private SwipeRefreshLayout srl_friends;
     private RecyclerView rv_friends;
-    private MyRecyclerAdapter adapter;
+    private FriendsAdapter adapter;
     private List list = new ArrayList();
     private TextView tv_friends_add;
 
@@ -118,7 +107,7 @@ public class FriendsFragment extends Fragment implements SwipeRefreshLayout.OnRe
         rv_friends.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         //创建适配器
-        adapter = new MyRecyclerAdapter(list, (HomeActivity) getActivity());
+        adapter = new FriendsAdapter(list, (HomeActivity) getActivity());
 
         //设置适配器
         rv_friends.setAdapter(adapter);
