@@ -71,6 +71,7 @@ public class ChatAdapter extends BaseAdapter {
                             .layout_list_chat_left, null);
                 }
                 setLeftHolder(convertView, chatMessage, position);
+                return convertView;
 
             case 2:     //发送的消息（右）
                 if (convertView == null) {
@@ -78,9 +79,13 @@ public class ChatAdapter extends BaseAdapter {
                             .layout_list_chat_right, null);
                 }
                 setRightHolder(convertView, chatMessage, position);
+                return convertView;
+
+            default:
+                LogUtil.i("ChatListView", position + "");
+                return null;
         }
-        LogUtil.i("ChatListView", position + "");
-        return convertView;
+
     }
 
 
@@ -94,20 +99,26 @@ public class ChatAdapter extends BaseAdapter {
     public void setLeftHolder(View convertView, ChatMessage chatMessage, int position) {
         LeftViewHolder holder_left = LeftViewHolder.getHolder(convertView);
         //头像加载
-        ImageLoader.getInstance().displayImage(AppURL.getimage + "/?nickname=" +
+        ImageLoader.getInstance().displayImage(AppURL.getimage + "?nickname=" +
                         chatMessage.getSendAvatar(),
                 holder_left
                         .civ_chat_left_icon, ImageLoaderOption.list_options);
         //消息内容
-        holder_left.tv_chat_left_content.setText(chatMessage.getSendContent());
+        holder_left.tv_chat_left_content.setText(chatMessage.getContent());
 
         //时间显示
         if (position != 0) {
             showLeftTime(chatMessage, holder_left, position);
         } else {
             holder_left.tv_chat_left_time.setVisibility(View.VISIBLE);
-            holder_left.tv_chat_left_time.setText(TimeUtil.getFromatTime(chatMessage
-                    .getChatTime(), false));
+            if (position == list.size()) {
+                holder_left.tv_chat_left_time.setText(TimeUtil.getFromatTime(chatMessage.getChatTime
+                        (), false));
+            } else {
+                holder_left.tv_chat_left_time.setText(TimeUtil.getFromatDate(chatMessage
+                        .getChatTime(), false) + "   " + TimeUtil.getFromatTime(chatMessage
+                        .getChatTime(), false));
+            }
         }
     }
 
@@ -159,7 +170,7 @@ public class ChatAdapter extends BaseAdapter {
                 holder_right
                         .civ_chat_right_icon, ImageLoaderOption.list_options);
         //消息内容
-        holder_right.tv_chat_right_content.setText(chatMessage.getSendContent());
+        holder_right.tv_chat_right_content.setText(chatMessage.getContent());
 
         //时间显示
         if (position != 0) {
@@ -167,7 +178,7 @@ public class ChatAdapter extends BaseAdapter {
         } else {
             holder_right.tv_chat_right_time.setVisibility(View.VISIBLE);
             holder_right.tv_chat_right_time.setText(TimeUtil.getFromatDate(chatMessage
-                    .getChatTime(), false) + "   "+ TimeUtil.getFromatTime(chatMessage
+                    .getChatTime(), false) + "   " + TimeUtil.getFromatTime(chatMessage
                     .getChatTime(), false));
         }
     }
@@ -182,13 +193,13 @@ public class ChatAdapter extends BaseAdapter {
     public void showRightTime(ChatMessage chatMessage, RightViewHolder holder_right, int position) {
         String time = new String();
         switch (TimeUtil.compareCalendar10(chatMessage.getChatTime(),
-                list.get(position-1).getChatTime())) {
-            case -1:
+                list.get(position - 1).getChatTime())) {
+            case -1:    //年月日
                 time = TimeUtil.getFromatDate(chatMessage.getChatTime(), true);
                 holder_right.tv_chat_right_time.setText(time);
                 break;
 
-            case 0:
+            case 0:     //月日
                 time = TimeUtil.getFromatDate(chatMessage.getChatTime(), false);
                 holder_right.tv_chat_right_time.setText(time);
                 break;

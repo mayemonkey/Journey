@@ -8,11 +8,18 @@ import java.util.Calendar;
 public class ChatMessage {
 
     String receiveAvatar;
-    String receiveContent;
+    String content;
     Calendar chatTime;
     String sendAvatar;
-    String sendContent;
     String messageId;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public String getMessageId() {
         return messageId;
@@ -30,13 +37,6 @@ public class ChatMessage {
         this.receiveAvatar = receiveAvatar;
     }
 
-    public String getReceiveContent() {
-        return receiveContent;
-    }
-
-    public void setReceiveContent(String receiveContent) {
-        this.receiveContent = receiveContent;
-    }
 
     public Calendar getChatTime() {
         return chatTime;
@@ -54,11 +54,4 @@ public class ChatMessage {
         this.sendAvatar = sendAvatar;
     }
 
-    public String getSendContent() {
-        return sendContent;
-    }
-
-    public void setSendContent(String sendContent) {
-        this.sendContent = sendContent;
-    }
 }

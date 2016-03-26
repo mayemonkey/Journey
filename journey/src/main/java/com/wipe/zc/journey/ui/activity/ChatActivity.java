@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,6 +47,8 @@ public class ChatActivity extends Activity implements View.OnClickListener {
     private EditText et_chat_content;
     private TextView tv_chat_send;
     private boolean isRefreshing = false;       //标记ListView刷新状态
+    private MessageReceiver msgReceiver;
+    private InputMethodManager imm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +57,15 @@ public class ChatActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_chat);
 
         friendName = getIntent().getStringExtra("receiver");
+        //
+        imm = (InputMethodManager) getSystemService(Context
+                .INPUT_METHOD_SERVICE);
 
         initWidget();
         setIM();
-        requestRecord(null, 20);
+        EMChatManager.getInstance().loadAllConversations();
+        requestRecord(EMChatManager.getInstance().getConversation(friendName).getLastMessage()
+                .getMsgId(), 20);
         setListViewPosition(list.size() - 1);
     }
 
@@ -135,19 +143,16 @@ public class ChatActivity extends Activity implements View.OnClickListener {
 
             @Override
             public void onError(int arg0, String arg1) {
-                // TODO Auto-generated method stub
                 Log.i("TAG", "消息发送失败");
             }
 
             @Override
             public void onProgress(int arg0, String arg1) {
-                // TODO Auto-generated method stub
                 Log.i("TAG", "正在发送消息");
             }
 
             @Override
             public void onSuccess() {
-                // TODO Auto-generated method stub
                 Log.i("TAG", "消息发送成功");
 
                 //提取EMMessage数据至ChatMessage中
@@ -156,8 +161,18 @@ public class ChatActivity extends Activity implements View.OnClickListener {
                 //data.setType(EMMessage.Type.TXT);
                 list.add(data);
 
-                //TODO ListView刷新
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.notifyDataSetChanged();
+                        rlv_chat.setSelection(list.size());
 
+                        //修改EditText
+                        et_chat_content.setText("");    //清空输入框
+                        //隐藏软键盘
+                        imm.hideSoftInputFromWindow(et_chat_content.getWindowToken(), 0);
+                    }
+                });
                 //mHandler.sendEmptyMessage(0x00001);
             }
         });
@@ -168,11 +183,11 @@ public class ChatActivity extends Activity implements View.OnClickListener {
      */
     public void initMessageBroadCastReceiver() {
         EMChat.getInstance().setAppInited();
-        MessageReceiver msgReceiver = new MessageReceiver();
+        msgReceiver = new MessageReceiver();
         IntentFilter intentFilter = new IntentFilter(EMChatManager.getInstance()
                 .getNewMessageBroadcastAction());
         intentFilter.setPriority(3);
-        MyApplication.getContext().registerReceiver(msgReceiver, intentFilter);
+        registerReceiver(msgReceiver, intentFilter);
     }
 
     class MessageReceiver extends BroadcastReceiver {
@@ -191,9 +206,10 @@ public class ChatActivity extends Activity implements View.OnClickListener {
             EMMessage message = EMChatManager.getInstance().getMessage(msgId);
 
             //TODO 添加至集合，更新ListView
-
-
-
+            ChatMessage chatMessage = setChatMessageData(message);
+            list.add(chatMessage);
+            adapter.notifyDataSetChanged();
+            rlv_chat.setSelection(list.size());
         }
     }
 
@@ -213,6 +229,7 @@ public class ChatActivity extends Activity implements View.OnClickListener {
     private void requestRecord(String start, int size) {
         //获取此会话的所有消息
         EMConversation conversation = EMChatManager.getInstance().getConversation(friendName);
+        conversation.markAllMessagesAsRead();
         int count = conversation.getAllMsgCount();
         if (start == null) {
             //sdk初始化加载的聊天记录为20条，到顶时需要去db里获取更多
@@ -234,16 +251,18 @@ public class ChatActivity extends Activity implements View.OnClickListener {
     private void addMessageToList(final List<EMMessage> messages, int count) {
         if (messages != null) {
             int index = 0;
+            List<ChatMessage> list_chat = new ArrayList<ChatMessage>();
             for (EMMessage message : messages) {
-                if (list.size() < count) {
+                if (list.size() + index < count) {
                     ChatMessage data = setChatMessageData(message);
-                    list.add(0, data);
+                    list_chat.add(data);
                     index++;
-                    adapter.notifyDataSetChanged();
                 } else {
                     break;
                 }
             }
+            list.addAll(0, list_chat);
+            adapter.notifyDataSetChanged();
             setListViewPosition(index);
         }
         cancelHeadView();
@@ -257,13 +276,14 @@ public class ChatActivity extends Activity implements View.OnClickListener {
      */
     private ChatMessage setChatMessageData(EMMessage message) {
         ChatMessage data = new ChatMessage();
-        data.setSendAvatar(MyApplication.getNickname());
-        data.setReceiveAvatar(friendName);
+        data.setSendAvatar(message.getFrom());  //发送者
+        data.setReceiveAvatar(message.getTo()); //接收者
+        //消息内容
         if (message.getType() == EMMessage.Type.TXT) {
-            data.setSendContent(((TextMessageBody) message.getBody()).getMessage());
+            data.setContent(((TextMessageBody) message.getBody()).getMessage());
         }
-        data.setMessageId(message.getMsgId());
-        data.setChatTime(TimeUtil.longToTime(message.getMsgTime()));
+        data.setMessageId(message.getMsgId());      //信息ID
+        data.setChatTime(TimeUtil.longToTime(message.getMsgTime()));    //信息时间
         return data;
     }
 
@@ -289,6 +309,12 @@ public class ChatActivity extends Activity implements View.OnClickListener {
      */
     public void setListViewPosition(int selection) {
         rlv_chat.setSelection(selection);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(msgReceiver);
     }
 
 }

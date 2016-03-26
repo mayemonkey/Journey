@@ -19,14 +19,19 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.easemob.chat.EMChat;
+import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMContactListener;
 import com.easemob.chat.EMContactManager;
+import com.easemob.chat.EMMessage;
 import com.easemob.chat.EMNotifier;
 import com.easemob.exceptions.EaseMobException;
 import com.wipe.zc.journey.R;
 
 
+import com.wipe.zc.journey.domain.ChatMessage;
 import com.wipe.zc.journey.global.MyApplication;
+import com.wipe.zc.journey.ui.activity.ChatActivity;
 import com.wipe.zc.journey.ui.activity.HomeActivity;
 import com.wipe.zc.journey.ui.adapter.FriendsAdapter;
 import com.wipe.zc.journey.util.LogUtil;
@@ -46,6 +51,7 @@ public class FriendsFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private FriendsAdapter adapter;
     private List list = new ArrayList();
     private TextView tv_friends_add;
+    private MessageReceiver msgReceiver;
 
 
     @Override
@@ -59,6 +65,23 @@ public class FriendsFragment extends Fragment implements SwipeRefreshLayout.OnRe
         setReceiver();
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        //注册监听
+        initMessageBroadCastReceiver();
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        getActivity().unregisterReceiver(msgReceiver);
     }
 
     /**
@@ -190,37 +213,37 @@ public class FriendsFragment extends Fragment implements SwipeRefreshLayout.OnRe
     }
 
 
-    private class MyContactListener implements EMContactListener {
-        @Override
-        public void onContactAdded(List<String> list) {     //添加好友
-            FriendsFragment.this.list.clear();
-            FriendsFragment.this.list.addAll(list);
-            adapter.notifyItemInserted(0);
-        }
-
-        @Override
-        public void onContactDeleted(List<String> list) {
-
-        }
-
-        @Override
-        public void onContactInvited(String s, String s1) {     //收到好友请求
-            //显示好友请求
-            //收到好友邀请
-            LogUtil.i("环信好友", "好友:" + s + "申请说明" + s1);
-            System.out.println("环信好友------好友:" + s + "申请说明" + s1);
-        }
-
-        @Override
-        public void onContactAgreed(String s) {     //请求同意
-            EMNotifier.getInstance(MyApplication.getContext()).notifyOnNewMsg();
-        }
-
-        @Override
-        public void onContactRefused(String s) {
-
-        }
-    }
+//    private class MyContactListener implements EMContactListener {
+//        @Override
+//        public void onContactAdded(List<String> list) {     //添加好友
+//            FriendsFragment.this.list.clear();
+//            FriendsFragment.this.list.addAll(list);
+//            adapter.notifyItemInserted(0);
+//        }
+//
+//        @Override
+//        public void onContactDeleted(List<String> list) {
+//
+//        }
+//
+//        @Override
+//        public void onContactInvited(String s, String s1) {     //收到好友请求
+//            //显示好友请求
+//            //收到好友邀请
+//            LogUtil.i("环信好友", "好友:" + s + "申请说明" + s1);
+//            System.out.println("环信好友------好友:" + s + "申请说明" + s1);
+//        }
+//
+//        @Override
+//        public void onContactAgreed(String s) {     //请求同意
+//            EMNotifier.getInstance(MyApplication.getContext()).notifyOnNewMsg();
+//        }
+//
+//        @Override
+//        public void onContactRefused(String s) {
+//
+//        }
+//    }
 
     BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
@@ -235,5 +258,26 @@ public class FriendsFragment extends Fragment implements SwipeRefreshLayout.OnRe
             }
         }
     };
+
+    /**
+     * 初始化接受消息监听
+     */
+    public void initMessageBroadCastReceiver() {
+        EMChat.getInstance().setAppInited();
+        msgReceiver = new MessageReceiver();
+        IntentFilter intentFilter = new IntentFilter(EMChatManager.getInstance()
+                .getNewMessageBroadcastAction());
+        intentFilter.setPriority(3);
+        getActivity().registerReceiver(msgReceiver, intentFilter);
+    }
+
+    class MessageReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            adapter.notifyDataSetChanged();
+            ((HomeActivity) getActivity()).setUnreadSign();
+        }
+    }
+
 
 }

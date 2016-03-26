@@ -106,7 +106,8 @@
 
         <activity
             android:name="com.wipe.zc.journey.ui.activity.ChatActivity"
-            android:label="@string/title_activity_chat" >
+            android:label="@string/title_activity_chat"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
         </activity>
     </application>
 

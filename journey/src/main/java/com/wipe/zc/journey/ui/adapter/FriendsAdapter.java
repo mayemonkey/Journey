@@ -49,6 +49,14 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
         final String name = (String) list.get(position);
         //处理View的显示
 
+        int count_unread = EMChatManager.getInstance().getConversation(name).getUnreadMsgCount();
+        if(count_unread == 0){
+            holder.tv_friends_unread_sign.setVisibility(View.INVISIBLE);
+        }else{
+            holder.tv_friends_unread_sign.setVisibility(View.VISIBLE);
+            holder.tv_friends_unread_sign.setText(String.valueOf(count_unread));
+        }
+
         ImageLoader.getInstance().displayImage(AppURL.getimage + "?nickname=" + name, holder
                 .civ_friends_icon, ImageLoaderOption.list_options);
 
@@ -99,11 +107,13 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
         public TextView tv_friends_message;
         public TextView tv_friends_time;
         public RelativeLayout rl_list_friends;
+        public TextView tv_friends_unread_sign;
 
         public FriendsViewHolder(View convertView) {
             super(convertView);
             civ_friends_icon = (CircleImageView) convertView.findViewById(R.id.civ_friends_icon);
             tv_friends_name = (TextView) convertView.findViewById(R.id.tv_friends_name);
+            tv_friends_unread_sign = (TextView) convertView.findViewById(R.id.tv_friends_unread_sign);
             tv_friends_message = (TextView) convertView.findViewById(R.id.tv_friends_message);
             tv_friends_time = (TextView) convertView.findViewById(R.id.tv_friends_time);
             rl_list_friends = (RelativeLayout) convertView.findViewById(R.id.rl_list_friends);

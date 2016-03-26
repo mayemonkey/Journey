@@ -44,11 +44,17 @@ public class TimeUtil {
     public static String getFromatTime(Calendar calendar, boolean needSecond) {
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
+        String min = "";
+        if(minute < 10){
+            min = "0"+minute;
+        }else{
+            min = String.valueOf(minute);
+        }
         int second = calendar.get(Calendar.SECOND);
         if (needSecond) {
-            return hour + ":" + minute + ":" + second;
+            return hour + ":" + min + ":" + second;
         } else {
-            return hour + ":" + minute;
+            return hour + ":" + min;
         }
     }
 

@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\studiospace\Journey\journey\src\main\AndroidManifest.xml:2:1-114:12
+ADDED from E:\studiospace\Journey\journey\src\main\AndroidManifest.xml:2:1-115:12
 	xmlns:android
 		ADDED from E:\studiospace\Journey\journey\src\main\AndroidManifest.xml:2:11-69
 	package
@@ -110,7 +110,7 @@ ADDED from E:\studiospace\Journey\journey\src\main\AndroidManifest.xml:44:5-67
 	android:name
 		ADDED from E:\studiospace\Journey\journey\src\main\AndroidManifest.xml:44:22-65
 application
-ADDED from E:\studiospace\Journey\journey\src\main\AndroidManifest.xml:47:5-112:19
+ADDED from E:\studiospace\Journey\journey\src\main\AndroidManifest.xml:47:5-113:19
 MERGED from [com.android.support:support-v4:23.0.1] E:\studiospace\Journey\journey\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.0.1] E:\studiospace\Journey\journey\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\AndroidManifest.xml:22:5-20
 	android:label
@@ -204,8 +204,10 @@ ADDED from E:\studiospace\Journey\journey\src\main\AndroidManifest.xml:106:9-66
 	android:name
 		ADDED from E:\studiospace\Journey\journey\src\main\AndroidManifest.xml:106:18-63
 activity#com.wipe.zc.journey.ui.activity.ChatActivity
-ADDED from E:\studiospace\Journey\journey\src\main\AndroidManifest.xml:108:9-111:20
+ADDED from E:\studiospace\Journey\journey\src\main\AndroidManifest.xml:108:9-112:20
+	android:windowSoftInputMode
+		ADDED from E:\studiospace\Journey\journey\src\main\AndroidManifest.xml:110:13-64
 	android:label
-		ADDED from E:\studiospace\Journey\journey\src\main\AndroidManifest.xml:110:13-56
+		ADDED from E:\studiospace\Journey\journey\src\main\AndroidManifest.xml:111:13-56
 	android:name
 		ADDED from E:\studiospace\Journey\journey\src\main\AndroidManifest.xml:109:13-53

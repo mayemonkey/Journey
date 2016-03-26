@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.Calendar;
 
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
@@ -97,7 +99,8 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     private TextView tv_menu_setting;
     private TextView tv_menu_friends;
     private TextView tv_menu_message;
-    private CircleImageView civ_menu_message_siign;
+    private CircleImageView civ_menu_message_sign;
+    private CircleImageView civ_menu_unread_sign;
 
     @Override
     protected void onResume() {
@@ -115,6 +118,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
                 }
             }
         }).start();
+
     }
 
     @Override
@@ -142,10 +146,15 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         tv_menu_calendar = (TextView) ll_menu.findViewById(R.id.tv_menu_calendar);
         tv_menu_total = (TextView) ll_menu.findViewById(R.id.tv_menu_total);
         tv_menu_setting = (TextView) ll_menu.findViewById(R.id.tv_menu_setting);
+
         tv_menu_friends = (TextView) ll_menu.findViewById(R.id.tv_menu_friends);
+        civ_menu_unread_sign = (CircleImageView) ll_menu.findViewById(R.id.civ_menu_unread_sign);
+
         tv_menu_message = (TextView) ll_menu.findViewById(R.id.tv_menu_message);
-        civ_menu_message_siign = (CircleImageView) findViewById(R.id
+        civ_menu_message_sign = (CircleImageView) findViewById(R.id
                 .civ_menu_message_sign);
+
+
 
         tv_menu_home.setOnClickListener(this);
         tv_menu_calendar.setOnClickListener(this);
@@ -270,7 +279,8 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
                         ToastUtil.shortToast("再按一次返回键退出");
                         exitTime = System.currentTimeMillis();
                     } else {
-                        finish();
+                        android.os.Process.killProcess(android.os.Process.myPid());    //获取PID
+                        System.exit(0);
                     }
                     return true;
                 }
@@ -424,9 +434,22 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         super.onStart();
 
         if (InviteDao.queryAllInvite().size() > 0) {
-            civ_menu_message_siign.setVisibility(View.VISIBLE);
+            civ_menu_message_sign.setVisibility(View.VISIBLE);
         }else{
-            civ_menu_message_siign.setVisibility(View.INVISIBLE);
+            civ_menu_message_sign.setVisibility(View.INVISIBLE);
         }
     }
+
+    /**
+     * 设置未读标记
+     */
+    public void setUnreadSign(){
+        int count = EMChatManager.getInstance().getUnreadMsgsCount();
+        if(count > 0){
+            civ_menu_unread_sign.setVisibility(View.VISIBLE);
+        }else{
+            civ_menu_unread_sign.setVisibility(View.INVISIBLE);
+        }
+    }
+
 }

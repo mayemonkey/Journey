@@ -26,12 +26,28 @@
         android:layout_height="wrap_content"
         android:text="全部"/>
 
-    <TextView
-        android:id="@+id/tv_menu_friends"
-        style="@style/menu_text"
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="好友"/>
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/tv_menu_friends"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:text="好友"/>
+
+        <com.wipe.zc.journey.lib.CircleImageView
+            android:id="@+id/civ_menu_unread_sign"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_alignRight="@id/tv_menu_friends"
+            android:src="#ff0000"
+            android:visibility="invisible"/>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -45,15 +61,15 @@
             android:text="消息"
             android:textColor="#fff"
             android:textSize="20sp"/>
-        
+
         <com.wipe.zc.journey.lib.CircleImageView
             android:id="@+id/civ_menu_message_sign"
             android:layout_width="5dp"
             android:layout_height="5dp"
             android:layout_alignRight="@id/tv_menu_message"
-            android:visibility="invisible"
-            android:src="#ff0000"/>
-        
+            android:src="#ff0000"
+            android:visibility="invisible"/>
+
     </RelativeLayout>
     <!--
 
