@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fff"
-    android:orientation="vertical" >
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#fff"
+              android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp" >
+        android:layout_height="45dp">
 
         <ImageView
             android:id="@+id/iv_register_cancel"
@@ -15,7 +15,7 @@
             android:layout_height="20dp"
             android:layout_centerVertical="true"
             android:layout_margin="10dp"
-            android:background="@drawable/icon_cancel" />
+            android:background="@drawable/icon_cancel"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -23,80 +23,80 @@
             android:layout_centerInParent="true"
             android:text="注册"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp" >
+        android:layout_marginTop="10dp">
 
         <com.wipe.zc.journey.lib.CircleImageView
             android:id="@+id/civ_icon"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/icon_icon" />
+            android:src="@drawable/icon_icon"/>
 
         <com.wipe.zc.journey.lib.CircleImageView
             android:id="@+id/civ_icon_add"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignRight="@id/civ_icon"
-            android:src="@drawable/add_icon" />
+            android:src="@drawable/add_icon"/>
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
             style="@style/login_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="昵称:" />
+            android:text="昵称:"/>
 
         <EditText
             android:id="@+id/et_register_nickname"
             style="@style/login_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"/>
 
         <View
             android:id="@+id/ve_register_nickname"
             android:layout_width="match_parent"
             android:layout_height="2px"
-            android:background="#e4e4e4" />
+            android:background="#e4e4e4"/>
 
         <TextView
             style="@style/login_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="常用邮箱:" />
+            android:text="常用邮箱:"/>
 
         <EditText
             android:id="@+id/et_register_email"
             style="@style/login_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"/>
 
         <View
             android:id="@+id/ve_register_email"
             android:layout_width="match_parent"
             android:layout_height="2px"
-            android:background="#e4e4e4" />
+            android:background="#e4e4e4"/>
 
         <TextView
             style="@style/login_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="密码:" />
+            android:text="密码:"/>
 
         <EditText
             android:id="@+id/et_register_password"
@@ -104,83 +104,99 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"/>
 
         <View
             android:id="@+id/ve_register_password"
             android:layout_width="match_parent"
             android:layout_height="2px"
-            android:background="#e4e4e4" />
+            android:background="#e4e4e4"/>
 
         <TextView
             style="@style/login_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="密码确认:" />
+            android:text="密码确认:"/>
 
         <EditText
             android:id="@+id/et_register_repassword"
             style="@style/login_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"/>
 
         <View
             android:id="@+id/ve_register_repassword"
             android:layout_width="match_parent"
             android:layout_height="2px"
-            android:background="#e4e4e4" />
+            android:background="#e4e4e4"/>
 
         <TextView
             style="@style/login_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="手机:" />
+            android:text="手机:"/>
 
         <EditText
             android:id="@+id/et_register_phone"
             style="@style/login_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"/>
 
         <View
             android:id="@+id/ve_register_phone"
             android:layout_width="match_parent"
             android:layout_height="2px"
-            android:background="#e4e4e4" />
+            android:background="#e4e4e4"/>
 
-        <TextView
-            android:id="@+id/tv_register"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/login_button"
-            android:gravity="center"
-            android:text="注册"
-            android:textColor="#fff"
-            android:textSize="16sp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_register_progress"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_processbar_circle"
+                android:indeterminate="false"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/tv_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/login_button"
+                android:gravity="center"
+                android:text="注册"
+                android:textColor="#fff"
+                android:textSize="16sp"/>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center_horizontal"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <TextView
                 style="@style/login_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="已经注册了账号？" />
+                android:text="已经注册了账号？"/>
 
             <TextView
                 android:id="@+id/tv_to_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="立即登录" />
+                android:text="立即登录"/>
         </LinearLayout>
     </LinearLayout>
 

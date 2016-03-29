@@ -69,15 +69,22 @@ public class RegisterActivity extends Activity implements OnClickListener {
                     String result = (String) msg.obj;
                     if (result != null) {
                         if (result.equals("注册成功")) {
+                            ViewUtil.recoverAnimatin(iv_register_progress, tv_register);
                             ToastUtil.shortToast("注册成功");
                             finish();
                         }
                         if (result.equals("注册失败")) {
+                            ViewUtil.recoverAnimatin(iv_register_progress, tv_register);
                             ToastUtil.shortToast("注册失败，请检查网络");
                         }
                     } else {
+                        ViewUtil.recoverAnimatin(iv_register_progress, tv_register);
                         ToastUtil.shortToast("请检查网络连接");
                     }
+                    break;
+
+                case 2:
+                    ViewUtil.executeAnimation(iv_register_progress, tv_register);
                     break;
 
                 default:
@@ -87,6 +94,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
         }
 
     };
+    private ImageView iv_register_progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +127,10 @@ public class RegisterActivity extends Activity implements OnClickListener {
         // 注册按钮
         tv_register = (TextView) findViewById(R.id.tv_register);
         tv_register.setOnClickListener(this);
+
+        //注册响应动画
+        iv_register_progress = (ImageView) findViewById(R.id.iv_register_progress);
+
         // 直接登录
         tv_to_login = (TextView) findViewById(R.id.tv_to_login);
         tv_to_login.setOnClickListener(this);
@@ -174,13 +186,13 @@ public class RegisterActivity extends Activity implements OnClickListener {
                                 if (checkData(et_register_password.getText().toString(), 3)) {
                                     // 密码确认输入空检查
                                     if (ViewUtil.checkEmptyData(et_register_repassword,
-											ve_register_repassword)) {
+                                            ve_register_repassword)) {
                                         if (checkData(et_register_repassword.getText().toString()
-												, 4)) {
+                                                , 4)) {
                                             String phone = "";
                                             if (et_register_phone.getText().toString() != null) {
                                                 if (checkData(et_register_phone.getText()
-														.toString(), 5)) {
+                                                        .toString(), 5)) {
                                                     phone = et_register_phone.getText().toString();
                                                 } else { // 电话格式不符合
                                                     ToastUtil.shortToast("请输入正确格式的手机号码");
@@ -227,7 +239,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
         new Thread(new Runnable() {
             @Override
             public void run() {
-
+                handler.sendEmptyMessage(2);
                 try {
                     EMChatManager.getInstance()
                             .createAccountOnServer(et_register_nickname.getText().toString(),
@@ -273,7 +285,8 @@ public class RegisterActivity extends Activity implements OnClickListener {
 
             case 2: // 邮箱格式
                 Pattern pattern_email = Pattern
-                        .compile("^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$");
+                        .compile("^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+" +
+                                "(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$");
                 Matcher match_email = pattern_email.matcher(string);
                 return match_email.matches();
 
@@ -284,7 +297,8 @@ public class RegisterActivity extends Activity implements OnClickListener {
                 return (string.equals(et_register_password.getText().toString()));
 
             case 5: // 电话格式
-                Pattern pattern_phone = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+                Pattern pattern_phone = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))" +
+                        "\\d{8}$");
                 Matcher match_phone = pattern_phone.matcher(string);
                 return match_phone.matches();
 
@@ -328,7 +342,8 @@ public class RegisterActivity extends Activity implements OnClickListener {
      */
     private void uploadImage(String url, String photoName, Bitmap photoBitmap) {
         // TODO 图片上传保存路径
-        File file = new File(getCacheDir().getAbsolutePath() + "//" + photoName + ".jpg");// 将要保存图片的路径
+        File file = new File(getCacheDir().getAbsolutePath() + "//" + photoName + ".jpg");//
+        // 将要保存图片的路径
         try {
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
             photoBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);

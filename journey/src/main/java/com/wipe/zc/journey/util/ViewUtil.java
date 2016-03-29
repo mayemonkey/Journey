@@ -1,10 +1,18 @@
 package com.wipe.zc.journey.util;
 
+import android.animation.ValueAnimator;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.CycleInterpolator;
+import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import com.nineoldandroids.view.ViewPropertyAnimator;
 
 public class ViewUtil {
 
@@ -20,4 +28,42 @@ public class ViewUtil {
 		}
 		return true;
 	}
+
+	/**
+	 * 验证时动画效果
+	 * @param imageView
+	 * @param textView
+	 */
+	public static void executeAnimation(ImageView imageView,TextView textView){
+		final ImageView iv = imageView;
+		TextView tv = textView;
+		ViewPropertyAnimator.animate(tv).scaleX(0.0f).alpha(0.0f).setDuration(500).start();
+		iv.setVisibility(View.VISIBLE);
+		ValueAnimator.ofFloat(0.0f, 1.0f).setDuration(500).addUpdateListener(new ValueAnimator
+				.AnimatorUpdateListener() {
+			public void onAnimationUpdate(ValueAnimator valueAnimator) {
+				float value = (float) valueAnimator.getAnimatedValue();
+				iv.setAlpha(value);
+			}
+		});
+		RotateAnimation ra = new RotateAnimation(0, 360, RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+				RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+		ra.setDuration(1000);
+		ra.setRepeatCount(20);
+		ra.setInterpolator(new AccelerateDecelerateInterpolator());
+		ra.setRepeatMode(RotateAnimation.RESTART);
+		iv.startAnimation(ra);
+	}
+
+	public static void recoverAnimatin(ImageView imageView,TextView textView){
+		final ImageView iv = imageView;
+		TextView tv = textView;
+		ViewPropertyAnimator.animate(tv).scaleX(1.0f).alpha(1.0f).setDuration(500).start();
+		iv.clearAnimation();
+		iv.setVisibility(View.INVISIBLE);
+	}
+
+
 }
+
+
