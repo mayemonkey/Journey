@@ -135,7 +135,7 @@ public class ChatActivity extends Activity implements View.OnClickListener {
         //输入框整体
         ll_chat_send = (LinearLayout) findViewById(R.id.ll_chat_send);
 
-        
+
         //语音按钮
         tv_chat_record_voice = (TextView) findViewById(R.id.tv_chat_record_voice);
         tv_chat_record_voice.setOnClickListener(null);
