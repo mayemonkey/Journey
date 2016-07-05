@@ -1,10 +1,13 @@
 package com.wipe.zc.journey.ui.adapter;
 
+import android.media.Image;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.easemob.chat.EMMessage;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wipe.zc.journey.R;
 import com.wipe.zc.journey.domain.ChatMessage;
@@ -104,7 +107,22 @@ public class ChatAdapter extends BaseAdapter {
                 holder_left
                         .civ_chat_left_icon, ImageLoaderOption.list_options);
         //消息内容
-        holder_left.tv_chat_left_content.setText(chatMessage.getContent());
+        if (chatMessage.getType() == EMMessage.Type.TXT) {
+            //隐藏其他内容
+            holder_left.iv_chat_left_image.setVisibility(View.INVISIBLE);
+
+            holder_left.tv_chat_left_content.setVisibility(View.VISIBLE);
+            holder_left.tv_chat_left_content.setText(chatMessage.getContent());
+        }
+        //图片内容
+        else if (chatMessage.getType() == EMMessage.Type.IMAGE) {
+            //隐藏其他内容
+            holder_left.tv_chat_left_content.setVisibility(View.INVISIBLE);
+
+            holder_left.iv_chat_left_image.setVisibility(View.VISIBLE);
+            ImageLoader.getInstance().displayImage(chatMessage.getContent(), holder_left
+                    .iv_chat_left_image, ImageLoaderOption.list_options);
+        }
 
         //时间显示
         if (position != 0) {
@@ -130,7 +148,7 @@ public class ChatAdapter extends BaseAdapter {
      * @param position
      */
     public void showLeftTime(ChatMessage chatMessage, LeftViewHolder holder_left, int position) {
-        String time = new String();
+        String time;
         switch (TimeUtil.compareCalendar10(chatMessage.getChatTime(),
                 list.get(position - 1).getChatTime())) {
             case -1:
@@ -170,7 +188,23 @@ public class ChatAdapter extends BaseAdapter {
                 holder_right
                         .civ_chat_right_icon, ImageLoaderOption.list_options);
         //消息内容
-        holder_right.tv_chat_right_content.setText(chatMessage.getContent());
+        if (chatMessage.getType() == EMMessage.Type.TXT) {
+            //隐藏其他内容
+            holder_right.iv_chat_right_image.setVisibility(View.INVISIBLE);
+
+            holder_right.tv_chat_right_content.setVisibility(View.VISIBLE);
+            holder_right.tv_chat_right_content.setText(chatMessage.getContent());
+        }
+        //图片内容
+        else if (chatMessage.getType() == EMMessage.Type.IMAGE) {
+            //隐藏其他内容
+            holder_right.tv_chat_right_content.setVisibility(View.INVISIBLE);
+
+            holder_right.iv_chat_right_image.setVisibility(View.VISIBLE);
+
+            ImageLoader.getInstance().displayImage(chatMessage.getContent(),
+                    holder_right.iv_chat_right_image, ImageLoaderOption.list_options);
+        }
 
         //时间显示
         if (position != 0) {
@@ -220,12 +254,14 @@ public class ChatAdapter extends BaseAdapter {
         public TextView tv_chat_left_time;
         public CircleImageView civ_chat_left_icon;
         public TextView tv_chat_left_content;
+        public ImageView iv_chat_left_image;
 
         public LeftViewHolder(View convertView) {
             tv_chat_left_time = (TextView) convertView.findViewById(R.id.tv_chat_left_time);
             civ_chat_left_icon = (CircleImageView) convertView.findViewById(R.id
                     .civ_chat_left_icon);
             tv_chat_left_content = (TextView) convertView.findViewById(R.id.tv_chat_left_content);
+            iv_chat_left_image = (ImageView) convertView.findViewById(R.id.iv_chat_left_image);
         }
 
         public static LeftViewHolder getHolder(View convertView) {
@@ -244,12 +280,15 @@ public class ChatAdapter extends BaseAdapter {
         public TextView tv_chat_right_time;
         public TextView tv_chat_right_content;
         public CircleImageView civ_chat_right_icon;
+        public ImageView iv_chat_right_image;
 
         public RightViewHolder(View convertView) {
             tv_chat_right_time = (TextView) convertView.findViewById(R.id.tv_chat_right_time);
             tv_chat_right_content = (TextView) convertView.findViewById(R.id.tv_chat_right_content);
             civ_chat_right_icon = (CircleImageView) convertView.findViewById(R.id
                     .civ_chat_right_icon);
+
+            iv_chat_right_image = (ImageView) convertView.findViewById(R.id.iv_chat_right_image);
         }
 
         public static RightViewHolder getHolder(View convertView) {

@@ -31,4 +31,7 @@ public class AppURL {
 	// 添加行程
 	public static String addjourney = HostUrl + "addjourney";
 
+	//删除行程
+	public static String deletejourney = HostUrl + "deletejourney";
+
 }

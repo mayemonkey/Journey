@@ -132,7 +132,8 @@ public class HttpUtil {
 
             ds = new DataOutputStream(con.getOutputStream());
             ds.writeBytes("--" + "*****" + "\r\n");
-            ds.writeBytes("Content-Disposition: form-data; name=\"img\"; filename=\"" + file.getName() + "\"" + "\r\n");
+            ds.writeBytes("Content-Disposition: form-data; name=\"img\"; filename=\"" + file
+                    .getName() + "\"" + "\r\n");
             ds.writeBytes("\r\n");
 
 			/* 取得文件的FileInputStream */
@@ -189,14 +190,16 @@ public class HttpUtil {
             String data = "";
             if (obj instanceof User) {
                 User user = (User) obj;
-                data = "nickname=" + user.getNickname() + "&password=" + user.getPassword() + "&email="
+                data = "nickname=" + user.getNickname() + "&password=" + user.getPassword() +
+                        "&email="
                         + user.getEmail() + "&phone=" + user.getPhone() + "&icon=" + user.getIcon();
             }
             if (obj instanceof Journey) {
                 Journey journey = (Journey) obj;
                 data = "?nickname=" + journey.getNickname() + "&date=" + journey.getDate()
                         + "&name=" + URLEncoder.encode(journey.getName(), "UTF-8") + "&describe="
-                        + URLEncoder.encode(journey.getDescribe(), "UTF-8") + "&stime=" + journey.getStime()
+                        + URLEncoder.encode(journey.getDescribe(), "UTF-8") + "&stime=" + journey
+                        .getStime()
                         + "&etime=" + journey.getEtime() + "&location="
                         + URLEncoder.encode(journey.getLocation(), "UTF-8");
             }
@@ -206,7 +209,8 @@ public class HttpUtil {
 
             URL url = new URL(url_path + data);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+            conn.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;" +
+                    "q=0.9,*/*;q=0.8");
             conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
             conn.setRequestProperty("Accept-Language", "zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3");
 
@@ -231,14 +235,17 @@ public class HttpUtil {
             String data = "";
             if (obj instanceof User) {
                 User user = (User) obj;
-                data = "nickname=" + user.getNickname() + "&password=" + user.getPassword() + "&email="
+                data = "nickname=" + user.getNickname() + "&password=" + user.getPassword() +
+                        "&email="
                         + user.getEmail() + "&phone=" + user.getPhone() + "&icon=" + user.getIcon();
             }
             if (obj instanceof Journey) {
                 Journey journey = (Journey) obj;
-                data = "nickname=" + URLEncoder.encode(journey.getNickname(), "UTF-8") + "&date=" + journey.getDate()
+                data = "nickname=" + URLEncoder.encode(journey.getNickname(), "UTF-8") + "&date="
+                        + journey.getDate()
                         + "&name=" + journey.getName() + "&describe="
-                        + URLEncoder.encode(journey.getDescribe(), "UTF-8") + "&stime=" + journey.getStime()
+                        + URLEncoder.encode(journey.getDescribe(), "UTF-8") + "&stime=" + journey
+                        .getStime()
                         + "&etime=" + journey.getEtime() + "&location="
                         + URLEncoder.encode(journey.getLocation(), "UTF-8");
             }
@@ -276,13 +283,15 @@ public class HttpUtil {
             String data = "";
             if (obj instanceof User) {
                 User user = (User) obj;
-                data = "nickname=" + user.getNickname() + "&password=" + user.getPassword() + "&email="
+                data = "nickname=" + user.getNickname() + "&password=" + user.getPassword() +
+                        "&email="
                         + user.getEmail() + "&phone=" + user.getPhone() + "&icon=" + user.getIcon();
             }
             if (obj instanceof Journey) {
                 Journey journey = (Journey) obj;
                 data = "nickname=" + journey.getNickname() + "&date=" + journey.getDate() + "&name="
-                        + journey.getName() + "&describe=" + journey.getDescribe() + "&stime=" + journey.getStime()
+                        + journey.getName() + "&describe=" + journey.getDescribe() + "&stime=" +
+                        journey.getStime()
                         + "&etime=" + journey.getEtime() + "&location=" + journey.getLocation();
             }
             if (obj instanceof String) {
@@ -312,7 +321,7 @@ public class HttpUtil {
         return null;
     }
 
-    public static String requestUser_ByOK(String url_path, String nickname, String password){
+    public static String requestUser_ByOK(String url_path, String nickname, String password) {
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("nickname", nickname)
@@ -338,6 +347,7 @@ public class HttpUtil {
     public static String requestOkHttp(String url_path, Journey journey) {
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
+                .add("id", String.valueOf(journey.getId()))
                 .add("name", journey.getName())
                 .add("describe", journey.getDescribe())
                 .add("date", journey.getDate())

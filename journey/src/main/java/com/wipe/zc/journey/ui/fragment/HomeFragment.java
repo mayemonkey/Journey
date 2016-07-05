@@ -105,7 +105,7 @@ public class HomeFragment extends Fragment implements OnClickListener {
 	 */
 	private void showJourney() {
 		list = new ArrayList<Journey>();
-		adapter = new JourneyAdapter(list, 0);
+		adapter = new JourneyAdapter(list, 0, ((HomeActivity)getActivity()));
 		lv_home.setAdapter(adapter);
 		new Thread(new Runnable() {
 			@Override

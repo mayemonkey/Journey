@@ -13,20 +13,20 @@ import com.wipe.zc.journey.R;
     public class ImageLoaderOption {
         //在显示小图的选项
         public static DisplayImageOptions list_options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.launch)// 加载过程中显示什么图片
-                .showImageForEmptyUri(R.drawable.launch)// url为空的时候显示什么图片
-                .showImageOnFail(R.drawable.launch)// 加载失败显示什么图片
+                .showImageOnLoading(R.drawable.icon_image_error)// 加载过程中显示什么图片
+                .showImageForEmptyUri(R.drawable.icon_image_error)// url为空的时候显示什么图片
+                .showImageOnFail(R.drawable.icon_image_error)// 加载失败显示什么图片
                 .cacheInMemory(true)// 在内存缓存
                 .cacheOnDisk(true)// 在硬盘缓存
                 .considerExifParams(true)// 会识别图片的方向信息
-                .displayer(new FadeInBitmapDisplayer(1000)).build();// 渐渐显示的动画
+                .displayer(new FadeInBitmapDisplayer(300)).build();// 渐渐显示的动画
         // .displayer(new RoundedBitmapDisplayer(100)).build();//显示圆角或圆形图片
 
 
     //在显示大图的时候的选项，
     public static DisplayImageOptions pager_options = new DisplayImageOptions.Builder()
-            .showImageForEmptyUri(R.drawable.launch)
-            .showImageOnFail(R.drawable.launch)
+            .showImageForEmptyUri(R.drawable.icon_image_error)
+            .showImageOnFail(R.drawable.icon_image_error)
             .resetViewBeforeLoading(true)//在ImageView显示图片之前先清空已有的图片内容
             .cacheOnDisk(true)
             .imageScaleType(ImageScaleType.EXACTLY)//会进一步将按照ImageView的宽高来缩放

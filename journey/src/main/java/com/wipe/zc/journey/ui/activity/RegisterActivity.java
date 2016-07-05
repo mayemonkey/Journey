@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -30,6 +31,7 @@ import com.easemob.exceptions.EaseMobException;
 import com.wipe.zc.journey.domain.User;
 import com.wipe.zc.journey.http.AppURL;
 import com.wipe.zc.journey.lib.CircleImageView;
+import com.wipe.zc.journey.util.EncryptionUtil;
 import com.wipe.zc.journey.util.HttpUtil;
 import com.wipe.zc.journey.util.ToastUtil;
 import com.wipe.zc.journey.util.ViewUtil;
@@ -72,10 +74,12 @@ public class RegisterActivity extends Activity implements OnClickListener {
                             ViewUtil.recoverAnimatin(iv_register_progress, tv_register);
                             ToastUtil.shortToast("注册成功");
                             finish();
-                        }
-                        if (result.equals("注册失败")) {
+                        } else if (result.equals("注册失败")) {
                             ViewUtil.recoverAnimatin(iv_register_progress, tv_register);
                             ToastUtil.shortToast("注册失败，请检查网络");
+                        } else {
+                            ViewUtil.recoverAnimatin(iv_register_progress, tv_register);
+                            ToastUtil.shortToast(result);
                         }
                     } else {
                         ViewUtil.recoverAnimatin(iv_register_progress, tv_register);
@@ -181,26 +185,20 @@ public class RegisterActivity extends Activity implements OnClickListener {
                     if (ViewUtil.checkEmptyData(et_register_email, ve_register_email)) {
                         if (checkData(et_register_email.getText().toString(), 2)) {
                             // 密码输入空检查
-                            if (ViewUtil.checkEmptyData(et_register_password,
-                                    ve_register_password)) {
+                            if (ViewUtil.checkEmptyData(et_register_password, ve_register_password)) {
                                 if (checkData(et_register_password.getText().toString(), 3)) {
                                     // 密码确认输入空检查
-                                    if (ViewUtil.checkEmptyData(et_register_repassword,
-                                            ve_register_repassword)) {
-                                        if (checkData(et_register_repassword.getText().toString()
-                                                , 4)) {
-                                            String phone = "";
-                                            if (et_register_phone.getText().toString() != null) {
-                                                if (checkData(et_register_phone.getText()
-                                                        .toString(), 5)) {
-                                                    phone = et_register_phone.getText().toString();
+                                    if (ViewUtil.checkEmptyData(et_register_repassword, ve_register_repassword)) {
+                                        if (checkData(et_register_repassword.getText().toString(), 4)) {
+                                            if (ViewUtil.checkEmptyData(et_register_phone, ve_register_phone)) {
+                                                if (checkData(et_register_phone.getText().toString(), 5)) {
+                                                    // 所有数据检查完毕
+                                                    uploadData();
+
                                                 } else { // 电话格式不符合
                                                     ToastUtil.shortToast("请输入正确格式的手机号码");
                                                 }
                                             }
-                                            // 所有数据检查完毕
-                                            uploadData(phone);
-
                                         } else { // 重复密码格式不符合
                                             ToastUtil.shortToast("请保证两次输入的密码一致");
                                         }
@@ -233,7 +231,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
     /**
      * 提交数据
      */
-    private void uploadData(String phone) {
+    private void uploadData() {
 
         // 提交表单中数据
         new Thread(new Runnable() {
@@ -241,9 +239,14 @@ public class RegisterActivity extends Activity implements OnClickListener {
             public void run() {
                 handler.sendEmptyMessage(2);
                 try {
-                    EMChatManager.getInstance()
-                            .createAccountOnServer(et_register_nickname.getText().toString(),
-                                    et_register_password.getText().toString());
+                    // 密码加密 TODO
+//                    String text = et_register_password.getText().toString();
+//                    String password = EncryptionUtil.encrypt(text, EncryptionUtil.SHA_256);
+
+                    String password = et_register_password.getText().toString();
+
+                    // 注册环信账号
+                    EMChatManager.getInstance().createAccountOnServer(et_register_nickname.getText().toString(), password);
 
                     // 上传头像
                     uploadImage(AppURL.upLoad, et_register_nickname.getText().toString(), bmp);
@@ -251,9 +254,9 @@ public class RegisterActivity extends Activity implements OnClickListener {
                     User user = new User();
                     user.setNickname(et_register_nickname.getText().toString());
                     user.setEmail(et_register_email.getText().toString());
-                    user.setPassword(et_register_password.getText().toString());
+                    user.setPassword(password);
                     user.setPhone(et_register_phone.getText().toString());
-                    // TODO 服务端图片路径拼接
+                    // 服务端图片路径拼接
                     user.setIcon("E:\\icon\\" + et_register_nickname.getText().toString() + ".jpg");
                     String result = HttpUtil.requestByPost(AppURL.reg, user);
                     // Handler
@@ -275,8 +278,8 @@ public class RegisterActivity extends Activity implements OnClickListener {
     /**
      * 表单数据合理性检查
      *
-     * @param string
-     * @param i
+     * @param string 数据内容
+     * @param i      数据种类
      */
     private boolean checkData(String string, int i) {
         switch (i) {
@@ -285,8 +288,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 
             case 2: // 邮箱格式
                 Pattern pattern_email = Pattern
-                        .compile("^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+" +
-                                "(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$");
+                        .compile("^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+" + "(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$");
                 Matcher match_email = pattern_email.matcher(string);
                 return match_email.matches();
 
@@ -297,8 +299,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
                 return (string.equals(et_register_password.getText().toString()));
 
             case 5: // 电话格式
-                Pattern pattern_phone = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))" +
-                        "\\d{8}$");
+                Pattern pattern_phone = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))" + "\\d{8}$");
                 Matcher match_phone = pattern_phone.matcher(string);
                 return match_phone.matches();
 
@@ -319,18 +320,16 @@ public class RegisterActivity extends Activity implements OnClickListener {
                     bmp.recycle();
                 bmp = BitmapFactory.decodeStream(cr.openInputStream(uri));
             } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             System.out.println("the bmp toString: " + bmp);
-            // TODO 修改处
+            // 修改处
             civ_icon.setImageBitmap(bmp);
             flag_icon = true;
         } else {
             flag_icon = false;
             Toast.makeText(RegisterActivity.this, "请重新选择图片", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     /**
@@ -341,7 +340,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
      * @param photoBitmap
      */
     private void uploadImage(String url, String photoName, Bitmap photoBitmap) {
-        // TODO 图片上传保存路径
+        // 图片上传保存路径
         File file = new File(getCacheDir().getAbsolutePath() + "//" + photoName + ".jpg");//
         // 将要保存图片的路径
         try {
@@ -352,7 +351,6 @@ public class RegisterActivity extends Activity implements OnClickListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         HttpUtil.uploadImage(url, file);
     }
 

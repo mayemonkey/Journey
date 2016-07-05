@@ -31,6 +31,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
 
     private List list;
     private HomeActivity activity;
+    private boolean flag_message_exit;
 
     public FriendsAdapter(List list, HomeActivity activity) {
         this.list = list;
@@ -47,6 +48,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
     @Override
     public void onBindViewHolder(FriendsViewHolder holder, int position) {
         final String name = (String) list.get(position);
+        flag_message_exit = false;
         //处理View的显示
 
         int count_unread = EMChatManager.getInstance().getConversation(name).getUnreadMsgCount();
@@ -80,9 +82,15 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
             }else{  //不是当天
                 holder.tv_friends_time.setText(TimeUtil.getFromatDate(calendar,false));
             }
+            //设置为存在
+            flag_message_exit = true;
+
         }else{      //不存在聊天记录
             holder.tv_friends_message.setText("[快去和好友聊天吧]");
             holder.tv_friends_time.setVisibility(View.INVISIBLE);
+
+            //设置为不存在
+            flag_message_exit = false;
         }
 
         //整体条目点击事件
@@ -90,6 +98,9 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
             public void onClick(View view) {
                 Intent intent = new Intent(activity, ChatActivity.class);
                 intent.putExtra("receiver",name);
+                //TODO 判断状态
+                intent.putExtra("flag_message_exit",flag_message_exit);
+
                 activity.startActivity(intent);
             }
         });

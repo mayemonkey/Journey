@@ -1,5 +1,7 @@
 package com.wipe.zc.journey.domain;
 
+import com.easemob.chat.EMMessage;
+
 import java.util.Calendar;
 
 /**
@@ -7,11 +9,20 @@ import java.util.Calendar;
  */
 public class ChatMessage {
 
-    String receiveAvatar;
-    String content;
-    Calendar chatTime;
-    String sendAvatar;
-    String messageId;
+    private String receiveAvatar;
+    private String content;
+    private Calendar chatTime;
+    private String sendAvatar;
+    private String messageId;
+    private EMMessage.Type type;
+
+    public EMMessage.Type getType() {
+        return type;
+    }
+
+    public void setType(EMMessage.Type type) {
+        this.type = type;
+    }
 
     public String getContent() {
         return content;
@@ -36,7 +47,6 @@ public class ChatMessage {
     public void setReceiveAvatar(String receiveAvatar) {
         this.receiveAvatar = receiveAvatar;
     }
-
 
     public Calendar getChatTime() {
         return chatTime;

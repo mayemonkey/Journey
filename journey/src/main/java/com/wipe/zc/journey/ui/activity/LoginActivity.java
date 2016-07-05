@@ -20,6 +20,7 @@ import com.easemob.chat.EMGroupManager;
 import com.wipe.zc.journey.domain.User;
 import com.wipe.zc.journey.global.MyApplication;
 import com.wipe.zc.journey.http.AppURL;
+import com.wipe.zc.journey.util.EncryptionUtil;
 import com.wipe.zc.journey.util.HttpUtil;
 import com.wipe.zc.journey.util.SharedPreUtil;
 import com.wipe.zc.journey.util.ToastUtil;
@@ -37,7 +38,6 @@ public class LoginActivity extends Activity implements OnClickListener {
     private ImageView iv_login_progress;
 
     private Handler handler = new Handler() {
-
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -47,10 +47,8 @@ public class LoginActivity extends Activity implements OnClickListener {
                     if (result != null) {        //网络请求不为空
                         if (result.equals("登陆成功")) {
                             // 保存用户名和密码
-                            SharedPreUtil.putString(LoginActivity.this, "nickname",
-                                    et_login_account.getText().toString());
-                            SharedPreUtil.putString(LoginActivity.this, "password",
-                                    et_login_password.getText().toString());
+                            SharedPreUtil.putString(LoginActivity.this, "nickname", et_login_account.getText().toString());
+                            SharedPreUtil.putString(LoginActivity.this, "password", et_login_password.getText().toString());
 
                             //停止动画
                             iv_login_progress.clearAnimation();
@@ -72,11 +70,11 @@ public class LoginActivity extends Activity implements OnClickListener {
 
                 case 2:
                     ToastUtil.shortToast("IM用户名或密码错误");
-                    ViewUtil.recoverAnimatin(iv_login_progress,tv_login);
+                    ViewUtil.recoverAnimatin(iv_login_progress, tv_login);
                     break;
 
                 case 3:
-                    ViewUtil.executeAnimation(iv_login_progress,tv_login);
+                    ViewUtil.executeAnimation(iv_login_progress, tv_login);
                     break;
 
                 default:
@@ -127,10 +125,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 
             case R.id.tv_login:
                 boolean flag_account = ViewUtil.checkEmptyData(et_login_account, ve_login_account);
-                boolean flag_password = ViewUtil.checkEmptyData(et_login_password,
-                        ve_login_password);
+                boolean flag_password = ViewUtil.checkEmptyData(et_login_password, ve_login_password);
                 if (flag_account && flag_password) {
-
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -139,6 +135,11 @@ public class LoginActivity extends Activity implements OnClickListener {
                             //登录逻辑
                             String nickname = et_login_account.getText().toString();
                             String password = et_login_password.getText().toString();
+
+                            //密码加密  TODO
+                            //String encrypt = EncryptionUtil.encrypt(password, EncryptionUtil.SHA_256);
+                            //imLogin(nickname, encrypt);
+
                             imLogin(nickname, password);
                         }
                     }).start();
@@ -156,8 +157,8 @@ public class LoginActivity extends Activity implements OnClickListener {
     /**
      * IM用户登陆
      *
-     * @param nickname
-     * @param password
+     * @param nickname 昵称
+     * @param password 密码
      */
     private void imLogin(final String nickname, final String password) {
         //环信登陆
@@ -166,7 +167,7 @@ public class LoginActivity extends Activity implements OnClickListener {
             EMGroupManager.getInstance().loadAllGroups();
             EMChatManager.getInstance().loadAllConversations();
 
-            serverLogin();
+            serverLogin(nickname, password);
         } else {
             EMChatManager.getInstance().login(nickname, password, new EMCallBack() {
                 @Override
@@ -174,7 +175,7 @@ public class LoginActivity extends Activity implements OnClickListener {
                     EMGroupManager.getInstance().loadAllGroups();
                     EMChatManager.getInstance().loadAllConversations();
 
-                    serverLogin();
+                    serverLogin(nickname, password);
                 }
 
                 @Override
@@ -197,10 +198,10 @@ public class LoginActivity extends Activity implements OnClickListener {
     /**
      * 服务端登录
      */
-    private void serverLogin() {
+    private void serverLogin(String nickname, String password) {
         User user = new User();
-        user.setNickname(et_login_account.getText().toString());
-        user.setPassword(et_login_password.getText().toString());
+        user.setNickname(nickname);
+        user.setPassword(password);
         String result = HttpUtil.requestByPost(AppURL.login, user);
 
         Message msg = new Message();

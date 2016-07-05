@@ -119,7 +119,7 @@ public class CalendarFragment extends Fragment {
 	 */
 	private void showJourney() {
 		list = new ArrayList<Journey>();
-		adapter = new JourneyAdapter(list , 0);
+		adapter = new JourneyAdapter(list , 0 , ((HomeActivity)getActivity()));
 		lv_calendar.setAdapter(adapter);
 		new Thread(new Runnable() {
 			@Override

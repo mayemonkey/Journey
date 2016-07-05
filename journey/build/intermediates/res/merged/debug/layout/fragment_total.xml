@@ -19,7 +19,9 @@
     <ListView
         android:id="@+id/lv_total"
         android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/total_lv_bg_shape"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-</LinearLayout><!-- From: file:/E:/studiospace/Journey/journey/src/main/res/layout/fragment_total.xml -->
+</LinearLayout>

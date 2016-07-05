@@ -43,8 +43,15 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.GET_TASKS"/>
 
+    <!-- 视频拍摄 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <!-- 百度地图 -->
     <application
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:replace="android:icon,android:theme"
         android:name=".global.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/icon_window"
@@ -105,11 +112,16 @@
         <!-- 声明sdk所需的service SDK核心功能 -->
         <service android:name="com.easemob.chat.EMChatService" />
 
+        <!-- 聊天页面 -->
         <activity
             android:name=".ui.activity.ChatActivity"
             android:windowSoftInputMode="adjustPan|stateHidden"
             android:label="@string/title_activity_chat" >
         </activity>
+
+        <!-- 编辑行程内容 -->
+        <activity android:name=".ui.activity.EditJourneyActivity"/>
+
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@ import java.util.Calendar;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.HorizontalScrollView;
@@ -166,5 +167,11 @@ public class MonthTab extends LinearLayout implements OnClickListener {
 
 	public void scrollTo(int i) {
 		hsv_monthtab.smoothScrollTo(i, 0);
+	}
+
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+		getParent().requestDisallowInterceptTouchEvent(true);
+		return super.dispatchTouchEvent(ev);
 	}
 }

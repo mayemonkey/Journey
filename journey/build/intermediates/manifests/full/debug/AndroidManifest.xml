@@ -5,8 +5,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
-        android:targetSdkVersion="17" />
+        android:minSdkVersion="16"
+        android:targetSdkVersion="23" />
 
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
     <!-- 这个权限用于进行网络定位 -->
@@ -42,6 +42,10 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.GET_TASKS" />
+ <!-- 视频拍摄 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
  <!-- 百度地图 -->
     <application
         android:name="com.wipe.zc.journey.global.MyApplication"
@@ -104,11 +108,15 @@
         <!-- 声明sdk所需的service SDK核心功能 -->
         <service android:name="com.easemob.chat.EMChatService" />
 
+        <!-- 聊天页面 -->
         <activity
             android:name="com.wipe.zc.journey.ui.activity.ChatActivity"
             android:label="@string/title_activity_chat"
             android:windowSoftInputMode="adjustPan|stateHidden" >
         </activity>
+
+        <!-- 编辑行程内容 -->
+        <activity android:name="com.wipe.zc.journey.ui.activity.EditJourneyActivity" />
     </application>
 
 </manifest>

@@ -32,19 +32,37 @@
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tv_chat_right_content"
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/bg_send"
-                    android:paddingBottom="5dp"
-                    android:paddingRight="10dp"
-                    android:paddingLeft="5dp"
-                    android:paddingTop="5dp"
-                    android:text="收到什么"
-                    android:textColor="#fff"
-                    android:textSize="18sp"/>
+                    android:layout_marginRight="10dp">
+
+                    <TextView
+                        android:id="@+id/tv_chat_right_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_send"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="5dp"
+                        android:text="收到什么"
+                        android:textColor="#fff"
+                        android:textSize="18sp"/>
+
+                    <ImageView
+                        android:id="@+id/iv_chat_right_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_send"
+                        android:layout_alignRight="@id/tv_chat_right_content"
+                        android:maxHeight="80dp"
+                        android:maxWidth="60dp"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="5dp"/>
+                </RelativeLayout>
 
                 <com.wipe.zc.journey.lib.CircleImageView
                     android:id="@+id/civ_chat_right_icon"

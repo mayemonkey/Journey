@@ -1,6 +1,5 @@
 package com.wipe.zc.journey.ui.activity;
 
-
 import android.content.BroadcastReceiver;
 
 import android.content.Context;
@@ -89,6 +88,7 @@ public class ChatActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_chat);
 
         friendName = getIntent().getStringExtra("receiver");
+        boolean flag_message_exit = getIntent().getBooleanExtra("flag_message_exit", false);
         //
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -96,9 +96,13 @@ public class ChatActivity extends Activity implements View.OnClickListener {
         initPopupWindow();
         setIM();
 //      EMChatManager.getInstance().loadAllConversations();
-        requestRecord(EMChatManager.getInstance().getConversation(friendName).getLastMessage()
-                .getMsgId(), 20);
-        setListViewPosition(list.size() - 1);
+
+        //不存在消息记录
+        if (flag_message_exit) {
+            requestRecord(EMChatManager.getInstance().getConversation(friendName).getLastMessage()
+                    .getMsgId(), 20);
+            setListViewPosition(list.size() - 1);
+        }
     }
 
 
@@ -135,24 +139,24 @@ public class ChatActivity extends Activity implements View.OnClickListener {
         //输入框整体
         ll_chat_send = (LinearLayout) findViewById(R.id.ll_chat_send);
 
-
         //语音按钮
         tv_chat_record_voice = (TextView) findViewById(R.id.tv_chat_record_voice);
         tv_chat_record_voice.setOnClickListener(null);
         tv_chat_record_voice.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()){
+                switch (motionEvent.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         tv_chat_record_voice.setTextColor(Color.WHITE);
-
                         break;
 
                     case MotionEvent.ACTION_UP:
                         tv_chat_record_voice.setTextColor(Color.BLACK);
-
                         break;
 
+                    case MotionEvent.ACTION_CANCEL:
+                        tv_chat_record_voice.setTextColor(Color.BLACK);
+                        break;
                 }
                 return false;
             }
@@ -523,7 +527,7 @@ public class ChatActivity extends Activity implements View.OnClickListener {
                             path_camera = Environment.getExternalStorageDirectory()
                                     .getAbsolutePath() + getApplication().getPackageName() + "/"
                                     + UUID.randomUUID().toString() + ".jpg";
-                        }else{  //内容为空保存为空
+                        } else {  //内容为空保存为空
                             path_camera = null;
                         }
                     } else {    //存在URI直接转换
