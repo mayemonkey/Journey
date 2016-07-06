@@ -122,6 +122,8 @@
         <!-- 编辑行程内容 -->
         <activity android:name=".ui.activity.EditJourneyActivity"/>
 
+        <activity android:name=".ui.activity.AlbumActivity"/>
+
     </application>
 
 </manifest>

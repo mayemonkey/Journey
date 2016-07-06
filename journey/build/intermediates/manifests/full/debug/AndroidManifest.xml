@@ -117,6 +117,7 @@
 
         <!-- 编辑行程内容 -->
         <activity android:name="com.wipe.zc.journey.ui.activity.EditJourneyActivity" />
+        <activity android:name="com.wipe.zc.journey.ui.activity.AlbumActivity" />
     </application>
 
 </manifest>

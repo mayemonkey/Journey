@@ -44,4 +44,6 @@ dependencies {
     compile 'com.android.support:support-v4:+'
     compile 'com.android.support:recyclerview-v7:+'
     compile 'com.google.code.gson:gson:2.7'
+    /*spinner*/
+    compile 'com.jaredrummler:material-spinner:1.0.9'
 }

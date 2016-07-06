@@ -86,6 +86,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/24.0.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/24.0.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.daimajia.swipelayout/library/1.2.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.jaredrummler/material-spinner/1.0.9/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.pnikosis/materialish-progress/1.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-classes" />
@@ -119,6 +120,7 @@
     <orderEntry type="library" exported="" name="materialish-progress-1.0" level="project" />
     <orderEntry type="library" exported="" name="universal-image-loader-1.9.4-with-sources" level="project" />
     <orderEntry type="library" exported="" name="locSDK_6.13" level="project" />
+    <orderEntry type="library" exported="" name="material-spinner-1.0.9" level="project" />
     <orderEntry type="library" exported="" name="gson-2.7" level="project" />
     <orderEntry type="library" exported="" name="hyphenatechat_3.1.0" level="project" />
     <orderEntry type="library" exported="" name="easemobchat_2.2.6" level="project" />
