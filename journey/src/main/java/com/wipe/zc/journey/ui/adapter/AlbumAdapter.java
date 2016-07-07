@@ -9,6 +9,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wipe.zc.journey.R;
 import com.wipe.zc.journey.domain.ImageItem;
 import com.wipe.zc.journey.global.MyApplication;
+import com.wipe.zc.journey.ui.activity.AlbumActivity;
 import com.wipe.zc.journey.util.ImageLoaderOption;
 
 import java.util.ArrayList;
@@ -19,10 +20,16 @@ import java.util.List;
  */
 public class AlbumAdapter extends BaseAdapter {
 
+    private AlbumActivity activity;
     private List<ImageItem> list = new ArrayList<>();
+    private List<String> list_selected_curr;
+    private List<String> list_selected_other;
 
-    public AlbumAdapter(List<ImageItem> list) {
+    public AlbumAdapter(AlbumActivity activity, List<ImageItem> list, List<String> list_selected_curr, List<String> list_selected_other) {
+        this.activity = activity;
         this.list = list;
+        this.list_selected_curr = list_selected_curr;
+        this.list_selected_other = list_selected_other;
     }
 
     @Override
@@ -42,32 +49,44 @@ public class AlbumAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
-        if(convertView == null){
+        if (convertView == null) {
             convertView = View.inflate(MyApplication.getContext(), R.layout.layout_gv_album, null);
         }
 
-        final int index = position;
-
-        ImageItem imageItem = list.get(position);
+        final ImageItem imageItem = list.get(position);
 
         final AlbumViewHolder holder = new AlbumViewHolder(convertView);
-        final boolean selected = imageItem.isSelected();
 
         //显示图片
         ImageLoader.getInstance().displayImage("file://" + imageItem.getImagePaht(), holder.iv_gv_album_bitmap, ImageLoaderOption.list_options);
 
         //显示选中状态
-        holder.iv_gv_album_sign.setBackgroundResource(selected ? R.drawable.check_selected : R.drawable.check);
+        holder.iv_gv_album_sign.setBackgroundResource(imageItem.isSelected() ? R.drawable.check_selected : R.drawable.check);
 
+        //默认选中状态
+//        holder.iv_gv_album_sign.setBackgroundResource(R.drawable.check);
 
-
-        //TODO 依然存在问题   单次点击
         holder.iv_gv_album_sign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                list.get(index).setSelected(!selected);
+                imageItem.setSelected(!imageItem.isSelected());
+
+                if (imageItem.isSelected()) {
+                    list_selected_curr.add(imageItem.getImagePaht());
+                } else {
+                    list_selected_curr.remove(imageItem.getImagePaht());
+                }
+
                 //显示选中状态
-                holder.iv_gv_album_sign.setBackgroundResource(!selected ? R.drawable.check_selected : R.drawable.check);
+                holder.iv_gv_album_sign.setBackgroundResource(imageItem.isSelected() ? R.drawable.check_selected : R.drawable.check);
+
+                if (list_selected_curr.size() + list_selected_other.size() > 0) {
+                    activity.setEnsureEnable(true);
+                    activity.setEnsureText("确认(" + (list_selected_other.size() + list_selected_curr.size()) + ")");
+                } else {
+                    activity.setEnsureEnable(false);
+                    activity.setEnsureText("确认");
+                }
             }
         });
         return convertView;

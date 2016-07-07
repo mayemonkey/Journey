@@ -1723,22 +1723,21 @@ containing a value of this type.
         public static final int ms__drop_down_shadow=0x7f02006d;
         public static final int ms__menu_down=0x7f02006e;
         public static final int ms__selector=0x7f02006f;
-        public static final int ms__shadow_background=0x7f020070;
-        public static final int processbar_blue=0x7f020071;
-        public static final int processbar_circle=0x7f020072;
-        public static final int processbar_organ=0x7f020073;
-        public static final int processbar_preple=0x7f020074;
-        public static final int red_button_background=0x7f020075;
-        public static final int shape_bt_disable=0x7f020076;
-        public static final int shape_bt_enable=0x7f020077;
-        public static final int shape_strock=0x7f020078;
-        public static final int success_bow=0x7f020079;
-        public static final int success_circle=0x7f02007a;
-        public static final int total_lv_bg_shape=0x7f02007b;
-        public static final int total_lv_point_done_shape=0x7f02007c;
-        public static final int total_lv_point_wait_shape=0x7f02007d;
-        public static final int warning_circle=0x7f02007e;
-        public static final int warning_sigh=0x7f02007f;
+        public static final int processbar_blue=0x7f020070;
+        public static final int processbar_circle=0x7f020071;
+        public static final int processbar_organ=0x7f020072;
+        public static final int processbar_preple=0x7f020073;
+        public static final int red_button_background=0x7f020074;
+        public static final int shape_bt_disable=0x7f020075;
+        public static final int shape_bt_enable=0x7f020076;
+        public static final int shape_strock=0x7f020077;
+        public static final int success_bow=0x7f020078;
+        public static final int success_circle=0x7f020079;
+        public static final int total_lv_bg_shape=0x7f02007a;
+        public static final int total_lv_point_done_shape=0x7f02007b;
+        public static final int total_lv_point_wait_shape=0x7f02007c;
+        public static final int warning_circle=0x7f02007d;
+        public static final int warning_sigh=0x7f02007e;
     }
     public static final class id {
         public static final int action_bar=0x7f0c003d;
@@ -1868,7 +1867,7 @@ containing a value of this type.
         public static final int mc_calendar=0x7f0c00ae;
         public static final int mch_home=0x7f0c00b3;
         public static final int middle=0x7f0c0016;
-        public static final int ms_album=0x7f0c005b;
+        public static final int ms_album=0x7f0c005a;
         public static final int mt_total=0x7f0c00b8;
         public static final int never=0x7f0c001d;
         public static final int none=0x7f0c000f;
@@ -1917,7 +1916,7 @@ containing a value of this type.
         public static final int title_text=0x7f0c00aa;
         public static final int top=0x7f0c0027;
         public static final int tr_title=0x7f0c00ef;
-        public static final int tv_album_cancel=0x7f0c005a;
+        public static final int tv_album_cancel=0x7f0c005b;
         public static final int tv_album_ensure=0x7f0c005c;
         public static final int tv_apr=0x7f0c0105;
         public static final int tv_aug=0x7f0c0109;

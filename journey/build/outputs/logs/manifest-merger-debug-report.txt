@@ -28,7 +28,6 @@ MERGED from [com.android.support:support-v4:24.0.0] D:\studiospace\Journey\journ
 MERGED from [com.android.support:support-v4:24.0.0] D:\studiospace\Journey\journey\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0\AndroidManifest.xml:21:5-23:54
 MERGED from [com.android.support:recyclerview-v7:24.0.0] D:\studiospace\Journey\journey\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.0.0\AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-v4:24.0.0] D:\studiospace\Journey\journey\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0\AndroidManifest.xml:21:5-23:54
-MERGED from [com.jaredrummler:material-spinner:1.0.9] D:\studiospace\Journey\journey\build\intermediates\exploded-aar\com.jaredrummler\material-spinner\1.0.9\AndroidManifest.xml:21:5-23:41
 	android:targetSdkVersion
 		ADDED from D:\studiospace\Journey\journey\src\main\AndroidManifest.xml:9:9-38
 		INJECTED from D:\studiospace\Journey\journey\src\main\AndroidManifest.xml

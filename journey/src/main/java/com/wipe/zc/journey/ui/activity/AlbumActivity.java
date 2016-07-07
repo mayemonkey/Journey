@@ -3,6 +3,7 @@ package com.wipe.zc.journey.ui.activity;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,12 +13,10 @@ import android.view.View;
 import android.view.Window;
 import android.widget.GridView;
 import android.widget.TextView;
-
-import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.wipe.zc.journey.R;
 import com.wipe.zc.journey.domain.ImageItem;
+import com.wipe.zc.journey.lib.materialspinner.MaterialSpinner;
 import com.wipe.zc.journey.ui.adapter.AlbumAdapter;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -32,6 +31,15 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
 
     private MaterialSpinner ms_album;
 
+    //选中图片集合
+    private List<String> list_selected_other = new ArrayList<>();
+
+    //当前页选中
+    private List<String> list_selected_curr = new ArrayList<>();
+
+    //选中图片文件夹名称
+//    private List<String> list_selected_dir = new ArrayList<>();
+
     //图片路径集合
     private List<String> list_dir = new ArrayList<>();
 
@@ -43,7 +51,6 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
 
     private AlbumAdapter adapter;
 
-
     //Handler标示What全局定义
     private static final int BIND_SPINNER = 0;
 
@@ -51,15 +58,16 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-
             switch (msg.what) {
                 case BIND_SPINNER:
                     getDirList();
                     ms_album.setItems(list_dir);
+                    ms_album.setSelectedIndex(0);
                     break;
             }
         }
     };
+    private TextView tv_album_ensure;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +86,7 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
                 handler.sendEmptyMessage(BIND_SPINNER);
             }
         }).start();
+
     }
 
     /**
@@ -90,12 +99,11 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
         ms_album = (MaterialSpinner) findViewById(R.id.ms_album);
         ms_album.setOnItemSelectedListener(this);
 
-
-        TextView tv_album_ensure = (TextView) findViewById(R.id.tv_album_ensure);
+        tv_album_ensure = (TextView) findViewById(R.id.tv_album_ensure);
         tv_album_ensure.setOnClickListener(this);
 
         GridView gv_album = (GridView) findViewById(R.id.gv_album);
-        adapter = new AlbumAdapter(list);
+        adapter = new AlbumAdapter(this, list, list_selected_curr, list_selected_other);
         gv_album.setAdapter(adapter);
     }
 
@@ -117,7 +125,7 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
 
         Cursor cur = cr.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, null, null, null);
 
-        if(cur == null){
+        if (cur == null) {
             return;
         }
 
@@ -158,31 +166,6 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
                 list.add(imageItem);
                 map.put(bucketName, list);
             }
-
-
-
-//            130077,
-//            bucketId: 97354131,
-//            picasaId: null,
-//            name:1a05408d553c39aa.jpg,
-//            path:/storage/emulated/0/Tencent/QQ_Images/1a05408d553c39aa.jpg,
-//            title: 1a05408d553c39aa,
-//            size: 114350,
-//            bucket: QQ_Images---,
-
-//            ImageBucket bucket = bucketList.get(bucketId);
-//            if (bucket == null) {
-//                bucket = new ImageBucket();
-//                bucketList.put(bucketId, bucket);
-//                bucket.imageList = new ArrayList<ImageItem>();
-//                bucket.bucketName = bucketName;
-//            }
-//            bucket.count++;
-//            ImageItem imageItem = new ImageItem();
-//            imageItem.imageId = _id;
-//            imageItem.imagePath = path;
-//            imageItem.thumbnailPath = thumbnailList.get(_id);
-//            bucket.imageList.add(imageItem);
         }
         cur.close();
     }
@@ -199,6 +182,27 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
         }
     }
 
+    /**
+     * 设置  确认键  可用性
+     * @param enable
+     */
+    public void setEnsureEnable(boolean enable){
+        tv_album_ensure.setEnabled(enable);
+        if(enable){
+            tv_album_ensure.setTextColor(Color.WHITE);
+        }else{
+            tv_album_ensure.setTextColor(Color.parseColor("#666666"));
+        }
+    }
+
+    /**
+     * 设置   确认键  文本
+     * @param text
+     */
+    public void setEnsureText(String text){
+        tv_album_ensure.setText(text);
+    }
+
     @Override
     public void onClick(View view) {
 
@@ -206,6 +210,38 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
 
     @Override
     public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+        //TODO  MaterialSpinner  中  list_selected
+
+        //清空当前页选中
+        list_selected_curr.clear();
+        //清空其他页选中
+        list_selected_other.clear();
+
+        //遍历Map确定选中图片的路径
+        for (Map.Entry<String, List<ImageItem>> entry : map.entrySet()) {
+            //一个Image路径
+            List<ImageItem> list_item = entry.getValue();
+            boolean flag_selected = false;
+            for (ImageItem imageItem : list_item) {
+                if (imageItem.isSelected()) {
+                    flag_selected = true;
+
+                    if(list_dir.get(position).equals(entry.getKey())){              //当前页
+                        list_selected_curr.add(imageItem.getImagePaht());
+                    }else{                                                          //非当前页
+                        list_selected_other.add(imageItem.getImagePaht());
+                    }
+                    ms_album.addSelectedList(entry.getKey());
+                }
+            }
+
+            //判断路径是否从List移除
+            if (!flag_selected) {
+                ms_album.removeSelectedList(entry.getKey());
+            }
+        }
+
+        //清除选中状态
         list.clear();
         String dir = list_dir.get(position);
         List<ImageItem> imageItems = map.get(dir);
