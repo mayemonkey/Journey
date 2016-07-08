@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.wipe.zc.journey.lib.drag.DragLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.wipe.zc.journey.lib.drag.DragLayout
     android:id="@+id/dl_home"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#51d3c4" >
+    android:background="#51d3c4">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <com.wipe.zc.journey.lib.CircleImageView
                 android:id="@+id/iv_home_favicon"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginRight="5dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_launcher" />
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_launcher"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:gravity="center_vertical"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_home_nickname"
@@ -37,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:text="昵称"
                     android:textColor="#ffffff"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"/>
 
                 <TextView
                     android:id="@+id/tv_home_email"
@@ -46,7 +47,7 @@
                     android:layout_marginTop="5dp"
                     android:text="邮箱"
                     android:textColor="#99ffffff"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -56,41 +57,41 @@
             android:layout_marginRight="100dp"
             android:paddingBottom="60dp"
             android:paddingLeft="60dp"
-            android:paddingTop="80dp" >
+            android:paddingTop="80dp">
 
             <include
                 android:id="@+id/ly_menu"
-                layout="@layout/layout_menu_left" />
+                layout="@layout/layout_menu_left"/>
         </RelativeLayout>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:background="#fff" >
+        android:background="#fff">
     </RelativeLayout>
 
     <com.wipe.zc.journey.lib.drag.DragRelativeLayout
         android:id="@+id/drl_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#fff" >
+        android:background="#fff">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp" >
+                android:layout_height="45dp">
 
                 <ImageView
                     android:id="@+id/iv_title_left"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_margin="10dp"
-                    android:background="@drawable/icon_setting" />
+                    android:background="@drawable/icon_setting"/>
 
                 <TextView
                     android:id="@+id/tv_title_text"
@@ -99,7 +100,7 @@
                     android:layout_centerInParent="true"
                     android:text="时间数据"
                     android:textColor="#000"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"/>
 
                 <ImageView
                     android:id="@+id/iv_title_right"
@@ -108,7 +109,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
                     android:layout_margin="10dp"
-                    android:background="@drawable/icon_add_gray" />
+                    android:background="@drawable/icon_add_gray"/>
 
                 <TextView
                     android:id="@+id/tv_total_year"
@@ -120,13 +121,13 @@
                     android:enabled="false"
                     android:text="2016"
                     android:textSize="14sp"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"/>
             </RelativeLayout>
 
             <FrameLayout
                 android:id="@+id/fl_content"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent">
             </FrameLayout>
         </LinearLayout>
     </com.wipe.zc.journey.lib.drag.DragRelativeLayout>

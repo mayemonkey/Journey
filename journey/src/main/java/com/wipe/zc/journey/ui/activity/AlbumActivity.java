@@ -2,6 +2,7 @@ package com.wipe.zc.journey.ui.activity;
 
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -30,6 +31,8 @@ import java.util.Set;
 public class AlbumActivity extends Activity implements View.OnClickListener, MaterialSpinner.OnItemSelectedListener {
 
     private MaterialSpinner ms_album;
+
+    private ArrayList<String> list_send = new ArrayList<>();
 
     //选中图片集合
     private List<String> list_selected_other = new ArrayList<>();
@@ -205,7 +208,36 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
 
     @Override
     public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.tv_album_cancel:
+                finish();
+                break;
 
+            case R.id.tv_album_ensure:
+                setSendList();
+                Intent intent = new Intent();
+                intent.putStringArrayListExtra("album", list_send);
+                setResult(0, intent);
+                finish();
+                break;
+        }
+    }
+
+    /**
+     * 设置发送集合
+     */
+    private void setSendList() {
+        list_send.clear();
+        if(list_selected_curr.size() > 0){
+            for(int i = 0; i < list_selected_curr.size(); i++){
+                list_send.add(list_selected_curr.get(i));
+            }
+        }
+        if(list_selected_other.size() > 0){
+            for(int i = 0; i < list_selected_other.size(); i++){
+                list_send.add(list_selected_other.get(i));
+            }
+        }
     }
 
     @Override

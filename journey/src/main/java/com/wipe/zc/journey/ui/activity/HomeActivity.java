@@ -290,7 +290,6 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
             default:
                 break;
         }
-
         return super.onKeyDown(keyCode, event);
     }
 
@@ -316,7 +315,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.fl_content, FragmentFactory.createFactory(1), "calendar").commit();
                 // 关闭LeftMenu
-                dl_home.close(true);
+//                dl_home.close(true);
                 dl_home.close(true);
                 break;
 
