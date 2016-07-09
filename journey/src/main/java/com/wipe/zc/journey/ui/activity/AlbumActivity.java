@@ -14,10 +14,12 @@ import android.view.View;
 import android.view.Window;
 import android.widget.GridView;
 import android.widget.TextView;
+
 import com.wipe.zc.journey.R;
 import com.wipe.zc.journey.domain.ImageItem;
 import com.wipe.zc.journey.lib.materialspinner.MaterialSpinner;
 import com.wipe.zc.journey.ui.adapter.AlbumAdapter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -41,7 +43,7 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
     private List<String> list_selected_curr = new ArrayList<>();
 
     //选中图片文件夹名称
-//    private List<String> list_selected_dir = new ArrayList<>();
+    private List<String> list_selected_before = new ArrayList<>();
 
     //图片路径集合
     private List<String> list_dir = new ArrayList<>();
@@ -71,12 +73,15 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
         }
     };
     private TextView tv_album_ensure;
+    private Object dirSelectedBefore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_album);
+
+        initSelected();
 
         initWidget();
         new Thread(new Runnable() {
@@ -90,6 +95,17 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
             }
         }).start();
 
+    }
+
+    /**
+     * 获取之前已选中图片
+     */
+    private void initSelected() {
+        Intent intent = getIntent();
+        ArrayList<String> selected = intent.getStringArrayListExtra("selected");
+        if (selected != null) {
+            list_selected_before.addAll(selected);
+        }
     }
 
     /**
@@ -132,6 +148,7 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
             return;
         }
 
+        //获取设备中所有保存的图片信息（由系统数据库收集）
         while (cur.moveToNext()) {
             int photoIDIndex = cur.getColumnIndexOrThrow(MediaStore.Images.Media._ID);
             int photoPathIndex = cur.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
@@ -157,6 +174,10 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
             ImageItem imageItem = new ImageItem();
             imageItem.setImageId(_id);
             imageItem.setImagePaht(path);
+            //设置ImageItem之前选中状态
+            if (list_selected_before.contains(path)) {
+                imageItem.setSelected(true);
+            }
 
             //添加数据至Map集合中，将文件夹名作为key存储
             //获取新的文件夹
@@ -171,6 +192,8 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
             }
         }
         cur.close();
+
+        getDirSelectedBefore();
     }
 
     /**
@@ -187,28 +210,30 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
 
     /**
      * 设置  确认键  可用性
+     *
      * @param enable
      */
-    public void setEnsureEnable(boolean enable){
+    public void setEnsureEnable(boolean enable) {
         tv_album_ensure.setEnabled(enable);
-        if(enable){
+        if (enable) {
             tv_album_ensure.setTextColor(Color.WHITE);
-        }else{
+        } else {
             tv_album_ensure.setTextColor(Color.parseColor("#666666"));
         }
     }
 
     /**
      * 设置   确认键  文本
+     *
      * @param text
      */
-    public void setEnsureText(String text){
+    public void setEnsureText(String text) {
         tv_album_ensure.setText(text);
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tv_album_cancel:
                 finish();
                 break;
@@ -228,13 +253,13 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
      */
     private void setSendList() {
         list_send.clear();
-        if(list_selected_curr.size() > 0){
-            for(int i = 0; i < list_selected_curr.size(); i++){
+        if (list_selected_curr.size() > 0) {
+            for (int i = 0; i < list_selected_curr.size(); i++) {
                 list_send.add(list_selected_curr.get(i));
             }
         }
-        if(list_selected_other.size() > 0){
-            for(int i = 0; i < list_selected_other.size(); i++){
+        if (list_selected_other.size() > 0) {
+            for (int i = 0; i < list_selected_other.size(); i++) {
                 list_send.add(list_selected_other.get(i));
             }
         }
@@ -258,9 +283,9 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
                 if (imageItem.isSelected()) {
                     flag_selected = true;
 
-                    if(list_dir.get(position).equals(entry.getKey())){              //当前页
+                    if (list_dir.get(position).equals(entry.getKey())) {              //当前页
                         list_selected_curr.add(imageItem.getImagePaht());
-                    }else{                                                          //非当前页
+                    } else {                                                          //非当前页
                         list_selected_other.add(imageItem.getImagePaht());
                     }
                     ms_album.addSelectedList(entry.getKey());
@@ -279,5 +304,41 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
         List<ImageItem> imageItems = map.get(dir);
         list.addAll(imageItems);
         adapter.notifyDataSetChanged();
+    }
+
+    /**
+     * 获取之前路径选择
+     *
+     * @return
+     */
+    public void getDirSelectedBefore() {
+        int i = 0;
+        for (Map.Entry<String, List<ImageItem>> entry : map.entrySet()) {
+            //单个路径下图片信息集合
+            List<ImageItem> list_item = entry.getValue();
+            boolean flag_selected = false;
+            for (ImageItem imageItem : list_item) {
+                if (imageItem.isSelected()) {
+                    if (i == 0) {
+                        list_selected_curr.add(imageItem.getImagePaht());
+                    }else{
+                        list_selected_other.add(imageItem.getImagePaht());
+                    }
+                    flag_selected = true;
+                }
+            }
+            if (flag_selected) {
+                ms_album.addSelectedList(entry.getKey());
+            }
+            i++;
+        }
+
+        if (list_selected_curr.size() + list_selected_other.size() > 0) {
+            setEnsureEnable(true);
+            setEnsureText("确认(" + (list_selected_other.size() + list_selected_curr.size()) + ")");
+        } else {
+            setEnsureEnable(false);
+            setEnsureText("确认");
+        }
     }
 }

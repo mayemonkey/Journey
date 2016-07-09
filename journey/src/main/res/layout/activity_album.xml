@@ -50,12 +50,11 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#666666"
-        />
-
+        android:background="#666666"/>
 
     <GridView
         android:id="@+id/gv_album"
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:horizontalSpacing="4dp"

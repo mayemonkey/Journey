@@ -21,7 +21,7 @@ import java.util.List;
 public class AlbumAdapter extends BaseAdapter {
 
     private AlbumActivity activity;
-    private List<ImageItem> list = new ArrayList<>();
+    private List<ImageItem> list ;
     private List<String> list_selected_curr;
     private List<String> list_selected_other;
 
