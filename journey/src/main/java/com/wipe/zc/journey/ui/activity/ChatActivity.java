@@ -15,8 +15,10 @@ import android.os.Bundle;
 import android.app.Activity;
 
 import android.os.Environment;
-import android.os.Parcelable;
+
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -38,7 +40,7 @@ import com.easemob.chat.EMConversation;
 import com.easemob.chat.EMMessage;
 import com.easemob.chat.ImageMessageBody;
 import com.easemob.chat.TextMessageBody;
-import com.easemob.util.VoiceRecorder;
+
 import com.wipe.zc.journey.R;
 import com.wipe.zc.journey.domain.ChatMessage;
 
@@ -56,7 +58,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ChatActivity extends Activity implements View.OnClickListener {
+public class ChatActivity extends Activity implements View.OnClickListener, TextWatcher {
 
     private ImageView iv_chat_cancel;
     private RefreshListView rlv_chat;
@@ -80,6 +82,8 @@ public class ChatActivity extends Activity implements View.OnClickListener {
     private static final int GALLERY = 0;
     private static final int CAMERA = 1;
     private TextView tv_chat_record_voice;
+    private ImageView iv_chat_voice;
+    private ImageView iv_chat_keyboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,8 +103,7 @@ public class ChatActivity extends Activity implements View.OnClickListener {
 
         //不存在消息记录
         if (flag_message_exit) {
-            requestRecord(EMChatManager.getInstance().getConversation(friendName).getLastMessage()
-                    .getMsgId(), 20);
+            requestRecord(EMChatManager.getInstance().getConversation(friendName).getLastMessage().getMsgId(), 20);
             setListViewPosition(list.size() - 1);
         }
     }
@@ -125,6 +128,9 @@ public class ChatActivity extends Activity implements View.OnClickListener {
         tv_chat_name.setText(friendName);
         //输入内容、发送按钮
         et_chat_content = (EditText) findViewById(R.id.et_chat_content);
+        et_chat_content.addTextChangedListener(this);
+
+
         tv_chat_send = (TextView) findViewById(R.id.tv_chat_send);
         tv_chat_send.setOnClickListener(this);
         //聊天内容
@@ -138,6 +144,12 @@ public class ChatActivity extends Activity implements View.OnClickListener {
         iv_choose.setOnClickListener(this);
         //输入框整体
         ll_chat_send = (LinearLayout) findViewById(R.id.ll_chat_send);
+
+        //切换按钮
+        iv_chat_voice = (ImageView) findViewById(R.id.iv_chat_voice);
+        iv_chat_keyboard = (ImageView) findViewById(R.id.iv_chat_keyboard);
+        iv_chat_voice.setOnClickListener(this);
+        iv_chat_keyboard.setOnClickListener(this);
 
         //语音按钮
         tv_chat_record_voice = (TextView) findViewById(R.id.tv_chat_record_voice);
@@ -162,8 +174,8 @@ public class ChatActivity extends Activity implements View.OnClickListener {
             }
         });
         //测试使用
-        et_chat_content.setEnabled(false);
-        et_chat_content.setVisibility(View.INVISIBLE);
+//        et_chat_content.setEnabled(false);
+//        et_chat_content.setVisibility(View.INVISIBLE);
 
         adapter = new ChatAdapter(list);
         rlv_chat.setAdapter(adapter);
@@ -187,7 +199,7 @@ public class ChatActivity extends Activity implements View.OnClickListener {
                 WindowManager.LayoutParams params = getWindow().getAttributes();
                 params.alpha = 0.7f;
                 getWindow().setAttributes(params);
-                int height = view_popup.getHeight();
+//                int height = view_popup.getHeight();
                 window.showAtLocation(view_popup, Gravity.LEFT | Gravity.TOP, 0, getWindowManager
                         ().getDefaultDisplay().getHeight() - 2 * ll_chat_send.getMeasuredHeight());
                 break;
@@ -202,17 +214,29 @@ public class ChatActivity extends Activity implements View.OnClickListener {
                 intent.setType("image/*");
                 startActivityForResult(Intent.createChooser(intent, "选择图片"), GALLERY);
                 window.dismiss();   //隐藏PopupWindow
-
                 break;
 
+            case R.id.iv_chat_voice://显示语音
+                iv_chat_voice.setVisibility(View.GONE);
+                iv_chat_keyboard.setVisibility(View.VISIBLE);
+
+                tv_chat_record_voice.setVisibility(View.VISIBLE);
+                et_chat_content.setVisibility(View.GONE);
+                break;
+
+            case R.id.iv_chat_keyboard://显示键盘
+                iv_chat_voice.setVisibility(View.VISIBLE);
+                iv_chat_keyboard.setVisibility(View.GONE);
+
+                tv_chat_record_voice.setVisibility(View.GONE);
+                et_chat_content.setVisibility(View.VISIBLE);
+                break;
         }
     }
 
     /**
      * 发送文本消息
      *
-     * @param receiver
-     * @param content
      */
     private void sendMessage(String receiver, final String content) {
         // 获取到与聊天人的会话对象。参数username为聊天人的userid或者groupid，后文中的username皆是如此
@@ -288,7 +312,6 @@ public class ChatActivity extends Activity implements View.OnClickListener {
     /**
      * 当信息发送成功
      *
-     * @param message
      */
     private void sendMessageSuccess(EMMessage message) {
         //提取EMMessage数据至ChatMessage中
@@ -321,6 +344,28 @@ public class ChatActivity extends Activity implements View.OnClickListener {
                 .getNewMessageBroadcastAction());
         intentFilter.setPriority(3);
         registerReceiver(msgReceiver, intentFilter);
+    }
+
+    /**
+     * 文本监听
+     */
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+        //根据输入栏中是否有文字决定右侧显示的控件
+        long length = editable.length();
+        if(length == 0){    //不存在内容，显示语音按钮
+            iv_choose.setVisibility(View.VISIBLE);
+            tv_chat_send.setVisibility(View.GONE);
+        }else{              //存在内容，显示发送按钮
+            iv_choose.setVisibility(View.GONE);
+            tv_chat_send.setVisibility(View.VISIBLE);
+        }
     }
 
     class MessageReceiver extends BroadcastReceiver {
@@ -379,7 +424,6 @@ public class ChatActivity extends Activity implements View.OnClickListener {
     /**
      * 将消息添加给显示List
      *
-     * @param messages
      */
     private void addMessageToList(final List<EMMessage> messages, int count) {
         if (messages != null) {
@@ -404,8 +448,6 @@ public class ChatActivity extends Activity implements View.OnClickListener {
     /**
      * 从EMMessage中提取数据封装至ChatMessage对象中
      *
-     * @param message
-     * @return
      */
     private ChatMessage setChatMessageData(EMMessage message) {
         ChatMessage data = new ChatMessage();
@@ -448,7 +490,6 @@ public class ChatActivity extends Activity implements View.OnClickListener {
     /**
      * 设置ListView视图位置
      *
-     * @param selection
      */
     public void setListViewPosition(int selection) {
         rlv_chat.setSelection(selection);
