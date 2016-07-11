@@ -1,0 +1,298 @@
+[
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\background.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\background.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_list_selector_disabled_holo_dark.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_list_selector_disabled_holo_dark.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.pnikosis\\materialish-progress\\1.0\\res\\drawable-hdpi-v4\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\alpha_background.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\alpha_background.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\check.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\check.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\check_selected.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\check_selected.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_switch_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_btn_check_to_on_mtrl_000.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_btn_check_to_on_mtrl_000.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\compose_pic_add.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\compose_pic_add.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_ensure.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_ensure.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_list_pressed_holo_light.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_list_pressed_holo_light.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_back_today.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_back_today.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_point_blue.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_point_blue.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_popup_background_mtrl_mult.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_popup_background_mtrl_mult.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_time.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_time.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_setting.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_setting.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_btn_check_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_textfield_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_total_preple.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_total_preple.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\alpha_background_add.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\alpha_background_add.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_total_organ.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_total_organ.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_right_arrow.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_right_arrow.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_ic_menu_selectall_mtrl_alpha.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_ic_menu_paste_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_list_divider_mtrl_alpha.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_list_divider_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_cab_background_top_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_btn_radio_to_on_mtrl_000.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_btn_radio_to_on_mtrl_000.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_spinner_mtrl_am_alpha.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_textfield_default_mtrl_alpha.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_textfield_default_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\edit_background.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\edit_background.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_ic_menu_share_mtrl_alpha.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_ic_menu_share_mtrl_alpha.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_search.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_search.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\bg_total_lv.jpg",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\bg_total_lv.jpg"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_menu_hardkey_panel_mtrl_mult.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\close_normal.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\close_normal.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_left_arrow.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_left_arrow.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_list_selector_disabled_holo_light.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_list_selector_disabled_holo_light.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\add_icon.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\add_icon.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_ic_voice_search_api_mtrl_alpha.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_ic_voice_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_total_blue.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_total_blue.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_btn_radio_to_on_mtrl_015.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_btn_radio_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ms__drop_down_shadow.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\ms__drop_down_shadow.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_ab_share_pack_holo_dark.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_ab_share_pack_holo_dark.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_textfield_search_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_add.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_add.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_ok.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\ic_ok.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_poi.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_poi.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_enter_train.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_enter_train.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_cancel.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_cancel.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_point_white.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_point_white.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_ic_ab_back_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_ic_menu_moreoverflow_mtrl_alpha.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_ic_menu_moreoverflow_mtrl_alpha.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_textfield_search_default_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_ic_go_search_api_mtrl_alpha.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_ic_go_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_window.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_window.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_ic_commit_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_ab_share_pack_holo_light.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_ab_share_pack_holo_light.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_ic_clear_mtrl_alpha.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_ic_clear_mtrl_alpha.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_add_gray.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_add_gray.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_list_focused_holo.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_list_focused_holo.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_list_pressed_holo_dark.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_list_pressed_holo_dark.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_header_close.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_header_close.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ms__menu_down.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ms__menu_down.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_tab_indicator_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_btn_switch_to_on_mtrl_00012.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_icon.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_icon.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\compose_pic_add_highlighted.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\compose_pic_add_highlighted.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_btn_switch_to_on_mtrl_00001.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_list_longpressed_holo.9.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_list_longpressed_holo.9.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_location.png",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\icon_location.png"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\launch.jpg",
+        "source": "D:\\studiospace\\Journey\\journey\\src\\main\\res\\drawable-hdpi\\launch.jpg"
+    },
+    {
+        "merged": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_ic_search_api_mtrl_alpha.png",
+        "source": "D:\\studiospace\\Journey\\journey\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\drawable-hdpi\\abc_ic_search_api_mtrl_alpha.png"
+    }
+]

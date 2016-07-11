@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#00ffffff">
+
+    <View
+        android:id="@+id/iv_total_line"
+        android:layout_width="2dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:background="#fff"/>
+
+    <ImageView
+        android:id="@+id/iv_total_point"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/total_lv_point_wait_shape"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/iv_total_point"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@id/iv_total_point"
+        android:layout_toRightOf="@id/iv_total_point"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="8dp"
+            android:background="#9993fe"/>
+
+        <TextView
+            android:id="@+id/tv_total_wait_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="8dp"
+            android:text="时间"
+            android:textColor="#9993fe"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/tv_total_wait_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="start"
+            android:textColor="#fff"
+            android:text="标题"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

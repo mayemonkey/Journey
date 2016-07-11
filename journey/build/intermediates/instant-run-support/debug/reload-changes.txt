@@ -1,0 +1,5 @@
+CHANGED,D:\studiospace\Journey\journey\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\wipe\zc\journey\ui\activity\AlbumActivity$2$override.class
+CHANGED,D:\studiospace\Journey\journey\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\android\tools\fd\runtime\AppPatchesLoaderImpl.class
+CHANGED,D:\studiospace\Journey\journey\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\wipe\zc\journey\ui\activity\AlbumActivity$1$override.class
+CHANGED,D:\studiospace\Journey\journey\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\wipe\zc\journey\ui\activity\AlbumActivity$override.class
+CHANGED,D:\studiospace\Journey\journey\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\wipe\zc\journey\ui\activity\EditJourneyActivity$override.class
