@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.baidu.platform.comapi.map.I;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wipe.zc.journey.R;
 import com.wipe.zc.journey.global.MyApplication;
@@ -46,39 +47,57 @@ public class EditJourneyAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
-        if (convertView == null) {
-            convertView = View.inflate(MyApplication.getContext(), R.layout.layout_gv_edit_journey, null);
-        }
+        if (position != 10) {       //范围内
 
-        String path = list.get(position);
+            if (convertView == null) {
+                convertView = View.inflate(MyApplication.getContext(), R.layout.layout_gv_edit_journey, null);
+            }
 
-        EditJourneyViewHolder holder = EditJourneyViewHolder.getInstance(convertView);
-        if (path.equals("add")) {
-            if(position != 0){
-                holder.iv_gv_edit_journey.setImageResource(R.drawable.edit_journey_add_selected);
-                //TODO 未测试内容
-                holder.iv_gv_edit_journey.setOnClickListener(new View.OnClickListener() {
+            String path = list.get(position);
+
+            final int index = position;
+
+            EditJourneyViewHolder holder = EditJourneyViewHolder.getInstance(convertView);
+            if (path.equals("add")) {
+                if (position != 0) {
+                    holder.iv_gv_edit_journey.setImageResource(R.drawable.edit_journey_add_selected);
+                    //TODO 未测试内容
+                    holder.iv_gv_edit_journey.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent();
+                            intent.setClass(activity, AlbumActivity.class);
+                            intent.putStringArrayListExtra("selected", (ArrayList<String>) list);
+                            activity.startActivityForResult(intent, 0);
+                        }
+                    });
+                }
+                holder.iv_gv_edit_journey_remove.setVisibility(View.GONE);
+            } else {
+                ImageLoader.getInstance().displayImage("file://" + path, holder.iv_gv_edit_journey, ImageLoaderOption.list_options);
+                holder.iv_gv_edit_journey_remove.setVisibility(View.VISIBLE);
+                holder.iv_gv_edit_journey_remove.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent();
-                        intent.setClass(activity, AlbumActivity.class);
-                        intent.putStringArrayListExtra("selected", (ArrayList<String>) list);
-                        activity.startActivityForResult(intent, 0);
+                        //remove 选中
+                        list.remove(index);
+                        notifyDataSetChanged();
                     }
                 });
             }
+            return convertView;
         } else {
-            ImageLoader.getInstance().displayImage("file://" + path, holder.iv_gv_edit_journey, ImageLoaderOption.list_options);
+            return null;
         }
-
-        return convertView;
     }
 
     static class EditJourneyViewHolder {
         ImageView iv_gv_edit_journey;
+        ImageView iv_gv_edit_journey_remove;
 
         public EditJourneyViewHolder(View convertView) {
             iv_gv_edit_journey = (ImageView) convertView.findViewById(R.id.iv_gv_edit_journey);
+            iv_gv_edit_journey_remove = (ImageView) convertView.findViewById(R.id.iv_gv_edit_journey_remove);
         }
 
         public static EditJourneyViewHolder getInstance(View convertView) {

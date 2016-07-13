@@ -15,6 +15,15 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"/>
 
+        <ImageView
+            android:id="@+id/iv_gv_edit_journey_remove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/iv_gv_edit_journey"
+            android:layout_alignTop="@id/iv_gv_edit_journey"
+            android:layout_margin="4dp"
+            android:background="@drawable/pic_delete"/>
+
     </com.wipe.zc.journey.view.AdapterLayout>
 
 </RelativeLayout>

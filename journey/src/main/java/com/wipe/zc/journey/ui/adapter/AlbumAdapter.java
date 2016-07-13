@@ -21,7 +21,7 @@ import java.util.List;
 public class AlbumAdapter extends BaseAdapter {
 
     private AlbumActivity activity;
-    private List<ImageItem> list ;
+    private List<ImageItem> list;
     private List<String> list_selected_curr;
     private List<String> list_selected_other;
 
@@ -69,12 +69,18 @@ public class AlbumAdapter extends BaseAdapter {
         holder.iv_gv_album_sign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                imageItem.setSelected(!imageItem.isSelected());
+                long count = list_selected_other.size() + list_selected_curr.size();
 
                 if (imageItem.isSelected()) {
-                    list_selected_curr.add(imageItem.getImagePaht());
-                } else {
+                    //已选中，取消当前选中
+                    imageItem.setSelected(!imageItem.isSelected());
                     list_selected_curr.remove(imageItem.getImagePaht());
+                } else {
+                    //未选中
+                    if (count < 9) {
+                        imageItem.setSelected(!imageItem.isSelected());
+                        list_selected_curr.add(imageItem.getImagePaht());
+                    }
                 }
 
                 //显示选中状态

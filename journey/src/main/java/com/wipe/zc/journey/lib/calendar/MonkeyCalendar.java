@@ -3,7 +3,6 @@ package com.wipe.zc.journey.lib.calendar;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -14,17 +13,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.TextView;
 import android.widget.ViewSwitcher;
-
 import com.wipe.zc.journey.R;
 
 public class MonkeyCalendar extends TableLayout {
 
-	ArrayList<TextView> list_calendar = new ArrayList<TextView>();
 	private Context context;
 	private Animation mInAnimationLastMonth, mInAnimationNextMonth, mOutAnimationLastMonth, mOutAnimationNextMonth;
 	private ArrayList<Calendar> list_record;
@@ -40,7 +35,7 @@ public class MonkeyCalendar extends TableLayout {
 	private boolean mMoveToNextMonth = false;
 
 	public interface OnDateSelectedListener {
-		public void onDateSelected(Calendar date);
+		void onDateSelected(Calendar date);
 	}
 
 	private OnMonthChangeListener mMonthChangeListener;
@@ -50,7 +45,7 @@ public class MonkeyCalendar extends TableLayout {
 	}
 
 	public interface OnMonthChangeListener {
-		public void onMonthChange(Calendar date);
+		void onMonthChange(Calendar date);
 	}
 
 	private OnDateSelectedListener mDateSelectedListener;
@@ -127,8 +122,7 @@ public class MonkeyCalendar extends TableLayout {
 
 	/**
 	 * 获取日历视图
-	 * 
-	 * @return
+	 *
 	 */
 	private View getCalendarView() {
 		TableLayout calendar = new TableLayout(context);
@@ -138,9 +132,7 @@ public class MonkeyCalendar extends TableLayout {
 
 	/**
 	 * 填充日历视图
-	 * 
-	 * @param calendar
-	 * @return
+	 *
 	 */
 	private View fillCalendarView(TableLayout calendar) {
 		calendar.removeAllViews();
@@ -170,7 +162,7 @@ public class MonkeyCalendar extends TableLayout {
 		// next month starts with day 1
 		nextMonthDay = 1;
 
-		TableRow week = new TableRow(context);
+		TableRow week ;
 		MonkeyDate date;
 
 		TableRow.LayoutParams lp = new TableRow.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -321,8 +313,7 @@ public class MonkeyCalendar extends TableLayout {
 
 	/**
 	 * 设置存在记录的日期集合
-	 * 
-	 * @param list_record
+	 *
 	 */
 	public void setRecordList(ArrayList<Calendar> list_record) {
 		this.list_record = list_record;
@@ -334,9 +325,7 @@ public class MonkeyCalendar extends TableLayout {
 
 	/**
 	 * 是否是存在记录的日期
-	 * 
-	 * @param date
-	 * @return
+	 *
 	 */
 	private boolean isRecord(Calendar date) {
 		if (list_record != null) {
@@ -354,9 +343,7 @@ public class MonkeyCalendar extends TableLayout {
 
 	/**
 	 * 判断是否是今天
-	 * 
-	 * @param date
-	 * @return
+	 *
 	 */
 	private boolean isToday(Calendar date) {
 		Calendar today = Calendar.getInstance();
@@ -368,11 +355,7 @@ public class MonkeyCalendar extends TableLayout {
 
 	/**
 	 * 方法重载
-	 * 
-	 * @param yaer
-	 * @param month
-	 * @param day
-	 * @return
+	 *
 	 */
 	private boolean isToday(int yaer, int month, int day) {
 		Calendar today = Calendar.getInstance();
@@ -478,7 +461,9 @@ public class MonkeyCalendar extends TableLayout {
 					}
 				}
 			}
-			mPreviousSelectedDate.setPadding(0, 8, 0, 8);
+			if(mPreviousSelectedDate != null){
+				mPreviousSelectedDate.setPadding(0, 8, 0, 8);
+			}
 			// 设置选中的日期
 			int selectedDay = Integer.parseInt(((MonkeyDate) view).getText().toString());
 			date_selected.set(Calendar.YEAR, date_now.get(Calendar.YEAR));

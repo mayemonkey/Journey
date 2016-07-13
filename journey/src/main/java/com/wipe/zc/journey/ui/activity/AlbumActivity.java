@@ -59,6 +59,10 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
     //Handler标示What全局定义
     private static final int BIND_SPINNER = 0;
 
+    private static final int CHANGE_ENSURE_ENABLE = 1;
+
+    private static final int CHANGE_ENSURE_DISABLE = 2;
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -69,11 +73,20 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
                     ms_album.setItems(list_dir);
                     ms_album.setSelectedIndex(0);
                     break;
+
+                case CHANGE_ENSURE_ENABLE:
+                    setEnsureEnable(true);
+                    setEnsureText("确认(" + (list_selected_other.size() + list_selected_curr.size()) + ")");
+                    break;
+
+                case CHANGE_ENSURE_DISABLE:
+                    setEnsureEnable(false);
+                    setEnsureText("确认");
+                    break;
             }
         }
     };
     private TextView tv_album_ensure;
-    private Object dirSelectedBefore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +97,7 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
         initSelected();
 
         initWidget();
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -175,8 +189,10 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
             imageItem.setImageId(_id);
             imageItem.setImagePaht(path);
             //设置ImageItem之前选中状态
-            if (list_selected_before.contains(path)) {
-                imageItem.setSelected(true);
+            if (list_selected_before != null) {
+                if (list_selected_before.contains(path)) {
+                    imageItem.setSelected(true);
+                }
             }
 
             //添加数据至Map集合中，将文件夹名作为key存储
@@ -211,7 +227,7 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
     /**
      * 设置  确认键  可用性
      *
-     * @param enable
+     * @param enable Button可用状态
      */
     public void setEnsureEnable(boolean enable) {
         tv_album_ensure.setEnabled(enable);
@@ -225,7 +241,7 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
     /**
      * 设置   确认键  文本
      *
-     * @param text
+     * @param text Button显示Text
      */
     public void setEnsureText(String text) {
         tv_album_ensure.setText(text);
@@ -309,7 +325,6 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
     /**
      * 获取之前路径选择
      *
-     * @return
      */
     public void getDirSelectedBefore() {
         int i = 0;
@@ -321,7 +336,7 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
                 if (imageItem.isSelected()) {
                     if (i == 0) {
                         list_selected_curr.add(imageItem.getImagePaht());
-                    }else{
+                    } else {
                         list_selected_other.add(imageItem.getImagePaht());
                     }
                     flag_selected = true;
@@ -334,11 +349,11 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
         }
 
         if (list_selected_curr.size() + list_selected_other.size() > 0) {
-            setEnsureEnable(true);
-            setEnsureText("确认(" + (list_selected_other.size() + list_selected_curr.size()) + ")");
+            //子线程中，需要通知主线程刷新
+            handler.sendEmptyMessage(CHANGE_ENSURE_ENABLE);
         } else {
-            setEnsureEnable(false);
-            setEnsureText("确认");
+            //子线程中，需要通知主线程刷新
+            handler.sendEmptyMessage(CHANGE_ENSURE_DISABLE);
         }
     }
 }

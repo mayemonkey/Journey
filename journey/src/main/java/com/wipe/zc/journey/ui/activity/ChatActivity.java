@@ -58,7 +58,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ChatActivity extends Activity implements View.OnClickListener, TextWatcher {
+public class ChatActivity extends Activity implements View.OnClickListener, TextWatcher, View.OnTouchListener {
 
     private ImageView iv_chat_cancel;
     private RefreshListView rlv_chat;
@@ -153,26 +153,9 @@ public class ChatActivity extends Activity implements View.OnClickListener, Text
 
         //语音按钮
         tv_chat_record_voice = (TextView) findViewById(R.id.tv_chat_record_voice);
+        tv_chat_record_voice.setBackgroundResource(R.drawable.chat_voice_unpressed);
         tv_chat_record_voice.setOnClickListener(null);
-        tv_chat_record_voice.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        tv_chat_record_voice.setTextColor(Color.WHITE);
-                        break;
-
-                    case MotionEvent.ACTION_UP:
-                        tv_chat_record_voice.setTextColor(Color.BLACK);
-                        break;
-
-                    case MotionEvent.ACTION_CANCEL:
-                        tv_chat_record_voice.setTextColor(Color.BLACK);
-                        break;
-                }
-                return false;
-            }
-        });
+        tv_chat_record_voice.setOnTouchListener(this);
         //测试使用
 //        et_chat_content.setEnabled(false);
 //        et_chat_content.setVisibility(View.INVISIBLE);
@@ -200,8 +183,8 @@ public class ChatActivity extends Activity implements View.OnClickListener, Text
                 params.alpha = 0.7f;
                 getWindow().setAttributes(params);
 //                int height = view_popup.getHeight();
-                window.showAtLocation(view_popup, Gravity.LEFT | Gravity.TOP, 0, getWindowManager
-                        ().getDefaultDisplay().getHeight() - 2 * ll_chat_send.getMeasuredHeight());
+                window.showAtLocation(view_popup, Gravity.LEFT | Gravity.TOP, 0, getWindowManager().getDefaultDisplay().getHeight() - 2 *
+                        ll_chat_send.getMeasuredHeight());
                 break;
 
             case R.id.iv_chatpopup_takephoto:       //拍摄照片
@@ -236,7 +219,6 @@ public class ChatActivity extends Activity implements View.OnClickListener, Text
 
     /**
      * 发送文本消息
-     *
      */
     private void sendMessage(String receiver, final String content) {
         // 获取到与聊天人的会话对象。参数username为聊天人的userid或者groupid，后文中的username皆是如此
@@ -311,7 +293,6 @@ public class ChatActivity extends Activity implements View.OnClickListener, Text
 
     /**
      * 当信息发送成功
-     *
      */
     private void sendMessageSuccess(EMMessage message) {
         //提取EMMessage数据至ChatMessage中
@@ -350,22 +331,53 @@ public class ChatActivity extends Activity implements View.OnClickListener, Text
      * 文本监听
      */
     @Override
-    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {    }
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    }
 
     @Override
-    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {    }
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    }
 
     @Override
     public void afterTextChanged(Editable editable) {
         //根据输入栏中是否有文字决定右侧显示的控件
         long length = editable.length();
-        if(length == 0){    //不存在内容，显示语音按钮
+        if (length == 0) {    //不存在内容，显示语音按钮
             iv_choose.setVisibility(View.VISIBLE);
             tv_chat_send.setVisibility(View.GONE);
-        }else{              //存在内容，显示发送按钮
+        } else {              //存在内容，显示发送按钮
             iv_choose.setVisibility(View.GONE);
             tv_chat_send.setVisibility(View.VISIBLE);
         }
+    }
+
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        switch (motionEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                tv_chat_record_voice.setBackgroundResource(R.drawable.chat_voice_pressed);
+                tv_chat_record_voice.setTextColor(Color.WHITE);
+                //TODO 开始录音
+
+
+                break;
+
+            case MotionEvent.ACTION_UP:
+                tv_chat_record_voice.setBackgroundResource(R.drawable.chat_voice_unpressed);
+                tv_chat_record_voice.setTextColor(Color.BLACK);
+                //TODO 处理录音
+
+
+                break;
+
+//            case MotionEvent.ACTION_CANCEL:
+//                tv_chat_record_voice.setTextColor(Color.BLACK);
+//                //TODO 取消录音
+//
+//
+//
+//                break;
+        }
+        return false;
     }
 
     class MessageReceiver extends BroadcastReceiver {
@@ -423,7 +435,6 @@ public class ChatActivity extends Activity implements View.OnClickListener, Text
 
     /**
      * 将消息添加给显示List
-     *
      */
     private void addMessageToList(final List<EMMessage> messages, int count) {
         if (messages != null) {
@@ -447,7 +458,6 @@ public class ChatActivity extends Activity implements View.OnClickListener, Text
 
     /**
      * 从EMMessage中提取数据封装至ChatMessage对象中
-     *
      */
     private ChatMessage setChatMessageData(EMMessage message) {
         ChatMessage data = new ChatMessage();
@@ -489,7 +499,6 @@ public class ChatActivity extends Activity implements View.OnClickListener, Text
 
     /**
      * 设置ListView视图位置
-     *
      */
     public void setListViewPosition(int selection) {
         rlv_chat.setSelection(selection);
@@ -507,20 +516,16 @@ public class ChatActivity extends Activity implements View.OnClickListener, Text
      */
     private void initPopupWindow() {
         view_popup = View.inflate(this, R.layout.layout_chat_popup, null);
-        iv_chatpopup_takephoto = (ImageView) view_popup.findViewById(R.id
-                .iv_chatpopup_takephoto);
+        iv_chatpopup_takephoto = (ImageView) view_popup.findViewById(R.id.iv_chatpopup_takephoto);
         iv_chatpopup_takephoto.setOnClickListener(this);
 
-        iv_chatpopup_choosephoto = (ImageView) view_popup.findViewById(R.id
-                .iv_chatpopup_choosephoto);
+        iv_chatpopup_choosephoto = (ImageView) view_popup.findViewById(R.id.iv_chatpopup_choosephoto);
         iv_chatpopup_choosephoto.setOnClickListener(this);
 
-        window = new PopupWindow(view_popup, LinearLayout.LayoutParams
-                .WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        window = new PopupWindow(view_popup, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         // 设置返回键能够隐藏弹窗
-        window.setBackgroundDrawable(new ColorDrawable(getResources().getColor(android.R
-                .color.transparent)));
+        window.setBackgroundDrawable(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
         window.setFocusable(true);
         window.setOutsideTouchable(true);
         window.setOnDismissListener(new PopupWindow.OnDismissListener() {
@@ -556,11 +561,8 @@ public class ChatActivity extends Activity implements View.OnClickListener, Text
                             try {
                                 //保存照片
                                 bm.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream
-                                        (Environment.getExternalStorageDirectory()
-                                                .getAbsolutePath() +
-                                                getApplication().getPackageName() + "/" + UUID
-                                                .randomUUID()
-                                                .toString() + ".jpg"));
+                                        (Environment.getExternalStorageDirectory().getAbsolutePath() + getApplication().getPackageName() + "/" + UUID
+                                                .randomUUID().toString() + ".jpg"));
                             } catch (FileNotFoundException e) {
                                 e.printStackTrace();
                             }

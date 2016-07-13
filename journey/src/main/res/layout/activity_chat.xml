@@ -38,7 +38,7 @@
     <LinearLayout
         android:id="@+id/ll_chat_send"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:orientation="horizontal">
 
         <RelativeLayout
@@ -88,7 +88,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_margin="5dp"
-                android:background="@drawable/chat_voice_press"
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="按住说话"

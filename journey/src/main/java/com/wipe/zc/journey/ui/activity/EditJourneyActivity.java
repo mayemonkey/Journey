@@ -96,9 +96,13 @@ public class EditJourneyActivity extends Activity implements View.OnClickListene
             case R.id.iv_edit_journey_ensure:
                 String text = et_edit_journey_text.getText().toString();
                 if (TextUtils.isEmpty(text)) {
+                    ToastUtil.shortToast("未输入行程记录");
                     return;
                 } else {
-                    ToastUtil.shortToast("未输入行程记录");
+
+
+
+
                 }
                 break;
 
