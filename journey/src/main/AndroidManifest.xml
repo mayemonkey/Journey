@@ -120,7 +120,7 @@
         </activity>
 
         <!-- 编辑行程内容 -->
-        <activity android:name=".ui.activity.EditJourneyActivity"/>
+        <activity android:name=".ui.activity.EditJourneyDetailActivity"/>
 
         <activity android:name=".ui.activity.AlbumActivity"/>
 

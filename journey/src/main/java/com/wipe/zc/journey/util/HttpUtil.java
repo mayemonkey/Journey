@@ -13,8 +13,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import okhttp3.Call;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -34,9 +37,13 @@ import org.apache.http.protocol.HTTP;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.View;
 
 import com.wipe.zc.journey.domain.Journey;
 import com.wipe.zc.journey.domain.User;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.builder.PostFormBuilder;
+import com.zhy.http.okhttp.callback.Callback;
 
 public class HttpUtil {
 
@@ -132,8 +139,7 @@ public class HttpUtil {
 
             ds = new DataOutputStream(con.getOutputStream());
             ds.writeBytes("--" + "*****" + "\r\n");
-            ds.writeBytes("Content-Disposition: form-data; name=\"img\"; filename=\"" + file
-                    .getName() + "\"" + "\r\n");
+            ds.writeBytes("Content-Disposition: form-data; name=\"img\"; filename=\"" + file.getName() + "\"" + "\r\n");
             ds.writeBytes("\r\n");
 
 			/* 取得文件的FileInputStream */
@@ -166,7 +172,6 @@ public class HttpUtil {
             // Toast.makeText(RegisterActivity.this, "上传成功", Toast.LENGTH_LONG)
             //
             // .show();
-
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("上传失败" + e.getMessage());
@@ -184,6 +189,35 @@ public class HttpUtil {
         }
         return null;
     }
+
+    /**
+     * 批量上传
+     * @param url 路径
+     * @param list 对象
+     * @return 结果
+     */
+    public static void uploadBatch(String url, String text, List<String> list, View view, Callback callback){
+
+        Map<String,String> headers = new HashMap<>();
+
+        headers.put("Connection","Alive");
+        headers.put("Charset", "UTF-8");
+        headers.put("Content-Type", "multipart/form-data;boundary=\" + \"*****\"");
+
+        PostFormBuilder builder = OkHttpUtils.post().url(url).headers(headers).addParams("text", text);
+
+        for(String str : list){
+            File file = new File(str);
+            if(!file.exists()){
+                return ;
+            }
+
+            builder.addFile("mfile", file.getName(), file);
+        }
+
+        builder.build().execute(callback);
+    }
+
 
     public static String requestJourney_ByGet(String url_path, Object obj) {
         try {

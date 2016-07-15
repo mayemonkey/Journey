@@ -31,7 +31,7 @@ dependencies {
     compile files('libs/baidumapapi_util_v3_6_1.jar')
     compile files('libs/locSDK_6.13.jar')
     compile files('libs/nineoldandroids-2.4.0.jar')
-    compile files('libs/okhttp-3.2.0.jar')
+//    compile files('libs/okhttp-3.2.0.jar')
     compile files('libs/okio-1.6.0.jar')
     compile files('libs/hyphenatechat_3.1.0.jar')
     compile files('libs/baidumapapi_base_v3_6_1.jar')
@@ -46,4 +46,11 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     /*spinner*/
 //    compile 'com.jaredrummler:material-spinner:1.0.9'
+    /*okhttp*/
+    compile 'com.squareup.okhttp3:okhttp:3.3.1'
+    compile 'com.zhy:okhttputils:2.6.2'
+
+    /*progressbar*/
+    compile 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
+
 }

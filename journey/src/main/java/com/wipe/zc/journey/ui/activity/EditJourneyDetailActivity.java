@@ -2,7 +2,6 @@ package com.wipe.zc.journey.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,13 +12,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wipe.zc.journey.R;
-import com.wipe.zc.journey.ui.adapter.EditJourneyAdapter;
+import com.wipe.zc.journey.ui.adapter.EditJourneyDetailAdapter;
+import com.wipe.zc.journey.util.HttpUtil;
 import com.wipe.zc.journey.util.ToastUtil;
+import com.zhy.http.okhttp.callback.Callback;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditJourneyActivity extends Activity implements View.OnClickListener {
+import okhttp3.Call;
+import okhttp3.Response;
+
+public class EditJourneyDetailActivity extends Activity implements View.OnClickListener {
 
     private static final int TAKE_PHOTO = 1;
     private static final int CHOOSE_PHOTO = 2;
@@ -30,7 +34,7 @@ public class EditJourneyActivity extends Activity implements View.OnClickListene
     private GridView gv_edit_journey;
     private TextView tv_edit_journey_info_time;
 
-    private EditJourneyAdapter adapter;
+    private EditJourneyDetailAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +80,7 @@ public class EditJourneyActivity extends Activity implements View.OnClickListene
 
         gv_edit_journey = (GridView) findViewById(R.id.gv_edit_journey);
         list.add("add");
-        adapter = new EditJourneyAdapter(this, list);
+        adapter = new EditJourneyDetailAdapter(this, list);
         gv_edit_journey.setAdapter(adapter);
 
         ImageView iv_edit_journey_takephoto = (ImageView) findViewById(R.id.iv_edit_journey_takephoto);
@@ -93,29 +97,55 @@ public class EditJourneyActivity extends Activity implements View.OnClickListene
                 finish();
                 break;
 
-            case R.id.iv_edit_journey_ensure:
+            case R.id.iv_edit_journey_ensure:   //上传EditJourney内容
                 String text = et_edit_journey_text.getText().toString();
-                if (TextUtils.isEmpty(text)) {
+                if (TextUtils.isEmpty(text)) {      //文本内容为空
                     ToastUtil.shortToast("未输入行程记录");
                     return;
                 } else {
+                    if (list.size() > 1) {    //存在图片数据
+                        //上传图片数据
+                        //多文件打包上传
+                        //TODO 子线程上传
+                        HttpUtil.uploadBatch("",text,  list, new TextView(this), new Callback() {
+                            @Override
+                            public void inProgress(float progress, long total, int id) {
+                                super.inProgress(progress, total, id);
 
+                                Intent intent = new Intent();
+                                intent.putExtra("progress", progress);
+                                intent.setAction("com.zc.journey.upload.progress");
+                                sendBroadcast(intent);
+                            }
 
+                            @Override
+                            public Object parseNetworkResponse(Response response, int id) throws Exception {
+                                return null;
+                            }
 
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                            }
 
+                            @Override
+                            public void onResponse(Object response, int id) {
+                                Intent intent = new Intent();
+                                intent.putExtra("response", response.toString());
+                                intent.setAction("com.zc.journey.upload.result");
+                                sendBroadcast(intent);
+                            }
+                        });
+                    }
                 }
                 break;
 
             case R.id.iv_edit_journey_takephoto:
-//                Intent intent_take = new Intent();
-//                intent_take.setClass();
-//                startActivityForResult(intent_take, TAKE_PHOTO);
+                //调用系统相机，路径添加至list
+
+
                 break;
 
             case R.id.iv_edit_journey_choosephoto:
-//                Intent intent_choose = new Intent(Intent.ACTION_GET_CONTENT);
-//                intent_choose.setType("image/*");
-//                startActivityForResult(intent_choose, CHOOSE_PHOTO);
                 Intent intent = new Intent();
                 intent.setClass(this, AlbumActivity.class);
                 intent.putStringArrayListExtra("selected", (ArrayList<String>) list);

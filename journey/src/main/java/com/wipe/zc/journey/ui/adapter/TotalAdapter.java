@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.wipe.zc.journey.R;
 import com.wipe.zc.journey.domain.Journey;
 import com.wipe.zc.journey.global.MyApplication;
-import com.wipe.zc.journey.ui.activity.EditJourneyActivity;
+import com.wipe.zc.journey.ui.activity.EditJourneyDetailActivity;
 import com.wipe.zc.journey.ui.activity.HomeActivity;
 
 import java.util.Calendar;
@@ -94,7 +94,7 @@ public class TotalAdapter extends BaseAdapter {
            holder.rl_total_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    activity.startActivity(new Intent(activity, EditJourneyActivity.class));
+                    activity.startActivity(new Intent(activity, EditJourneyDetailActivity.class));
                 }
             });
 

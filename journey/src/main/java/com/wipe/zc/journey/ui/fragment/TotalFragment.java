@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -20,7 +25,9 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ListView;
 
+import com.dd.CircularProgressButton;
 import com.google.gson.reflect.TypeToken;
+import com.nineoldandroids.view.ViewHelper;
 import com.wipe.zc.journey.R;
 import com.wipe.zc.journey.domain.Journey;
 import com.wipe.zc.journey.global.MyApplication;
@@ -42,7 +49,8 @@ public class TotalFragment extends Fragment {
     private TotalPagerAdapter adapter;
     private MonthTab mt_total;
     private ListView lv_total;
-    private JourneyAdapter journeyAdapter;
+    private CircularProgressButton cpb_total;
+
     private TotalAdapter totalAdapter;
     private List<Journey> list = new ArrayList<>();
     private Handler handler = new Handler() {
@@ -51,15 +59,46 @@ public class TotalFragment extends Fragment {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0:
-//                    if (journeyAdapter != null) {
-//                        journeyAdapter.notifyDataSetChanged();
-//                    }
-
                     if (totalAdapter != null) {
                         totalAdapter.notifyDataSetChanged();
                     }
                     break;
                 default:
+                    break;
+            }
+        }
+    };
+
+    /**
+     * 广播监听
+     */
+    BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            switch (action){
+                case "com.zc.journey.upload.progress":
+                    if(cpb_total.getVisibility() == View.GONE){
+                        cpb_total.setVisibility(View.VISIBLE);
+                    }
+                    int progress = intent.getIntExtra("progress", 0);
+                    cpb_total.setProgress(progress);
+                    break;
+
+                case "com.zc.journey.upload.response":
+                    String response = intent.getStringExtra("response");
+                    if(!response.equals("")){    //失败
+                        cpb_total.setProgress(-1);
+                    }
+                    //隐藏cpb_total
+                    ValueAnimator.ofFloat(1, 0).setDuration(300).addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                            float animatedValue = (float) valueAnimator.getAnimatedValue();
+                            ViewHelper.setScaleX(cpb_total, animatedValue);
+                            ViewHelper.setScaleY(cpb_total, animatedValue);
+                        }
+                    });
                     break;
             }
         }
@@ -74,6 +113,13 @@ public class TotalFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        ViewHelper.setScaleX(cpb_total, 1);
+        ViewHelper.setScaleY(cpb_total, 1);
+    }
+
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         if (adapter != null) {
@@ -81,6 +127,7 @@ public class TotalFragment extends Fragment {
             vp_total.setAdapter(adapter);
         }
     }
+
 
     /**
      * 初始化视图
@@ -124,15 +171,21 @@ public class TotalFragment extends Fragment {
         if (adapter != null) {
             vp_total.setAdapter(adapter);
         }
-//		if (journeyAdapter != null) {
-//			lv_total.setAdapter(journeyAdapter);
-//		}
+
         if (totalAdapter != null) {
             lv_total.setAdapter(totalAdapter);
         }
 
         vp_total.setCurrentItem(month);
         vp_total.addOnPageChangeListener(onPageChangeListener);
+
+        cpb_total = (CircularProgressButton) view.findViewById(R.id.cpb_total);
+        cpb_total.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cpb_total.setVisibility(View.GONE);
+            }
+        });
 
         // 初始化标题
         ((HomeActivity) getActivity()).setTitleText("全部");
@@ -143,6 +196,13 @@ public class TotalFragment extends Fragment {
                 requestJourney();
             }
         }).start();
+
+
+        //注册广播接收
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("com.zc.journey.upload.progress");
+        filter.addAction("com.zc.journey.upload.response");
+        getActivity().registerReceiver(receiver, filter);
     }
 
     /**
@@ -152,9 +212,7 @@ public class TotalFragment extends Fragment {
      */
     public void changeDateTo(Calendar calendar) {
         int year = calendar.get(Calendar.YEAR);
-        // int month = calendar.get(Calendar.MONTH) + 1;
         mt_total.setYear(year);
-        // mt_total.setMonth(month);
     }
 
     /**
@@ -181,14 +239,12 @@ public class TotalFragment extends Fragment {
         }.getType());
         if (list_journey != null) {
             int year = mt_total.getYear();
-            int month = mt_total.getMonth();
+
             for (Journey journey : list_journey) {
                 String date = journey.getDate();
                 if (Integer.parseInt(date.split("-")[0]) == year) {
                     list.add(journey);
                 }
-//				if (Integer.parseInt(date.split("-")[0]) == year && Integer.parseInt(date.split("-")[1]) == month) {
-//				}
             }
             handler.sendEmptyMessage(0);
         }
@@ -200,11 +256,6 @@ public class TotalFragment extends Fragment {
     OnMonthChangeListener onMonthChangeListener = new OnMonthChangeListener() {
         public void onMonthChange(int i) {
             vp_total.setCurrentItem(i - 1);
-//			new Thread(new Runnable() {
-//				public void run() {
-//					requestJourney();
-//				}
-//			}).start();
         }
     };
 
@@ -233,11 +284,9 @@ public class TotalFragment extends Fragment {
         }
 
         public void onPageScrolled(int arg0, float arg1, int arg2) {
-
         }
 
         public void onPageScrollStateChanged(int arg0) {
-
         }
     };
 
@@ -261,4 +310,9 @@ public class TotalFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        cpb_total.setVisibility(View.GONE);
+    }
 }

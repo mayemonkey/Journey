@@ -17,7 +17,6 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.os.Handler;
 import android.util.Log;
 
 public class MyApplication extends Application {
@@ -55,8 +54,7 @@ public class MyApplication extends Application {
         // 默认的app会在以包名为默认的process name下运行，如果查到的process name不是app的process
         // name就立即返回
 
-        if (processAppName == null
-                || !processAppName.equalsIgnoreCase("com.wipe.zc.journey")) {
+        if (processAppName == null || !processAppName.equalsIgnoreCase("com.wipe.zc.journey")) {
             Log.e("IM", "enter the service process!");
             // 则此application::onCreate 是被service 调用的，直接返回
             return;
@@ -123,6 +121,7 @@ public class MyApplication extends Application {
 
     /**
      * 初始化ImageLoader
+     *
      * @param context
      */
     public static void initImageLoader(Context context) {
@@ -131,10 +130,10 @@ public class MyApplication extends Application {
 //		  ImageLoaderConfiguration.createDefault(this);
         // method.
         ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(context);
-        config.threadPriority(Thread.NORM_PRIORITY - 2);				//配置下载图片的线程优先级
-        config.denyCacheImageMultipleSizesInMemory();					//不会在内存中缓存多个大小的图片
-        config.diskCacheFileNameGenerator(new Md5FileNameGenerator());	//为了保证图片名称唯一
-        config.diskCacheSize(50 * 1024 * 1024); 						// 50 MiB
+        config.threadPriority(Thread.NORM_PRIORITY - 2);                //配置下载图片的线程优先级
+        config.denyCacheImageMultipleSizesInMemory();                    //不会在内存中缓存多个大小的图片
+        config.diskCacheFileNameGenerator(new Md5FileNameGenerator());    //为了保证图片名称唯一
+        config.diskCacheSize(50 * 1024 * 1024);                        // 50 MiB
         //内存缓存大小默认是：app可用内存的1/8
         config.tasksProcessingOrder(QueueProcessingType.LIFO);
         config.writeDebugLogs(); // Remove for release app
