@@ -44,11 +44,11 @@ public class DragLayout extends FrameLayout {
 		void onDrag(float percent);
 	}
 	
-	public static enum Status {
+	public enum Status {
 		Open, Close, Draging
 	}
 
-	public static enum Direction {
+	public enum Direction {
 		Left, Right, Default
 	}
 	
@@ -79,16 +79,16 @@ public class DragLayout extends FrameLayout {
 		public boolean onScroll(MotionEvent e1, MotionEvent e2,
 				float distanceX, float distanceY) {
 			return Math.abs(distanceX) >= Math.abs(distanceY);
-		};
+		}
 	};
 
 	@Override
 	protected void onFinishInflate() {
+		super.onFinishInflate();
 		Log.i(TAG, "--onFinishInflate");
-		mLeftContent = (View) getChildAt(0);
+		mLeftContent =  getChildAt(0);
 		mRightContent = getChildAt(1);
-		mMainContent = (View) getChildAt(2);
-
+		mMainContent =  getChildAt(2);
 	}
 
 	@Override
@@ -153,7 +153,7 @@ public class DragLayout extends FrameLayout {
 			
 			dispathDragEvent(mMainLeft);
 			invalidate();
-		};
+		}
 
 		/**
 		 * @param releasedChild
@@ -207,7 +207,7 @@ public class DragLayout extends FrameLayout {
 
 		@Override
 		public void onViewCaptured(View capturedChild, int activePointerId) {
-		};
+		}
 
 	};
 
@@ -217,7 +217,7 @@ public class DragLayout extends FrameLayout {
 
 		if (mDirction == Direction.Left) {
 			minLeft = 0;
-			maxLeft = 0 + mRangeLeft;
+			maxLeft = mRangeLeft;
 		} else if (mDirction == Direction.Right) {
 			minLeft = 0 - mRangeRight;
 			maxLeft = 0;
@@ -267,7 +267,7 @@ public class DragLayout extends FrameLayout {
 	/**
 	 * 处理其他同步动画
 	 * 
-	 * @param mainLeft
+	 * @param mainLeft    距离左侧距离
 	 */
 	protected void dispathDragEvent(int mainLeft) {
 		// 注意转换成float

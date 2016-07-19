@@ -94,35 +94,32 @@ public class MyApplication extends Application {
     /**
      * 环信获取App名称
      *
-     * @param pID
-     * @return
+     * @param pID pID
+     * @return 当前进程名
      */
     private String getAppName(int pID) {
-        String processName = null;
+        String processName;
         ActivityManager am = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);
         List l = am.getRunningAppProcesses();
-        Iterator i = l.iterator();
-        PackageManager pm = this.getPackageManager();
-        while (i.hasNext()) {
-            ActivityManager.RunningAppProcessInfo info = (ActivityManager.RunningAppProcessInfo)
-                    (i.next());
+        for (Object aL : l) {
+            ActivityManager.RunningAppProcessInfo info = (ActivityManager.RunningAppProcessInfo) (aL);
             try {
                 if (info.pid == pID) {
                     processName = info.processName;
                     return processName;
                 }
             } catch (Exception e) {
-                // Log.d("Process", "Error>> :"+ e.toString());
+                 Log.d("Process", "Error>> :"+ e.toString());
             }
         }
-        return processName;
+        return null;
     }
 
 
     /**
      * 初始化ImageLoader
      *
-     * @param context
+     * @param context 上下文
      */
     public static void initImageLoader(Context context) {
         // This configuration tuning is custom. You can tune every option, you may tune some of them,
@@ -146,7 +143,7 @@ public class MyApplication extends Application {
     /**
      * 获取应用上下文
      *
-     * @return
+     * @return 上下文
      */
     public static Context getContext() {
         return context;

@@ -71,7 +71,7 @@ public class MonkeyDateHorizontal extends LinearLayout {
 	
 	/**
 	 * 日期文本
-	 * @param text
+	 * @param text	文本内容
 	 */
 	public void setDateText(CharSequence text) {
 		tv_date_num.setText(text);
@@ -90,7 +90,7 @@ public class MonkeyDateHorizontal extends LinearLayout {
 	}
 	/**
 	 * 星期文本
-	 * @param text
+	 * @param i		星期序号
 	 */
 	public void setWeekText(int i) {
 		
@@ -114,7 +114,7 @@ public class MonkeyDateHorizontal extends LinearLayout {
 	
 	/**
 	 * 设置小点是否可见
-	 * @param flag
+	 * @param flag	判断boolean值
 	 */
 	public void setPointVisiable(boolean flag){
 		iv_date_point.setVisibility(flag ? View.VISIBLE:View.INVISIBLE);
@@ -122,7 +122,7 @@ public class MonkeyDateHorizontal extends LinearLayout {
 	
 	/**
 	 * 设置小点背景
-	 * @param resid
+	 * @param resid		资源ID
 	 */
 	public void setPointBackground(int resid){
 		iv_date_point.setBackgroundResource(resid);

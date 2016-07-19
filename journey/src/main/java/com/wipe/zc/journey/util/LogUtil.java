@@ -9,8 +9,8 @@ public class LogUtil {
 	/**
 	 * 打印i级别的log
 	 * 
-	 * @param tag
-	 * @param msg
+	 * @param tag    标签
+	 * @param msg    打印Message对象
 	 */
 	public static void i(String tag, String msg) {
 		if (isDebug) {
@@ -21,8 +21,8 @@ public class LogUtil {
 	/**
 	 * 打印i级别的log
 	 * 
-	 * @param object
-	 * @param msg
+	 * @param object	对象实例
+	 * @param msg		打印Message
 	 */
 	public static void i(Object object, String msg) {
 		if (isDebug) {
@@ -33,8 +33,8 @@ public class LogUtil {
 	/**
 	 * 打印e级别的log
 	 * 
-	 * @param tag
-	 * @param msg
+	 * @param tag	标签
+	 * @param msg	打印Message
 	 */
 	public static void e(String tag, String msg) {
 		if (isDebug) {
@@ -45,8 +45,8 @@ public class LogUtil {
 	/**
 	 * 打印e级别的log
 	 * 
-	 * @param object
-	 * @param msg
+	 * @param object    对象
+	 * @param msg		打印Message
 	 */
 	public static void e(Object object, String msg) {
 		if (isDebug) {

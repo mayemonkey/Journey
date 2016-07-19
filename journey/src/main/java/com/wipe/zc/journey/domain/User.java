@@ -1,5 +1,8 @@
 package com.wipe.zc.journey.domain;
 
+/**
+ * 用户对象
+ */
 public class User {
 	private int id;
 	private String nickname;

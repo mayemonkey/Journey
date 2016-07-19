@@ -1,7 +1,7 @@
 package com.wipe.zc.journey.domain;
 
 /**
- * Created by admin on 2016/7/6.
+ * 图片选择模块
  */
 public class ImageItem {
 

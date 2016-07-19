@@ -41,11 +41,8 @@ public class TotalViewFragment extends Fragment {
     private ProgressBar pb_total_done;
     private ProgressBar pb_total_wait;
     private ProgressBar pb_total_free;
-    private List<Journey> list = new ArrayList<Journey>();
-    private List<Journey> list_select = new ArrayList<Journey>();
-    private int done;
-    private int wait;
-    private int free;
+    private List<Journey> list = new ArrayList<>();
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -59,20 +56,20 @@ public class TotalViewFragment extends Fragment {
     /**
      * 执行动画操作
      *
-     * @param msg
+     * @param msg    Message(Handler)
      */
     private void doAnimation(Message msg) {
         switch (msg.what) {
             case 0:
-                list_select.clear();
+
                 // 进度条动画
                 int month_now = Calendar.getInstance().get(Calendar.MONTH);
                 int day_now = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-                String date = null;
-                done = 0;
-                wait = 0;
-                free = 0;
-                TreeSet<String> ts = new TreeSet<String>();
+                String date ;
+                int done = 0;
+                int wait = 0;
+                int free ;
+                TreeSet<String> ts = new TreeSet<>();
                 for (Journey journey : list) {
                     date = journey.getDate();
                     // 当前月日
@@ -92,7 +89,6 @@ public class TotalViewFragment extends Fragment {
                         // 去除重复日期统计空闲日期
                         ts.add(date);
 
-                        list_select.add(journey);
                     }
                 }
                 free = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH) - ts.size();
@@ -105,7 +101,7 @@ public class TotalViewFragment extends Fragment {
                 ValueAnimator va1 = ValueAnimator.ofInt(0, done);
                 va1.addUpdateListener(new AnimatorUpdateListener() {
                     public void onAnimationUpdate(ValueAnimator arg0) {
-                        int i = ((Integer) arg0.getAnimatedValue()).intValue();
+                        int i = (Integer) arg0.getAnimatedValue();
                         if (pb_total_done != null) {
                             pb_total_done.setProgress(i);
                         }
@@ -117,7 +113,7 @@ public class TotalViewFragment extends Fragment {
                 ValueAnimator va2 = ValueAnimator.ofInt(0, wait);
                 va2.addUpdateListener(new AnimatorUpdateListener() {
                     public void onAnimationUpdate(ValueAnimator arg0) {
-                        int i = ((Integer) arg0.getAnimatedValue()).intValue();
+                        int i = (Integer) arg0.getAnimatedValue();
                         if (pb_total_wait != null) {
                             pb_total_wait.setProgress(i);
                         }
@@ -129,7 +125,7 @@ public class TotalViewFragment extends Fragment {
                 ValueAnimator va3 = ValueAnimator.ofInt(0, free);
                 va3.addUpdateListener(new AnimatorUpdateListener() {
                     public void onAnimationUpdate(ValueAnimator arg0) {
-                        int i = ((Integer) arg0.getAnimatedValue()).intValue();
+                        int i = (Integer) arg0.getAnimatedValue();
                         if (pb_total_free != null) {
                             pb_total_free.setProgress(i);
                         }
@@ -252,7 +248,7 @@ public class TotalViewFragment extends Fragment {
     /**
      * 设置当前年份
      *
-     * @param year
+     * @param year    年份数
      */
     public void setYear(int year) {
         this.year = year;

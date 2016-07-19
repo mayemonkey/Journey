@@ -34,7 +34,7 @@ public class JourneyAdapter extends BaseAdapter {
             int position = msg.arg1;
             switch (msg.what) {
                 case 0:
-                    showErrorDialog(dialog, position);
+                    showErrorDialog(dialog);
                     break;
 
                 case 1:
@@ -61,7 +61,7 @@ public class JourneyAdapter extends BaseAdapter {
     /**
      * 显示错误
      */
-    private void showErrorDialog(SweetAlertDialog dialog, int position) {
+    private void showErrorDialog(SweetAlertDialog dialog) {
         dialog.setTitleText("删除")
                 .setContentText("删除遇到错误，未成功")
                 .setConfirmText("完成")

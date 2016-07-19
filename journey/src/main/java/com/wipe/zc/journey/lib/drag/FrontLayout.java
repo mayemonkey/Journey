@@ -30,11 +30,8 @@ public class FrontLayout extends RelativeLayout {
 	
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
-		if(mISwipeLayout.getCurrentStatus() == Status.Close){
-			return super.onInterceptTouchEvent(ev);
-		}else {
-			return true;
-		}
+		//android studio提供的写法  深感佩服
+		return mISwipeLayout.getCurrentStatus() != Status.Close || super.onInterceptTouchEvent(ev);
 	}
 	
 	@Override

@@ -37,9 +37,6 @@ public class AddJourneyActivity extends Activity implements OnClickListener {
 	private TextView tv_journey_stime;
 	private TextView tv_journey_etime;
 	private EditText et_journey_location;
-	private ImageView iv_location;
-	private ImageView iv_add_cancle;
-	private ImageView iv_add_ensure;
 	private View ve_journey_name;
 	private View ve_journey_describe;
 	private View ve_journey_location;
@@ -78,9 +75,9 @@ public class AddJourneyActivity extends Activity implements OnClickListener {
 	 * 初始化控件
 	 */
 	private void initWidget() {
-		iv_add_cancle = (ImageView) findViewById(R.id.iv_add_cancle);
+		ImageView iv_add_cancle = (ImageView) findViewById(R.id.iv_add_cancle);
 		iv_add_cancle.setOnClickListener(this);
-		iv_add_ensure = (ImageView) findViewById(R.id.iv_add_ensure);
+		ImageView iv_add_ensure = (ImageView) findViewById(R.id.iv_add_ensure);
 		iv_add_ensure.setOnClickListener(this);
 
 		et_journey_name = (EditText) findViewById(R.id.et_journey_name);
@@ -90,9 +87,11 @@ public class AddJourneyActivity extends Activity implements OnClickListener {
 		ve_journey_describe = findViewById(R.id.ve_journey_describe);
 
 		tv_journey_date = (TextView) findViewById(R.id.tv_journey_date);
+
 		tv_journey_date.setText(Calendar.getInstance().get(Calendar.YEAR) + "-"
 				+ (Calendar.getInstance().get(Calendar.MONTH) + 1) + "-"
 				+ Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+
 		tv_journey_date.setOnClickListener(this);
 		tv_journey_stime = (TextView) findViewById(R.id.tv_journey_stime);
 		tv_journey_stime.setOnClickListener(this);
@@ -101,7 +100,7 @@ public class AddJourneyActivity extends Activity implements OnClickListener {
 		et_journey_location = (EditText) findViewById(R.id.et_journey_location);
 		ve_journey_location = findViewById(R.id.ve_journey_location);
 
-		iv_location = (ImageView) findViewById(R.id.iv_location);
+		ImageView iv_location = (ImageView) findViewById(R.id.iv_location);
 		iv_location.setOnClickListener(this);
 	}
 
@@ -182,7 +181,7 @@ public class AddJourneyActivity extends Activity implements OnClickListener {
 					}
 					tv_journey_stime.setText(hour + ":" + min);
 				}
-			}, 00, 00, true);
+			}, 0, 0, true);
 			stimeDialog.show();
 			break;
 
@@ -212,7 +211,7 @@ public class AddJourneyActivity extends Activity implements OnClickListener {
 					}
 					tv_journey_etime.setText(hour + ":" + min);
 				}
-			}, 00, 00, true);
+			}, 0, 0, true);
 			etimeDialog.show();
 			break;
 

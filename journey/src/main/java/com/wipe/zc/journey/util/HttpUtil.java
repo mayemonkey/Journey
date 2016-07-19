@@ -17,7 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import okhttp3.Call;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -32,9 +31,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
@@ -50,10 +47,9 @@ public class HttpUtil {
     /**
      * get请求
      *
-     * @param context
-     * @return
+     * @return  请求结果
      */
-    public static String requestByGet(Context context, String url_path) {
+    public static String requestByGet(String url_path) {
         try {
             URL url = new URL(url_path);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -77,9 +73,9 @@ public class HttpUtil {
     /**
      * 获取位图对象
      *
-     * @param url_paht
-     * @param file
-     * @return
+     * @param url_paht    请求地址
+     * @param file        保存图片文件对象
+     * @return            图片Bitmap对象
      */
     public static Bitmap getImage(String url_paht, File file, String nickname) {
         URL url;
@@ -96,14 +92,13 @@ public class HttpUtil {
             if (code == 200) {
                 InputStream is = conn.getInputStream();
                 FileOutputStream fos = new FileOutputStream(file);
-                int len = 0;
+                int len ;
                 byte[] buf = new byte[1024];
                 while ((len = is.read(buf)) != -1) {
                     fos.write(buf, 0, len);
                 }
                 fos.close();
-                Bitmap bm = BitmapFactory.decodeFile(file.getAbsolutePath());
-                return bm;
+                return BitmapFactory.decodeFile(file.getAbsolutePath());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -114,9 +109,9 @@ public class HttpUtil {
     /**
      * 上传图片工具方法
      *
-     * @param url_path
-     * @param file
-     * @return
+     * @param url_path    路径
+     * @param file        上传文件对象
+     * @return            请求结果
      */
     public static String uploadImage(String url_path, File file) {
         DataOutputStream ds = null;
@@ -147,7 +142,7 @@ public class HttpUtil {
             /* 设定每次写入1024bytes */
             int bufferSize = 1024;
             byte[] buffer = new byte[bufferSize];
-            int length = -1;
+            int length ;
 
 			/* 从文件读取数据到缓冲区 */
             while ((length = fStream.read(buffer)) != -1) {
@@ -194,7 +189,6 @@ public class HttpUtil {
      * 批量上传
      * @param url 路径
      * @param list 对象
-     * @return 结果
      */
     public static void uploadBatch(String url, String text, List<String> list, View view, Callback callback){
 
@@ -422,7 +416,7 @@ public class HttpUtil {
             list.add(new BasicNameValuePair("etime", journey.getEtime()));
             list.add(new BasicNameValuePair("location", journey.getLocation()));
             list.add(new BasicNameValuePair("nickname", journey.getNickname()));
-            UrlEncodedFormEntity entity = null;
+            UrlEncodedFormEntity entity ;
             entity = new UrlEncodedFormEntity(list, "UTF-8");
             post.setEntity(entity);
             HttpResponse response = client.execute(post);
@@ -472,7 +466,7 @@ public class HttpUtil {
      */
     public static String getResult(InputStream in) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        int len = 0;
+        int len ;
         byte[] buf = new byte[1024];
         try {
             while ((len = in.read(buf)) != -1) {
@@ -499,14 +493,13 @@ public class HttpUtil {
     public static String getXml(InputStream is) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         try {
-            int len = 0;
+            int len ;
             byte[] buf = new byte[1024];
             while ((len = is.read(buf)) != -1) {
                 bos.write(buf, 0, len);
             }
             bos.flush();
-            String xml = new String(bos.toByteArray(), "utf-8");
-            return xml;
+            return new String(bos.toByteArray(), "utf-8");
         } catch (IOException e) {
             e.printStackTrace();
         }

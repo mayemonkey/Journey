@@ -1,6 +1,5 @@
 package com.wipe.zc.journey.ui.adapter;
 
-import android.media.Image;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -21,7 +20,7 @@ import com.wipe.zc.journey.util.TimeUtil;
 import java.util.List;
 
 /**
- * Created by hp on 2016/3/23.
+ * Chat页面Adapter
  */
 public class ChatAdapter extends BaseAdapter {
 
@@ -95,9 +94,9 @@ public class ChatAdapter extends BaseAdapter {
     /**
      * 设置左侧Holder
      *
-     * @param convertView
-     * @param chatMessage
-     * @param position
+     * @param convertView    convertView
+     * @param chatMessage    chat信息
+     * @param position       位置
      */
     public void setLeftHolder(View convertView, ChatMessage chatMessage, int position) {
         LeftViewHolder holder_left = LeftViewHolder.getHolder(convertView);
@@ -143,9 +142,9 @@ public class ChatAdapter extends BaseAdapter {
     /**
      * 左侧时间显示
      *
-     * @param chatMessage
-     * @param holder_left
-     * @param position
+     * @param chatMessage    chat信息
+     * @param holder_left    左侧ViewHolder
+     * @param position       位置
      */
     public void showLeftTime(ChatMessage chatMessage, LeftViewHolder holder_left, int position) {
         String time;
@@ -176,9 +175,9 @@ public class ChatAdapter extends BaseAdapter {
     /**
      * 设置右侧Hodler
      *
-     * @param convertView
-     * @param chatMessage
-     * @param position
+     * @param convertView    convertView
+     * @param chatMessage    chat信息
+     * @param position       位置
      */
     public void setRightHolder(View convertView, ChatMessage chatMessage, int position) {
         RightViewHolder holder_right = RightViewHolder.getHolder(convertView);
@@ -220,12 +219,12 @@ public class ChatAdapter extends BaseAdapter {
     /**
      * 显示右侧时间
      *
-     * @param chatMessage
-     * @param holder_right
-     * @param position
+     * @param chatMessage       chat信息
+     * @param holder_right      右侧ViewHolder
+     * @param position          位置
      */
     public void showRightTime(ChatMessage chatMessage, RightViewHolder holder_right, int position) {
-        String time = new String();
+        String time ;
         switch (TimeUtil.compareCalendar10(chatMessage.getChatTime(),
                 list.get(position - 1).getChatTime())) {
             case -1:    //年月日

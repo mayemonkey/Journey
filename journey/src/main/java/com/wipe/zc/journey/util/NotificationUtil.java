@@ -12,7 +12,7 @@ import com.wipe.zc.journey.ui.activity.HomeActivity;
 import com.wipe.zc.journey.ui.activity.MessageActivity;
 
 /**
- * Created by hp on 2016/3/23.
+ * 通知栏工具包
  */
 public class NotificationUtil {
 

@@ -23,11 +23,11 @@ public class ViewPager extends android.support.v4.view.ViewPager {
 		int i = 0;
 		for (int j = 0;; j++) {
 			if (j >= getChildCount()) {
-				super.onMeasure(paramInt1, View.MeasureSpec.makeMeasureSpec(i, 1073741824));
+				super.onMeasure(paramInt1, View.MeasureSpec.makeMeasureSpec(i, MeasureSpec.EXACTLY));
 				return;
 			}
 			View localView = getChildAt(j);
-			localView.measure(paramInt1, View.MeasureSpec.makeMeasureSpec(0, 0));
+			localView.measure(paramInt1, View.MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
 			int k = localView.getMeasuredHeight();
 			if (k > i)
 				i = k;

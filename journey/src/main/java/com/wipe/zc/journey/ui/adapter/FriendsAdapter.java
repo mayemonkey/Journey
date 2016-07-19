@@ -25,7 +25,7 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * Created by hp on 2016/3/20.
+ * 好友Adapter
  */
 public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsViewHolder> {
 
@@ -41,8 +41,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
     @Override
     public FriendsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = View.inflate(MyApplication.getContext(), R.layout.layout_list_friends, null);
-        FriendsViewHolder holder = FriendsViewHolder.getHolder(view);
-        return holder;
+        return FriendsViewHolder.getHolder(view);
     }
 
     @Override

@@ -20,8 +20,6 @@ package com.wipe.zc.journey.lib.materialspinner;
 import android.content.Context;
 import android.widget.ListAdapter;
 
-import com.wipe.zc.journey.lib.materialspinner.*;
-
 final class MaterialSpinnerAdapterWrapper extends MaterialSpinnerBaseAdapter {
 
   private final ListAdapter listAdapter;

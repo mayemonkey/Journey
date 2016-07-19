@@ -17,7 +17,7 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * Created by admin on 2016/6/14.
+ * Total
  */
 public class TotalAdapter extends BaseAdapter {
 

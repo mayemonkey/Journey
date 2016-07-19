@@ -18,14 +18,15 @@ public class JsonUtil {
     /**
      * 把一个map变成json字符串
      *
-     * @param map
-     * @return
+     * @param map    map对象
+     * @return       JSON数据
      */
     public static String parseMapToJson(Map<?, ?> map) {
         try {
             Gson gson = new Gson();
             return gson.toJson(map);
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
@@ -33,9 +34,9 @@ public class JsonUtil {
     /**
      * 把一个json字符串变成对象
      *
-     * @param json
-     * @param cls
-     * @return
+     * @param json    JSON数据
+     * @param cls     对象
+     * @return        对象实例
      */
     public static <T> T parseJsonToBean(String json, Class<T> cls) {
         Gson gson = new Gson();
@@ -43,6 +44,7 @@ public class JsonUtil {
         try {
             t = gson.fromJson(json, cls);
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return t;
     }
@@ -50,8 +52,8 @@ public class JsonUtil {
     /**
      * 把json字符串变成map
      *
-     * @param json
-     * @return
+     * @param json    JSON数据
+     * @return        Map对象实例
      */
     public static HashMap<String, Object> parseJsonToMap(String json) {
         Gson gson = new Gson();
@@ -61,6 +63,7 @@ public class JsonUtil {
         try {
             map = gson.fromJson(json, type);
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return map;
     }
@@ -69,41 +72,39 @@ public class JsonUtil {
      * 把json字符串变成集合
      * params: new TypeToken<List<yourbean>>(){}.getType(),
      *
-     * @param json
+     * @param json  JSON数据
      * @param type new TypeToken<List<yourbean>>(){}.getType()
-     * @return
+     * @return      List对象实例
      */
     public static List<?> parseJsonToList(String json, Type type) {
         Gson gson = new Gson();
-        List<?> list = gson.fromJson(json, type);
-        return list;
+        return gson.fromJson(json, type);
     }
 
     /**
      * 把List集合变成json
      *
-     * @param list
-     * @return
+     * @param list    List实例对象
+     * @return        JSON数据
      */
     public static String parseListToJson(List list) {
         Gson gson = new Gson();
-        String json = gson.toJson(list);
-        return json;
+        return gson.toJson(list);
     }
 
     /**
      * 获取json串中某个字段的值，注意，只能获取同一层级的value
      *
-     * @param json
-     * @param key
-     * @return
+     * @param json    JSON数据
+     * @param key     抽取的key
+     * @return        抽取后JSON数据
      */
     public static String getFieldValue(String json, String key) {
         if (TextUtils.isEmpty(json))
             return null;
         if (!json.contains(key))
             return "";
-        JSONObject jsonObject = null;
+        JSONObject jsonObject ;
         String value = null;
         try {
             jsonObject = new JSONObject(json);

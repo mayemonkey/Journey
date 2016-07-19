@@ -217,9 +217,7 @@ public class AlbumActivity extends Activity implements View.OnClickListener, Mat
      */
     private void getDirList() {
         Set<String> set = map.keySet();
-        Iterator<String> iterator = set.iterator();
-        while (iterator.hasNext()) {
-            String dir = iterator.next();
+        for (String dir : set) {
             list_dir.add(dir);
         }
     }

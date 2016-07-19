@@ -2,6 +2,7 @@ package com.wipe.zc.journey.util;
 
 import android.content.Context;
 import android.content.Intent;
+
 import com.easemob.chat.EMChat;
 import com.easemob.chat.EMContactListener;
 import com.easemob.chat.EMContactManager;
@@ -11,7 +12,7 @@ import com.wipe.zc.journey.global.MyApplication;
 import java.util.List;
 
 /**
- * Created by hp on 2016/3/23.
+ * 即时通讯工具包
  */
 public class IMUtil {
     /**
@@ -32,6 +33,7 @@ public class IMUtil {
                         } else {
                             name_result += "-" + name;
                         }
+                        i++;
                     }
                     intent.putExtra("data", name_result);
                     MyApplication.getContext().sendBroadcast(intent);

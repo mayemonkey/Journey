@@ -17,7 +17,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -31,7 +30,6 @@ import com.easemob.exceptions.EaseMobException;
 import com.wipe.zc.journey.domain.User;
 import com.wipe.zc.journey.http.AppURL;
 import com.wipe.zc.journey.lib.CircleImageView;
-import com.wipe.zc.journey.util.EncryptionUtil;
 import com.wipe.zc.journey.util.HttpUtil;
 import com.wipe.zc.journey.util.ToastUtil;
 import com.wipe.zc.journey.util.ViewUtil;
@@ -39,9 +37,9 @@ import com.wipe.zc.journey.R;
 
 public class RegisterActivity extends Activity implements OnClickListener {
 
-    private ImageView iv_register_cancel;
+
     private CircleImageView civ_icon;
-    private CircleImageView civ_icon_add;
+
     private EditText et_register_nickname;
     private View ve_register_nickname;
     private EditText et_register_email;
@@ -53,7 +51,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
     private EditText et_register_phone;
     private View ve_register_phone;
     private TextView tv_register;
-    private TextView tv_to_login;
+
     // 获取的图片对象
     private Bitmap bmp = null;
     // 是否选择图片
@@ -70,16 +68,20 @@ public class RegisterActivity extends Activity implements OnClickListener {
                 case 1:
                     String result = (String) msg.obj;
                     if (result != null) {
-                        if (result.equals("注册成功")) {
-                            ViewUtil.recoverAnimatin(iv_register_progress, tv_register);
-                            ToastUtil.shortToast("注册成功");
-                            finish();
-                        } else if (result.equals("注册失败")) {
-                            ViewUtil.recoverAnimatin(iv_register_progress, tv_register);
-                            ToastUtil.shortToast("注册失败，请检查网络");
-                        } else {
-                            ViewUtil.recoverAnimatin(iv_register_progress, tv_register);
-                            ToastUtil.shortToast(result);
+                        switch (result) {
+                            case "注册成功":
+                                ViewUtil.recoverAnimatin(iv_register_progress, tv_register);
+                                ToastUtil.shortToast("注册成功");
+                                finish();
+                                break;
+                            case "注册失败":
+                                ViewUtil.recoverAnimatin(iv_register_progress, tv_register);
+                                ToastUtil.shortToast("注册失败，请检查网络");
+                                break;
+                            default:
+                                ViewUtil.recoverAnimatin(iv_register_progress, tv_register);
+                                ToastUtil.shortToast(result);
+                                break;
                         }
                     } else {
                         ViewUtil.recoverAnimatin(iv_register_progress, tv_register);
@@ -115,12 +117,12 @@ public class RegisterActivity extends Activity implements OnClickListener {
      */
     private void initView() {
         // 取消注册
-        iv_register_cancel = (ImageView) findViewById(R.id.iv_register_cancel);
+        ImageView iv_register_cancel = (ImageView) findViewById(R.id.iv_register_cancel);
         iv_register_cancel.setOnClickListener(this);
         // 头像显示
         civ_icon = (CircleImageView) findViewById(R.id.civ_icon);
         // 添加头像
-        civ_icon_add = (CircleImageView) findViewById(R.id.civ_icon_add);
+        CircleImageView civ_icon_add = (CircleImageView) findViewById(R.id.civ_icon_add);
         civ_icon_add.setOnClickListener(this);
         // 表单数据
         et_register_nickname = (EditText) findViewById(R.id.et_register_nickname);
@@ -136,7 +138,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
         iv_register_progress = (ImageView) findViewById(R.id.iv_register_progress);
 
         // 直接登录
-        tv_to_login = (TextView) findViewById(R.id.tv_to_login);
+        TextView tv_to_login = (TextView) findViewById(R.id.tv_to_login);
         tv_to_login.setOnClickListener(this);
 
         ve_register_nickname = findViewById(R.id.ve_register_nickname);
@@ -335,9 +337,9 @@ public class RegisterActivity extends Activity implements OnClickListener {
     /**
      * 上传照片
      *
-     * @param url
-     * @param photoName
-     * @param photoBitmap
+     * @param url            路径
+     * @param photoName      图片名称
+     * @param photoBitmap    图片Bitmap对象
      */
     private void uploadImage(String url, String photoName, Bitmap photoBitmap) {
         // 图片上传保存路径

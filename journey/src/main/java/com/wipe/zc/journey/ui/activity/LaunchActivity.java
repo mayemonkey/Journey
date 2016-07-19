@@ -90,8 +90,8 @@ public class LaunchActivity extends Activity {
     /**
      * IM用户登陆
      *
-     * @param nickname
-     * @param password
+     * @param nickname    昵称
+     * @param password    密码
      */
     private void imLogin(final String nickname,final String password) {
         //环信登陆
@@ -114,6 +114,7 @@ public class LaunchActivity extends Activity {
                 public void onError(int code, String message) {
                     if (code == -1005) {
                         message = "用户名或密码错误";
+                        ToastUtil.shortToast(message);
                     }
                     handler.sendEmptyMessageDelayed(5, 3000);
                 }

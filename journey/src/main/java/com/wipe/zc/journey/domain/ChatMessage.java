@@ -5,7 +5,7 @@ import com.easemob.chat.EMMessage;
 import java.util.Calendar;
 
 /**
- * Created by hp on 2016/3/23.
+ * Chat信息
  */
 public class ChatMessage {
 

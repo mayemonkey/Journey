@@ -19,7 +19,7 @@ import com.wipe.zc.journey.util.ImageLoaderOption;
 import java.util.List;
 
 /**
- * Created by hp on 2016/3/22.
+ * 好友邀请信息Adapter
  */
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
 
@@ -36,10 +36,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     }
 
     @Override
-    public void onBindViewHolder(MessageViewHolder holder, final int position) {
-        Invite invite = list.get(position);
+    public void onBindViewHolder(MessageViewHolder holder, int position) {
+        Invite invite = list.get(holder.getAdapterPosition());
         final String inviter = invite.getInviter();
-        final int index = position;
+        final int index = holder.getAdapterPosition();
 
         ImageLoader.getInstance().displayImage(AppURL.getimage + "?nickname=" + invite.getInviter
                 (), holder.civ_message_icon, ImageLoaderOption.list_options);
@@ -67,9 +67,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
      * true:接受
      * false:拒绝
      *
-     * @param flag
-     * @param index
-     * @param inviter
+     * @param flag       是否接受boolean
+     * @param index      序号
+     * @param inviter    邀请人
      */
     public void inviteDecide(boolean flag, int index, String inviter) {
         try {

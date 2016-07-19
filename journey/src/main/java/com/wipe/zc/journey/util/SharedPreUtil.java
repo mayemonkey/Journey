@@ -19,7 +19,7 @@ public class SharedPreUtil {
 	 */
 	public static void putString(Context context,String key,String value){
 		SharedPreferences shared = context.getSharedPreferences(CONFIG, Context.MODE_PRIVATE);
-		shared.edit().putString(key, value).commit();
+		shared.edit().putString(key, value).apply();
 	}
 	
 	/**
@@ -27,7 +27,7 @@ public class SharedPreUtil {
 	 * @param context：上下文
 	 * @param key：获取名
 	 * @param defValue：未找到时的默认String值
-	 * @return
+	 * @return	获取到的value
 	 */
 	public static String getString(Context context,String key,String defValue){
 		SharedPreferences shared = context.getSharedPreferences(CONFIG, Context.MODE_PRIVATE);
@@ -42,7 +42,7 @@ public class SharedPreUtil {
 	 */
 	public static void putBoolean(Context context,String key,boolean value){
 		SharedPreferences shared = context.getSharedPreferences(CONFIG, Context.MODE_PRIVATE);
-		shared.edit().putBoolean(key, value).commit();
+		shared.edit().putBoolean(key, value).apply();
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class SharedPreUtil {
 	 * @param context：上下文
 	 * @param key：获取名
 	 * @param defValue：未找到时的默认boolean值
-	 * @return
+	 * @return	获取到的value
 	 */
 	public static boolean getBoolean(Context context,String key,boolean defValue){
 		SharedPreferences shared = context.getSharedPreferences(CONFIG, Context.MODE_PRIVATE);
@@ -65,7 +65,7 @@ public class SharedPreUtil {
 	 */
 	public static void putInt(Context context,String key,int value){
 		SharedPreferences shared = context.getSharedPreferences(CONFIG, Context.MODE_PRIVATE);
-		shared.edit().putInt(key, value).commit();
+		shared.edit().putInt(key, value).apply();
 	}
 	
 	/**
@@ -73,7 +73,7 @@ public class SharedPreUtil {
 	 * @param context：上下文
 	 * @param key：获取名
 	 * @param defValue：未找到时的默认int值
-	 * @return
+	 * @return	获取到的value
 	 */
 	public static int getInt(Context context,String key,int defValue){
 		SharedPreferences shared = context.getSharedPreferences(CONFIG, Context.MODE_PRIVATE);

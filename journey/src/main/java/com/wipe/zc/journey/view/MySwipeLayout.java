@@ -6,9 +6,7 @@ import android.view.MotionEvent;
 
 import com.daimajia.swipe.SwipeLayout;
 
-/**
- * Created by hp on 2016/4/7.
- */
+
 public class MySwipeLayout extends SwipeLayout {
     public MySwipeLayout(Context context) {
         super(context);

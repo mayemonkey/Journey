@@ -8,16 +8,16 @@ import android.provider.MediaStore;
 import com.wipe.zc.journey.global.MyApplication;
 
 /**
- * Created by hp on 2016/4/13.
+ * 常用工具包
  */
 public class CommonUtil {
 
     /**
      * 通过系统Uri获取文件路径
      *
-     * @param uri
+     * @param uri 路径
      */
-    public static String fronUriToPath(Uri uri) {
+    public static String fromUriToPath(Uri uri) {
         if (uri == null) {
             return null;
         }
@@ -29,16 +29,18 @@ public class CommonUtil {
         }
         //当Uri为内容格式时，进行相应的转换
         else if (ContentResolver.SCHEME_CONTENT.equals(scheme)) {
-            Cursor cursor = MyApplication.getContext().getContentResolver().query(uri ,
-                    new String[]{MediaStore.Images.ImageColumns.DATA},null,null,null);
-            if(cursor != null){
-                if(cursor.moveToFirst()){
-                   int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-                   if(index > -1){
-                       data = cursor.getString(index);
-                   }
+            Cursor cursor = MyApplication.getContext().getContentResolver().query(uri, new String[]{MediaStore.Images.ImageColumns.DATA}, null,
+                    null, null);
+            if (cursor != null) {
+                if (cursor.moveToFirst()) {
+                    int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                    if (index > -1) {
+                        data = cursor.getString(index);
+                    }
                 }
             }
+            if(cursor != null)
+                cursor.close();
         }
         return data;
     }

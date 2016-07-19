@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by hp on 2016/3/22.
+ * 用于本地使用，保存好友请求信息
  */
 public class InviteDao {
 
@@ -21,7 +21,7 @@ public class InviteDao {
     /**
      * 添加邀请信息
      *
-     * @param invite
+     * @param invite 好友请求
      */
     public static void addInvite(Invite invite) {
         SQLiteDatabase db = imSQLite.getReadableDatabase();
@@ -34,8 +34,8 @@ public class InviteDao {
     /**
      * 添加邀请信息
      *
-     * @param inviter
-     * @param reason
+     * @param inviter   好友请求
+     * @param reason    请求内容
      */
     public static void addInvite(String inviter, String reason) {
         SQLiteDatabase db = imSQLite.getReadableDatabase();
@@ -48,7 +48,7 @@ public class InviteDao {
     /**
      * 移除邀请消息
      *
-     * @param invite
+     * @param invite    好友请求
      */
     public static void deleteInvite(Invite invite) {
         SQLiteDatabase db = imSQLite.getReadableDatabase();
@@ -58,7 +58,7 @@ public class InviteDao {
     /**
      * 移除邀请消息
      *
-     * @param inviter
+     * @param inviter   邀请者昵称
      */
     public static void deleteInvite(String inviter) {
         SQLiteDatabase db = imSQLite.getReadableDatabase();
@@ -68,14 +68,16 @@ public class InviteDao {
 
     /**
      * 查询邀请
-     * @return
+     * @return  邀请者昵称
      */
     public static boolean checkInvite(String inviter){
         SQLiteDatabase db = imSQLite.getReadableDatabase();
         Cursor cursor = db.query("invite",null,"inviter=?",new String[]{inviter},null,null,null,null);
         if(cursor.moveToNext()){
+            cursor.close();
             return true;
         }else{
+            cursor.close();
             return false;
         }
     }
@@ -93,6 +95,7 @@ public class InviteDao {
             invite.setReason(cursor.getString(cursor.getColumnIndex("reason")));
             list.add(invite);
         }
+        cursor.close();
         return list;
     }
 }

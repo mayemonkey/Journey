@@ -32,13 +32,13 @@ public class SwipeLayout extends FrameLayout implements SwipeLayoutInterface{
 	private SwipeListener mSwipeListener;
 	private GestureDetectorCompat mGestureDetector;
 	
-	public static enum Status{
+	public enum Status{
 		Close, Swiping, Open
 	}
-	public static enum ShowEdge{
+	public enum ShowEdge{
 		Left, Right
 	}
-	public static interface SwipeListener{
+	public interface SwipeListener{
 		void onClose(SwipeLayout swipeLayout);
 		void onOpen(SwipeLayout swipeLayout);
 		void onStartClose(SwipeLayout swipeLayout);
@@ -86,7 +86,7 @@ public class SwipeLayout extends FrameLayout implements SwipeLayoutInterface{
 				// 大于0即可，不会真正限制child的移动范围。
 				// 内部用来计算是否此方向是否可以拖拽，以及释放时动画执行时间
 			return mDragDistance;
-		};
+		}
 		
 		@Override
 		public int clampViewPositionHorizontal(View child, int left, int dx) {
@@ -124,7 +124,7 @@ public class SwipeLayout extends FrameLayout implements SwipeLayoutInterface{
 			}
 			
 			return newLeft;
-		};
+		}
 		
 		@Override
 		public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
@@ -141,26 +141,26 @@ public class SwipeLayout extends FrameLayout implements SwipeLayoutInterface{
 			updateStatus();
 			// 重绘界面
 			invalidate();
-		};
+		}
 
 		@Override
 		public void onViewReleased(View releasedChild, float xvel, float yvel) {
 			// 当释放滑动的view时，处理最后的事情。（执行开启或关闭的动画）
 			Log.d(TAG, "xvel: " + xvel + " mShowEdge: " + mShowEdge);
 			if(releasedChild == getFrontView()){
-				processFrontViewRelease(xvel ,yvel);
+				processFrontViewRelease(xvel);
 			}else if (releasedChild == getBackView()) {
-				processBackViewRelease(xvel,yvel);
+				processBackViewRelease(xvel);
 			}
 			invalidate();
-		};
+		}
 		
 		
 		
 	};
 	private float mDownX;
 	
-	protected void processBackViewRelease(float xvel, float yvel) {
+	protected void processBackViewRelease(float xvel) {
 		switch (mShowEdge) {
 			case Left:
 				if(xvel == 0){
@@ -200,7 +200,7 @@ public class SwipeLayout extends FrameLayout implements SwipeLayoutInterface{
 		return Status.Swiping;
 	}
 
-	protected void processFrontViewRelease(float xvel, float yvel) {
+	protected void processFrontViewRelease(float xvel) {
 		switch (mShowEdge) {
 			case Left:
 				if(xvel == 0){
@@ -241,7 +241,7 @@ public class SwipeLayout extends FrameLayout implements SwipeLayoutInterface{
 			Rect rect = computeFrontLayout(false);
 			if(mDragHelper.smoothSlideViewTo(getFrontView(), rect.left, rect.top)){
 				ViewCompat.postInvalidateOnAnimation(this);
-			};
+			}
 		} else {
 			layoutContent(false);
 			updateStatus(isNotify);
@@ -265,7 +265,7 @@ public class SwipeLayout extends FrameLayout implements SwipeLayoutInterface{
 			Rect rect = computeFrontLayout(true);
 			if(mDragHelper.smoothSlideViewTo(getFrontView(), rect.left, rect.top)){
 				ViewCompat.postInvalidateOnAnimation(this);
-			};
+			}
 		} else {
 			layoutContent(true);
 			updateStatus(isNotify);
@@ -277,7 +277,7 @@ public class SwipeLayout extends FrameLayout implements SwipeLayoutInterface{
 
 	/**
 	 * 更新当前状态
-	 * @param isNotify
+	 * @param isNotify    提醒状态
 	 */
 	private void updateStatus(boolean isNotify) {
 		Status lastStatus = mStatus;
@@ -321,7 +321,7 @@ public class SwipeLayout extends FrameLayout implements SwipeLayoutInterface{
 		// 决定当前的SwipeLayout是否要把touch事件拦截下来，直接交由自己的onTouchEvent处理
 		// 返回true则为拦截
 		return  mDragHelper.shouldInterceptTouchEvent(ev) & mGestureDetector.onTouchEvent(ev);
-	};
+	}
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
@@ -350,6 +350,7 @@ public class SwipeLayout extends FrameLayout implements SwipeLayoutInterface{
 		try {
 			mDragHelper.processTouchEvent(event);
 		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
 		}
 
 		return true;
@@ -379,13 +380,12 @@ public class SwipeLayout extends FrameLayout implements SwipeLayoutInterface{
 	}
 
 	private Rect computeBackLayoutViaFront(Rect mFrontRect) {
-		Rect rect = mFrontRect;
 
-		int bl = rect.left, bt = rect.top, br = rect.right, bb = rect.bottom;
+		int bl = mFrontRect.left, bt = mFrontRect.top, br, bb = mFrontRect.bottom;
 		if (mShowEdge == ShowEdge.Left) {
-			bl = rect.left - mDragDistance;
+			bl = mFrontRect.left - mDragDistance;
 		} else if (mShowEdge == ShowEdge.Right) {
-			bl = rect.right;
+			bl = mFrontRect.right;
 		}
 		br = bl + getBackView().getMeasuredWidth();
 
@@ -396,7 +396,7 @@ public class SwipeLayout extends FrameLayout implements SwipeLayoutInterface{
 		int l = 0, t = 0;
 		if(isOpen){
 			if(mShowEdge == ShowEdge.Left){
-				l = 0 + mDragDistance;
+				l = mDragDistance;
 			}else if (mShowEdge == ShowEdge.Right) {
 				l = 0 - mDragDistance;
 			}
@@ -407,6 +407,7 @@ public class SwipeLayout extends FrameLayout implements SwipeLayoutInterface{
 
 	@Override
 	protected void onFinishInflate() {
+		super.onFinishInflate();
 		if(getChildCount() != 2){
 			throw new IllegalStateException("At least 2 views in SwipeLayout");
 		}

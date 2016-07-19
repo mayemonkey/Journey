@@ -3,7 +3,7 @@ package com.wipe.zc.journey.domain;
 import java.util.List;
 
 /**
- * Created by admin on 2016/7/15.
+ * 行程详细对象
  */
 public class JourneyDetail {
 

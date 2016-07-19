@@ -31,7 +31,6 @@ public class EditJourneyDetailActivity extends Activity implements View.OnClickL
     private List<String> list = new ArrayList<>();
 
     private EditText et_edit_journey_text;
-    private GridView gv_edit_journey;
     private TextView tv_edit_journey_info_time;
 
     private EditJourneyDetailAdapter adapter;
@@ -78,7 +77,7 @@ public class EditJourneyDetailActivity extends Activity implements View.OnClickL
 
         et_edit_journey_text = (EditText) findViewById(R.id.et_edit_journey_text);
 
-        gv_edit_journey = (GridView) findViewById(R.id.gv_edit_journey);
+        GridView gv_edit_journey = (GridView) findViewById(R.id.gv_edit_journey);
         list.add("add");
         adapter = new EditJourneyDetailAdapter(this, list);
         gv_edit_journey.setAdapter(adapter);

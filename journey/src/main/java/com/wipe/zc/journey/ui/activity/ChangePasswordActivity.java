@@ -2,12 +2,9 @@ package com.wipe.zc.journey.ui.activity;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.wipe.zc.journey.R;
 import com.wipe.zc.journey.global.MyApplication;
 import com.wipe.zc.journey.util.HttpUtil;
@@ -16,8 +13,6 @@ import com.wipe.zc.journey.util.ViewUtil;
 
 public class ChangePasswordActivity extends Activity implements View.OnClickListener {
 
-    private ImageView iv_password_cancle;
-    private ImageView iv_password_ensure;
     private EditText et_password_before;
     private View ve_password_before;
     private EditText et_password_new_first;
@@ -37,10 +32,10 @@ public class ChangePasswordActivity extends Activity implements View.OnClickList
      * 初始化控件
      */
     private void intiWidget() {
-        iv_password_cancle = (ImageView) findViewById(R.id.iv_password_cancle);
+        ImageView iv_password_cancle = (ImageView) findViewById(R.id.iv_password_cancle);
         iv_password_cancle.setOnClickListener(this);
 
-        iv_password_ensure = (ImageView) findViewById(R.id.iv_password_ensure);
+        ImageView iv_password_ensure = (ImageView) findViewById(R.id.iv_password_ensure);
         iv_password_ensure.setOnClickListener(this);
 
         et_password_before = (EditText) findViewById(R.id.et_password_before);
@@ -54,7 +49,7 @@ public class ChangePasswordActivity extends Activity implements View.OnClickList
     /**
      * 点击事件
      *
-     * @param view
+     * @param view  点击的View对象
      */
     public void onClick(View view) {
         switch (view.getId()) {

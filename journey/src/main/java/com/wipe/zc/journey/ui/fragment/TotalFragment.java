@@ -10,8 +10,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,7 +34,6 @@ import com.wipe.zc.journey.lib.monthtab.MonthTab;
 import com.wipe.zc.journey.lib.monthtab.MonthTab.OnMonthChangeListener;
 import com.wipe.zc.journey.lib.monthtab.MonthTab.OnYearChangeListener;
 import com.wipe.zc.journey.ui.activity.HomeActivity;
-import com.wipe.zc.journey.ui.adapter.JourneyAdapter;
 import com.wipe.zc.journey.ui.adapter.TotalAdapter;
 import com.wipe.zc.journey.ui.adapter.TotalPagerAdapter;
 import com.wipe.zc.journey.util.HttpUtil;
@@ -48,7 +45,6 @@ public class TotalFragment extends Fragment {
     private ViewPager vp_total;
     private TotalPagerAdapter adapter;
     private MonthTab mt_total;
-    private ListView lv_total;
     private CircularProgressButton cpb_total;
 
     private TotalAdapter totalAdapter;
@@ -134,7 +130,7 @@ public class TotalFragment extends Fragment {
      */
     private void initView() {
         mt_total = (MonthTab) view.findViewById(R.id.mt_total);
-        lv_total = (ListView) view.findViewById(R.id.lv_total);
+        ListView lv_total = (ListView) view.findViewById(R.id.lv_total);
         lv_total.setDividerHeight(0);
 
 //		journeyAdapter = new JourneyAdapter(list, 1, ((HomeActivity)getActivity()));
@@ -208,7 +204,7 @@ public class TotalFragment extends Fragment {
     /**
      * 切换当前选中日期
      *
-     * @param calendar
+     * @param calendar    设定的Calendar对象
      */
     public void changeDateTo(Calendar calendar) {
         int year = calendar.get(Calendar.YEAR);
@@ -218,7 +214,7 @@ public class TotalFragment extends Fragment {
     /**
      * 获取Total页的ViewPager对象
      *
-     * @return
+     * @return      ViewPager对象
      */
     public ViewPager getViewPager() {
         if (vp_total != null) {
@@ -293,7 +289,7 @@ public class TotalFragment extends Fragment {
 
     /**
      * 滑动MonthTab
-     * @param index
+     * @param index    滑动目标序号
      */
     private void scrollMT(int index) {
         int mtWidth = mt_total.getWholeWidth();

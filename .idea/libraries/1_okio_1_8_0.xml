@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="okio-1.6.0">
+  <library name="1_okio-1.8.0">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/journey/libs/okio-1.6.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/journey/libs/okio-1.8.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

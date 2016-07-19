@@ -44,10 +44,10 @@ public class EncryptionUtil {
     private static String getDigestStr(byte[] origBytes) {
         String tempStr;
         StringBuilder stb = new StringBuilder();
-        for (int i = 0; i < origBytes.length; i++) {
+        for (byte origByte : origBytes) {
             // 这里按位与是为了把字节转整时候取其正确的整数，java中一个int是4个字节
             // 如果origBytes[i]最高位为1，则转为int时，int的前三个字节都被1填充了
-            tempStr = Integer.toHexString(origBytes[i] & 0xff);
+            tempStr = Integer.toHexString(origByte & 0xff);
             if (tempStr.length() == 1) {
                 stb.append("0");
             }

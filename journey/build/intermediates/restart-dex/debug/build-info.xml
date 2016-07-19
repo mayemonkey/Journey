@@ -4,24 +4,20 @@
     api-level="19"
     density="xxhdpi"
     format="7"
-    timestamp="2356926559166358" >
+    timestamp="347505488727296" >
 
     <task
         name="javac"
-        duration="5458" />
+        duration="2094" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="114" />
+        duration="3080" />
     <task
         name="verifier"
-        duration="33" />
-
-    <artifact
-        location="D:\studiospace\Journey\journey\build\outputs\apk\journey-debug.apk"
-        type="MAIN" />
+        duration="0" />
 
     <build timestamp="2356926559166358" >
         <artifact

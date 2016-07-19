@@ -33,7 +33,7 @@ public class CalendarFragment extends Fragment {
 
 	private JourneyAdapter adapter;
 	private List<Journey> list;
-	private ArrayList<Calendar> list_record = new ArrayList<Calendar>();
+	private ArrayList<Calendar> list_record = new ArrayList<>();
 	private Handler handler = new Handler() {
 
 		public void handleMessage(Message msg) {
@@ -98,7 +98,7 @@ public class CalendarFragment extends Fragment {
 						}.getType());
 
 				if (list_calendar != null) {
-					Calendar calendar = null;
+					Calendar calendar ;
 					for (Journey journey : list_calendar) {
 						calendar = Calendar.getInstance();
 						String year = journey.getDate().split("-")[0];
@@ -118,7 +118,7 @@ public class CalendarFragment extends Fragment {
 	 * 显示行程数据
 	 */
 	private void showJourney() {
-		list = new ArrayList<Journey>();
+		list = new ArrayList<>();
 		adapter = new JourneyAdapter(list , 0 , ((HomeActivity)getActivity()));
 		lv_calendar.setAdapter(adapter);
 		new Thread(new Runnable() {

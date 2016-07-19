@@ -20,7 +20,6 @@ import com.easemob.chat.EMGroupManager;
 import com.wipe.zc.journey.domain.User;
 import com.wipe.zc.journey.global.MyApplication;
 import com.wipe.zc.journey.http.AppURL;
-import com.wipe.zc.journey.util.EncryptionUtil;
 import com.wipe.zc.journey.util.HttpUtil;
 import com.wipe.zc.journey.util.SharedPreUtil;
 import com.wipe.zc.journey.util.ToastUtil;
@@ -29,7 +28,6 @@ import com.wipe.zc.journey.R;
 
 public class LoginActivity extends Activity implements OnClickListener {
 
-    private TextView tv_lgoin_register;
     private TextView tv_login;
     private EditText et_login_account;
     private EditText et_login_password;
@@ -98,7 +96,7 @@ public class LoginActivity extends Activity implements OnClickListener {
      */
     private void init() {
         // 注册
-        tv_lgoin_register = (TextView) findViewById(R.id.tv_lgoin_register);
+        TextView tv_lgoin_register = (TextView) findViewById(R.id.tv_lgoin_register);
         tv_lgoin_register.setOnClickListener(this);
         // 登陆
         tv_login = (TextView) findViewById(R.id.tv_login);
@@ -182,6 +180,7 @@ public class LoginActivity extends Activity implements OnClickListener {
                 public void onError(int code, String message) {
                     if (code == -1005) {
                         message = "用户名或密码错误";
+                        ToastUtil.shortToast(message);
                     }
                     handler.sendEmptyMessage(2);
                 }

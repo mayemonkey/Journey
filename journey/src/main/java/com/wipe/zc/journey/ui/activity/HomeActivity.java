@@ -5,18 +5,13 @@ import java.io.IOException;
 import java.util.Calendar;
 
 import android.app.DatePickerDialog.OnDateSetListener;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.HandlerThread;
 import android.os.Message;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,17 +21,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.easemob.chat.EMChat;
 import com.easemob.chat.EMChatManager;
-import com.easemob.chat.EMMessage;
-import com.easemob.chat.TextMessageBody;
+import com.wipe.zc.journey.R;
 import com.wipe.zc.journey.dao.InviteDao;
 import com.wipe.zc.journey.domain.User;
 import com.wipe.zc.journey.global.MyApplication;
 import com.wipe.zc.journey.http.AppURL;
 import com.wipe.zc.journey.lib.CircleImageView;
 import com.wipe.zc.journey.lib.drag.DragLayout;
-import com.wipe.zc.journey.lib.drag.DragLayout.Status;
 import com.wipe.zc.journey.lib.drag.DragRelativeLayout;
 import com.wipe.zc.journey.ui.fragment.CalendarFragment;
 import com.wipe.zc.journey.ui.fragment.FragmentFactory;
@@ -44,29 +36,24 @@ import com.wipe.zc.journey.ui.fragment.HomeFragment;
 import com.wipe.zc.journey.ui.fragment.TotalFragment;
 import com.wipe.zc.journey.util.HttpUtil;
 import com.wipe.zc.journey.util.IMUtil;
-import com.wipe.zc.journey.util.LogUtil;
 import com.wipe.zc.journey.util.ToastUtil;
 import com.wipe.zc.journey.view.MonthPickerDialog;
 import com.wipe.zc.journey.view.YearPickerDialog;
-import com.wipe.zc.journey.R;
+import com.wipe.zc.journey.lib.drag.DragLayout.Status;
 
 public class HomeActivity extends FragmentActivity implements OnClickListener {
 
-    private static int Page_Home = 1, Page_Calendar = 2, Page_Total = 3;
+    private static final int Page_Home = 1, Page_Calendar = 2, Page_Total = 3;
     private int currentPage = Page_Home;
-    private DragLayout dl_home;
-    private DragRelativeLayout drl_home;
-    private FragmentTransaction ft;
-    private TextView tv_title_text;
-    private ImageView iv_title_left;
-    private ImageView iv_title_right;
-    private TextView tv_menu_home;
-    private TextView tv_menu_calendar;
-    private TextView tv_menu_total;
-    private TextView tv_total_year;
+    private long exitTime = 0L;
 
-    private long exitTime = 0l;
+    private DragLayout dl_home;
+    private CircleImageView civ_menu_message_sign;
+    private CircleImageView civ_menu_unread_sign;
     private CircleImageView civ_home_favicon;
+    private TextView tv_title_text;
+    private ImageView iv_title_right;
+    private TextView tv_total_year;
     private TextView tv_home_nickname;
     private TextView tv_home_email;
 
@@ -97,11 +84,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
             }
         }
     };
-    private TextView tv_menu_setting;
-    private TextView tv_menu_friends;
-    private TextView tv_menu_message;
-    private CircleImageView civ_menu_message_sign;
-    private CircleImageView civ_menu_unread_sign;
+
 
     @Override
     protected void onResume() {
@@ -143,19 +126,16 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
      */
     private void initLeftView() {
         LinearLayout ll_menu = (LinearLayout) findViewById(R.id.ly_menu);
-        tv_menu_home = (TextView) ll_menu.findViewById(R.id.tv_menu_home);
-        tv_menu_calendar = (TextView) ll_menu.findViewById(R.id.tv_menu_calendar);
-        tv_menu_total = (TextView) ll_menu.findViewById(R.id.tv_menu_total);
-        tv_menu_setting = (TextView) ll_menu.findViewById(R.id.tv_menu_setting);
+        TextView tv_menu_home = (TextView) ll_menu.findViewById(R.id.tv_menu_home);
+        TextView tv_menu_calendar = (TextView) ll_menu.findViewById(R.id.tv_menu_calendar);
+        TextView tv_menu_total = (TextView) ll_menu.findViewById(R.id.tv_menu_total);
+        TextView tv_menu_setting = (TextView) ll_menu.findViewById(R.id.tv_menu_setting);
 
-        tv_menu_friends = (TextView) ll_menu.findViewById(R.id.tv_menu_friends);
+        TextView tv_menu_friends = (TextView) ll_menu.findViewById(R.id.tv_menu_friends);
         civ_menu_unread_sign = (CircleImageView) ll_menu.findViewById(R.id.civ_menu_unread_sign);
 
-        tv_menu_message = (TextView) ll_menu.findViewById(R.id.tv_menu_message);
-        civ_menu_message_sign = (CircleImageView) findViewById(R.id
-                .civ_menu_message_sign);
-
-
+        TextView tv_menu_message = (TextView) ll_menu.findViewById(R.id.tv_menu_message);
+        civ_menu_message_sign = (CircleImageView) findViewById(R.id.civ_menu_message_sign);
 
         tv_menu_home.setOnClickListener(this);
         tv_menu_calendar.setOnClickListener(this);
@@ -170,7 +150,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
      */
     private void initContentView() {
         dl_home = (DragLayout) findViewById(R.id.dl_home);
-        drl_home = (DragRelativeLayout) findViewById(R.id.drl_home);
+        DragRelativeLayout drl_home = (DragRelativeLayout) findViewById(R.id.drl_home);
         drl_home.setDragLayout(dl_home);
 
         civ_home_favicon = (CircleImageView) findViewById(R.id.iv_home_favicon);
@@ -182,7 +162,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         tv_title_text.setTag(Calendar.getInstance());
         tv_title_text.setOnClickListener(this);
         // 左侧菜单栏
-        iv_title_left = (ImageView) findViewById(R.id.iv_title_left);
+        ImageView iv_title_left = (ImageView) findViewById(R.id.iv_title_left);
         iv_title_left.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 // 打开菜单栏
@@ -199,14 +179,13 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
 
         // 初始化替换FrameLayout
         // 获取Fragment管理器，开启事务，替换View
-        ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fl_content, FragmentFactory.createFactory(0), "home").commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_content, FragmentFactory.createFactory(0), "home").commit();
     }
 
     /**
      * 网络请求头像
      *
-     * @param user
+     * @param user 用户对象
      */
     public void requestImage(String nickname, User user) {
         String result = HttpUtil.requestByPost(AppURL.getuser, user);
@@ -250,18 +229,17 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     /**
      * 提供公开设置标题文本方法
      *
-     * @param text
+     * @param text 文本内容
      */
     public void setTitleText(CharSequence text) {
         tv_title_text.setText(text);
     }
 
 
-
     /**
      * 设置标题文本tag
      *
-     * @param tag
+     * @param tag 标题文本内容
      */
     public void setTitleTag(Object tag) {
         tv_title_text.setTag(tag);
@@ -302,8 +280,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
                 setTitleStyle(false, true, true);
                 currentPage = Page_Home;
                 // 替换Fragment
-                ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.fl_content, FragmentFactory.createFactory(0), "home").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl_content, FragmentFactory.createFactory(0), "home").commit();
                 // 关闭LeftMenu
                 dl_home.close(true);
                 break;
@@ -312,8 +289,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
                 setTitleStyle(false, true, true);
                 currentPage = Page_Calendar;
                 // 替换Fragment
-                ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.fl_content, FragmentFactory.createFactory(1), "calendar").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl_content, FragmentFactory.createFactory(1), "calendar").commit();
                 // 关闭LeftMenu
 //                dl_home.close(true);
                 dl_home.close(true);
@@ -324,8 +300,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
                 setTitleStyle(true, false, false);
                 currentPage = Page_Total;
                 // 替换Fragment
-                ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.fl_content, FragmentFactory.createFactory(2), "total").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl_content, FragmentFactory.createFactory(2), "total").commit();
                 // 关闭LeftMenu
                 dl_home.close(true);
                 break;
@@ -333,8 +308,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
             case R.id.tv_menu_friends:
                 setTitleStyle(false, false, false);
                 // 替换Fragment
-                ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.fl_content, FragmentFactory.createFactory(3), "friends").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl_content, FragmentFactory.createFactory(3), "friends").commit();
                 // 关闭LeftMenu
                 dl_home.close(true);
                 break;
@@ -342,8 +316,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
             case R.id.tv_menu_setting:
                 setTitleStyle(false, false, false);
                 // 替换Fragment
-                ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.fl_content, FragmentFactory.createFactory(4), "setting").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl_content, FragmentFactory.createFactory(4), "setting").commit();
                 // 关闭LeftMenu
                 dl_home.close(true);
                 break;
@@ -418,9 +391,9 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     /**
      * 设置标题样式
      *
-     * @param year
-     * @param right
-     * @param text
+     * @param year  年份显示boolean
+     * @param right 右侧按钮显示boolean
+     * @param text  文本内容显示boolean
      */
     private void setTitleStyle(boolean year, boolean right, boolean text) {
         tv_total_year.setVisibility(year ? View.VISIBLE : View.INVISIBLE);
@@ -435,7 +408,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
 
         if (InviteDao.queryAllInvite().size() > 0) {
             civ_menu_message_sign.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             civ_menu_message_sign.setVisibility(View.INVISIBLE);
         }
     }
@@ -443,11 +416,11 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     /**
      * 设置未读标记
      */
-    public void setUnreadSign(){
+    public void setUnreadSign() {
         int count = EMChatManager.getInstance().getUnreadMsgsCount();
-        if(count > 0){
+        if (count > 0) {
             civ_menu_unread_sign.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             civ_menu_unread_sign.setVisibility(View.INVISIBLE);
         }
     }

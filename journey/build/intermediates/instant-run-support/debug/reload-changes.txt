@@ -1,5 +1,0 @@
-CHANGED,D:\studiospace\Journey\journey\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\wipe\zc\journey\lib\calendar\MonkeyCalendar$2$override.class
-CHANGED,D:\studiospace\Journey\journey\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\wipe\zc\journey\lib\calendar\MonkeyCalendar$1$override.class
-CHANGED,D:\studiospace\Journey\journey\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\wipe\zc\journey\lib\calendar\MonkeyCalendar$override.class
-CHANGED,D:\studiospace\Journey\journey\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\android\tools\fd\runtime\AppPatchesLoaderImpl.class
-CHANGED,D:\studiospace\Journey\journey\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\wipe\zc\journey\lib\calendar\MonkeyCalendar$3$override.class

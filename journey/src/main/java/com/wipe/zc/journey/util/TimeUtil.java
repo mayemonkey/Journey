@@ -3,7 +3,7 @@ package com.wipe.zc.journey.util;
 import java.util.Calendar;
 
 /**
- * Created by hp on 2016/3/23.
+ * 时间工具包
  */
 public class TimeUtil {
 
@@ -19,32 +19,28 @@ public class TimeUtil {
     /**
      * 判断是否是当天
      *
-     * @param calendar
-     * @return
+     * @param calendar    用于判断的Calendar对象
+     * @return            判断结果
      */
     public static boolean isToday(Calendar calendar) {
         int year = Calendar.getInstance().get(Calendar.YEAR);
         int month = Calendar.getInstance().get(Calendar.MONTH);
         int date = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-        if (year == calendar.get(Calendar.YEAR) && month == calendar.get(Calendar.MONTH) && date
-                == calendar.get(Calendar.DAY_OF_MONTH)) {
-            return true;
-        } else {
-            return false;
-        }
+        return year == calendar.get(Calendar.YEAR) && month == calendar.get(Calendar.MONTH) && date
+                == calendar.get(Calendar.DAY_OF_MONTH);
     }
 
     /**
      * 获取格式化的时间
      *
-     * @param calendar
-     * @param needSecond
-     * @return
+     * @param calendar      进行格式化的Calendar对象
+     * @param needSecond    格式是否需要秒单位
+     * @return              格式化后时间  XX:XX:XX
      */
     public static String getFromatTime(Calendar calendar, boolean needSecond) {
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
-        String min = "";
+        String min ;
         if(minute < 10){
             min = "0"+minute;
         }else{
@@ -61,9 +57,9 @@ public class TimeUtil {
     /**
      * 获取格式化的日期
      *
-     * @param calendar
-     * @param needYear
-     * @return
+     * @param calendar      进行格式化的Calendar对象
+     * @param needYear      格式是否需要年单位
+     * @return              格式化后时间 XXXX-XX-XX
      */
     public static String getFromatDate(Calendar calendar, boolean needYear) {
         int year = calendar.get(Calendar.YEAR);
@@ -77,9 +73,9 @@ public class TimeUtil {
     }
 
     /**
-     * 比较是否为10分钟时差
-     * @param now
-     * @param last
+     * 比较两个Calendar对象之间时间差
+     * @param now       当前年
+     * @param last      之前年
      * @return -1:显示年月时分  0：显示月时分   1：显示时分    2：不显示
      *
      */

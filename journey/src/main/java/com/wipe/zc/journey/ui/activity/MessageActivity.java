@@ -19,14 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by hp on 2016/3/22.
+ * 消息Activitiy
  */
 public class MessageActivity extends Activity implements View.OnClickListener {
 
     private List<Invite> list = new ArrayList<>();
     private MessageAdapter adapter;
-    private RecyclerView rv_message;
-    private ImageView iv_message_cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +45,8 @@ public class MessageActivity extends Activity implements View.OnClickListener {
      * 初始化控件
      */
     private void initWisget() {
-        rv_message = (RecyclerView) findViewById(R.id.rv_message);
-        iv_message_cancel = (ImageView) findViewById(R.id.iv_message_cancel);
+        RecyclerView rv_message = (RecyclerView) findViewById(R.id.rv_message);
+        ImageView iv_message_cancel = (ImageView) findViewById(R.id.iv_message_cancel);
         iv_message_cancel.setOnClickListener(this);
 
         rv_message.setLayoutManager(new LinearLayoutManager(this));

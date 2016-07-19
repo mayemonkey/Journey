@@ -1,7 +1,7 @@
 package com.wipe.zc.journey.domain;
 
 /**
- * Created by hp on 2016/3/22.
+ * 好友邀请对象
  */
 public class Invite {
     private String inviter;

@@ -25,10 +25,10 @@ public class YearPickerDialog extends DatePickerDialog {
 	@Override
 	public void onDateChanged(DatePicker view, int year, int month, int day) {
 		super.onDateChanged(view, year, month, day);
-		updateTitle(year, month);
+		updateTitle(year);
 	}
 
-	private void updateTitle(int year, int month) {
+	private void updateTitle(int year) {
 		setTitle(String.valueOf(year));
 	}
 

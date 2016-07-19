@@ -22,14 +22,11 @@ public class RefreshListView extends ListView {
 
 	private ProgressBar pb_cuslv_header;
 	private View header_view;
-	private RotateAnimation ra_up;
-	private RotateAnimation ra_down;
 
 	private OnRefreshListener listener;
 
 	public RefreshListView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-
 		initHeader(context);
 		initAnimation();
 	}
@@ -49,7 +46,7 @@ public class RefreshListView extends ListView {
 	/**
 	 * 初始化头布局
 	 * 
-	 * @param context
+	 * @param context		上下文
 	 */
 	public void initHeader(Context context) {
 		header_view = View.inflate(context, R.layout.item_lv_header, null);
@@ -71,7 +68,7 @@ public class RefreshListView extends ListView {
 	 * 初始化动画
 	 */
 	public void initAnimation() {
-		ra_up = new RotateAnimation(
+		RotateAnimation ra_up = new RotateAnimation(
 				0, -180, 
 				Animation.RELATIVE_TO_SELF, 0.5f, 
 				Animation.RELATIVE_TO_SELF, 0.5f);
@@ -79,7 +76,7 @@ public class RefreshListView extends ListView {
 		ra_up.setFillAfter(true);
 		ra_up.setDuration(500);
 
-		ra_down = new RotateAnimation(
+		RotateAnimation ra_down = new RotateAnimation(
 				-180, -360, 
 				Animation.RELATIVE_TO_SELF, 0.5f, 
 				Animation.RELATIVE_TO_SELF, 0.5f);
@@ -157,7 +154,7 @@ public class RefreshListView extends ListView {
 	/**
 	 * 根据状态处理
 	 * 
-	 * @param headerState
+	 * @param headerState	HeaderView状态
 	 */
 	private void switchState(int headerState) {
 		if (headerState == RELESE_STATE) {
@@ -165,6 +162,7 @@ public class RefreshListView extends ListView {
 		}
 
 		if (headerState == PULLDOWN_STATE) {
+
 		}
 
 		if (headerState == REFRESH_STATE) {
@@ -189,7 +187,7 @@ public class RefreshListView extends ListView {
 	}
 
 	public interface OnRefreshListener {
-		public void refreshing();
+		void refreshing();
 	}
 
 }

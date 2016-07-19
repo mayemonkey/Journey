@@ -4,7 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,18 +18,13 @@ import com.easemob.chat.EMChatManager;
 import com.wipe.zc.journey.R;
 import com.wipe.zc.journey.ui.activity.HomeActivity;
 import com.wipe.zc.journey.ui.activity.LoginActivity;
-import com.wipe.zc.journey.util.SharedPreUtil;
-
-import org.w3c.dom.Text;
 
 /**
- * Created by hp on 2016/3/17.
+ * 设置
  */
 public class SettingFragment extends Fragment implements View.OnClickListener {
 
     private View view;
-    private TextView tv_setting_exit;
-    private TextView tv_setting_changepassword;
 
     @Nullable
     @Override
@@ -47,11 +42,10 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
      * 初始化控件
      */
     private void initWidget() {
-        tv_setting_exit = (TextView) view.findViewById(R.id.tv_setting_exit);
+        TextView tv_setting_exit = (TextView) view.findViewById(R.id.tv_setting_exit);
         tv_setting_exit.setOnClickListener(this);
 
-        tv_setting_changepassword = (TextView) view.findViewById(R.id
-                .tv_setting_changepassword);
+        TextView tv_setting_changepassword = (TextView) view.findViewById(R.id.tv_setting_changepassword);
         tv_setting_changepassword.setOnClickListener(this);
 
     }
@@ -60,8 +54,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_setting_exit:
-                new AlertDialog.Builder(getActivity()).setTitle("提示")
-                        .setMessage("确定要注销账号吗？")
+                new AlertDialog.Builder(getActivity()).setTitle("提示").setMessage("确定要注销账号吗？")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -69,13 +62,9 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                                     @Override
                                     public void onSuccess() {
                                         //清除缓存用户名及密码
-                                        getActivity().getSharedPreferences("config", Context
-                                                .MODE_PRIVATE).edit().clear()
-                                                .commit();
-
+                                        getActivity().getSharedPreferences("config", Context.MODE_PRIVATE).edit().clear().commit();
                                         getActivity().finish();
-                                        startActivity(new Intent(getActivity(), LoginActivity
-                                                .class));
+                                        startActivity(new Intent(getActivity(), LoginActivity.class));
                                     }
 
                                     @Override

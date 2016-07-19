@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Created by hp on 2016/3/22.
+ * 本地信息存储数据库
  */
 public class IMSQliteOpenHelper extends SQLiteOpenHelper {
 

@@ -48,9 +48,10 @@ public class FriendsFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private View view;
     private SwipeRefreshLayout srl_friends;
     private RecyclerView rv_friends;
-    private FriendsAdapter adapter;
+
     private List list = new ArrayList();
-    private TextView tv_friends_add;
+
+    private FriendsAdapter adapter;
     private MessageReceiver msgReceiver;
 
 
@@ -98,7 +99,7 @@ public class FriendsFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private void initWidget() {
         srl_friends = (SwipeRefreshLayout) view.findViewById(R.id.srl_friends);
         rv_friends = (RecyclerView) view.findViewById(R.id.rv_friends);
-        tv_friends_add = (TextView) view.findViewById(R.id.tv_friends_add);
+        TextView tv_friends_add = (TextView) view.findViewById(R.id.tv_friends_add);
 
         //设置SwipeRefreshLayout的刷新颜色
         srl_friends.setColorSchemeColors(Color.RED, Color.YELLOW, Color.BLUE, Color.GREEN);
@@ -250,6 +251,10 @@ public class FriendsFragment extends Fragment implements SwipeRefreshLayout.OnRe
         public void onReceive(Context context, Intent intent) {
             String result = intent.getExtras().getString("data");
             list.clear();
+            if(result == null){
+                return;
+            }
+
             if (result.contains("-")) {
                 String[] results = result.split("-");
                 list.addAll(Arrays.asList(results));

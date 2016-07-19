@@ -40,7 +40,7 @@ public class MonkeyDate extends LinearLayout {
 	/**
 	 * 初始化控件
 	 * 
-	 * @param context
+	 * @param context    上下文
 	 */
 	private void init(Context context) {
 		View.inflate(context, R.layout.layout_monkeydate, this);
@@ -52,7 +52,7 @@ public class MonkeyDate extends LinearLayout {
 	/**
 	 * 设置文本
 	 * 
-	 * @param text
+	 * @param text	文本内容
 	 */
 	public void setText(CharSequence text) {
 		tv_date_number.setText(text);
@@ -85,7 +85,7 @@ public class MonkeyDate extends LinearLayout {
 	
 	/**
 	 * 设置小点是否可见
-	 * @param flag
+	 * @param flag	判断boolean值
 	 */
 	public void setPointVisiable(boolean flag){
 		iv_date_point.setVisibility(flag ? View.VISIBLE:View.INVISIBLE);
@@ -93,7 +93,7 @@ public class MonkeyDate extends LinearLayout {
 	
 	/**
 	 * 设置小点背景
-	 * @param resid
+	 * @param resid		资源ID
 	 */
 	public void setPointBackground(int resid){
 		iv_date_point.setBackgroundResource(resid);

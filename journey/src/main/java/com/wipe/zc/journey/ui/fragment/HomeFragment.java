@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment implements OnClickListener {
 	private ListView lv_home;
 	private JourneyAdapter adapter;
 	private List<Journey> list;
-	private ArrayList<Calendar> list_record = new ArrayList<Calendar>();
+	private ArrayList<Calendar> list_record = new ArrayList<>();
 
 	private Handler handler = new Handler() {
 
@@ -81,7 +81,7 @@ public class HomeFragment extends Fragment implements OnClickListener {
 	private void initView() {
 		view = View.inflate(getActivity(), R.layout.fragment_home, null);
 		mch_home = (MonkeyCalendarHorizontal) view.findViewById(R.id.mch_home);
-		iv_home_backtoday = (ImageView) view.findViewById(R.id.iv_home_backtoday);
+		ImageView iv_home_backtoday = (ImageView) view.findViewById(R.id.iv_home_backtoday);
 		iv_home_backtoday.setOnClickListener(this);
 		// // 子线程中请求包含记录日期集合
 		// new Thread(new Runnable() {
@@ -104,7 +104,7 @@ public class HomeFragment extends Fragment implements OnClickListener {
 	 * 显示行程数据
 	 */
 	private void showJourney() {
-		list = new ArrayList<Journey>();
+		list = new ArrayList<>();
 		adapter = new JourneyAdapter(list, 0, ((HomeActivity)getActivity()));
 		lv_home.setAdapter(adapter);
 		new Thread(new Runnable() {
@@ -156,7 +156,7 @@ public class HomeFragment extends Fragment implements OnClickListener {
 						}.getType());
 
 				if (list_calendar != null) {
-					Calendar calendar = null;
+					Calendar calendar ;
 					for (Journey journey : list_calendar) {
 						calendar = Calendar.getInstance();
 						String year = journey.getDate().split("-")[0];
@@ -175,7 +175,7 @@ public class HomeFragment extends Fragment implements OnClickListener {
 	/**
 	 * 设置Calendar日期
 	 * 
-	 * @param calendar
+	 * @param calendar	被设置的Calendar对象
 	 */
 	public void changeDateTo(Calendar calendar) {
 		mch_home.changeDateTo(calendar);
@@ -196,10 +196,6 @@ public class HomeFragment extends Fragment implements OnClickListener {
 	 */
 	OnDateSelectedListener mDateSelectedListener = new OnDateSelectedListener() {
 		public void onDateSelected(Calendar date) {
-			// int year = date.get(Calendar.YEAR);
-			// int month = date.get(Calendar.MONTH);
-			// ((HomeActivity) getActivity()).setTitleText(year + "年" + (month +
-			// 1) + "月");
 			list.clear();
 			new Thread(new Runnable() {
 				@Override
@@ -221,14 +217,14 @@ public class HomeFragment extends Fragment implements OnClickListener {
 			((HomeActivity) getActivity()).setTitleText(year + "年" + (month + 1) + "月");
 		}
 	};
-	private ImageView iv_home_backtoday;
+
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.iv_home_backtoday:
 			Calendar calendar = Calendar.getInstance();
-			backToToday(calendar);
+			backToToday();
 			((HomeActivity) getActivity()).setTitleText(calendar.get(Calendar.YEAR) + "年"
 					+ (calendar.get(Calendar.MONTH) + 1) + "月");
 			((HomeActivity) getActivity()).setTitleTag(calendar);
@@ -239,7 +235,7 @@ public class HomeFragment extends Fragment implements OnClickListener {
 		}
 	}
 
-	private void backToToday(Calendar calendar) {
+	private void backToToday() {
 		mch_home.backToToday();
 	}
 

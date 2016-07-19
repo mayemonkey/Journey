@@ -5,9 +5,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ListView;
 
-/**
- * Created by hp on 2016/4/9.
- */
+
 public class MyListView extends ListView{
 
 

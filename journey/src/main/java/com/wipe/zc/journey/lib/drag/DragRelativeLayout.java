@@ -31,10 +31,7 @@ public class DragRelativeLayout extends RelativeLayout {
     
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
-        if (dl.getStatus() != Status.Close) {
-            return true;
-        }
-        return super.onInterceptTouchEvent(event);
+        return dl.getStatus() != Status.Close || super.onInterceptTouchEvent(event);
     }
 
 	@Override

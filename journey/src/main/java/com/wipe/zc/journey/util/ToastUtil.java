@@ -1,6 +1,5 @@
 package com.wipe.zc.journey.util;
 
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.wipe.zc.journey.global.MyApplication;
@@ -11,7 +10,7 @@ public class ToastUtil {
 	
 	/**
 	 * 短暂时间Toast
-	 * @param text
+	 * @param text		显示文本
 	 */
 	public static void shortToast(String text){
 		if(toast == null){
@@ -24,7 +23,7 @@ public class ToastUtil {
 	
 	/**
 	 * 长时间Toast
-	 * @param text
+	 * @param text		显示文本
 	 */
 	public static void longToast(String text){
 		if(toast == null){

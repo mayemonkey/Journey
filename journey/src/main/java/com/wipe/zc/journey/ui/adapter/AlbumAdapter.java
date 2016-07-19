@@ -12,7 +12,6 @@ import com.wipe.zc.journey.global.MyApplication;
 import com.wipe.zc.journey.ui.activity.AlbumActivity;
 import com.wipe.zc.journey.util.ImageLoaderOption;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

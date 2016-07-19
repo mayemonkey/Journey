@@ -8,7 +8,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.wipe.zc.journey.R;
 
 /**
- * Created by hp on 2016/3/22.
+ * ImageLoader配置
  */
     public class ImageLoaderOption {
         //在显示小图的选项

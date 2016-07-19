@@ -20,12 +20,12 @@ public class MonthTab extends LinearLayout implements OnClickListener {
 	private TextView preTextView;
 	private int month = -1;
 	private HorizontalScrollView hsv_monthtab;
-	private ArrayList<TextView> list = new ArrayList<TextView>();
+	private ArrayList<TextView> list = new ArrayList<>();
 	private int year = Calendar.getInstance().get(Calendar.YEAR);
 
 	public interface OnYearChangeListener {
-		public void onYearChange(int i);
-	};
+		void onYearChange(int i);
+	}
 
 	private OnYearChangeListener onYearChangeListener;
 
@@ -34,8 +34,8 @@ public class MonthTab extends LinearLayout implements OnClickListener {
 	}
 
 	public interface OnMonthChangeListener {
-		public void onMonthChange(int i);
-	};
+		void onMonthChange(int i);
+	}
 
 	private OnMonthChangeListener onMonthChangeListener;
 
@@ -90,8 +90,8 @@ public class MonthTab extends LinearLayout implements OnClickListener {
 		list.add(tv_dec);
 
 		for (int i = 0; i < list.size(); i++) {
-			TextView tv = (TextView) this.list.get(i);
-			tv.setTag(Integer.valueOf(i + 1));
+			TextView tv =  this.list.get(i);
+			tv.setTag(i + 1);
 			tv.setOnClickListener(this);
 		}
 
@@ -100,7 +100,7 @@ public class MonthTab extends LinearLayout implements OnClickListener {
 	/**
 	 * 设置当前月份
 	 * 
-	 * @param i
+	 * @param i  月份序号
 	 */
 	public void setMonth(int i) {
 		if (preTextView != null) {
@@ -117,7 +117,7 @@ public class MonthTab extends LinearLayout implements OnClickListener {
 	/**
 	 * 获取当前月份
 	 * 
-	 * @return
+	 * @return	月份序号
 	 */
 	public int getMonth() {
 		if (month != -1) {
@@ -138,8 +138,7 @@ public class MonthTab extends LinearLayout implements OnClickListener {
 		tv.setEnabled(false);
 		tv.setTextColor(Color.WHITE);
 		// 设置当前选中月
-		int i = ((Integer) tv.getTag()).intValue();
-		month = i;
+		month = (Integer) tv.getTag();
 		if (onMonthChangeListener != null) {
 			onMonthChangeListener.onMonthChange(month);
 		}

@@ -1,5 +1,8 @@
 package com.wipe.zc.journey.domain;
 
+/**
+ * 行程对象
+ */
 public class Journey {
 	private String name;
 	private String describe;

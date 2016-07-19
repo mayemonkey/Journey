@@ -60,30 +60,27 @@ import java.util.UUID;
 
 public class ChatActivity extends Activity implements View.OnClickListener, TextWatcher, View.OnTouchListener {
 
-    private ImageView iv_chat_cancel;
     private RefreshListView rlv_chat;
-    private ChatAdapter adapter;
-    private List<ChatMessage> list = new ArrayList<>();
-    private TextView tv_chat_name;
-    private String friendName;
-
     private EditText et_chat_content;
     private TextView tv_chat_send;
-    private boolean isRefreshing = false;       //标记ListView刷新状态
-    private MessageReceiver msgReceiver;
-    private InputMethodManager imm;
     private ImageView iv_choose;
     private View view_popup;
-    private ImageView iv_chatpopup_takephoto;
-    private ImageView iv_chatpopup_choosephoto;
     private PopupWindow window;
     private LinearLayout ll_chat_send;
-
-    private static final int GALLERY = 0;
-    private static final int CAMERA = 1;
     private TextView tv_chat_record_voice;
     private ImageView iv_chat_voice;
     private ImageView iv_chat_keyboard;
+
+    private InputMethodManager imm;
+    private ChatAdapter adapter;
+    private MessageReceiver msgReceiver;
+
+    private static final int GALLERY = 0;
+    private static final int CAMERA = 1;
+    private boolean isRefreshing = false;       //标记ListView刷新状态
+    private List<ChatMessage> list = new ArrayList<>();
+    private String friendName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,10 +118,10 @@ public class ChatActivity extends Activity implements View.OnClickListener, Text
      */
     private void initWidget() {
         //返回
-        iv_chat_cancel = (ImageView) findViewById(R.id.iv_chat_cancel);
+        ImageView iv_chat_cancel = (ImageView) findViewById(R.id.iv_chat_cancel);
         iv_chat_cancel.setOnClickListener(this);
         //好友名
-        tv_chat_name = (TextView) findViewById(R.id.tv_chat_name);
+        TextView tv_chat_name = (TextView) findViewById(R.id.tv_chat_name);
         tv_chat_name.setText(friendName);
         //输入内容、发送按钮
         et_chat_content = (EditText) findViewById(R.id.et_chat_content);
@@ -516,10 +513,10 @@ public class ChatActivity extends Activity implements View.OnClickListener, Text
      */
     private void initPopupWindow() {
         view_popup = View.inflate(this, R.layout.layout_chat_popup, null);
-        iv_chatpopup_takephoto = (ImageView) view_popup.findViewById(R.id.iv_chatpopup_takephoto);
+        ImageView iv_chatpopup_takephoto = (ImageView) view_popup.findViewById(R.id.iv_chatpopup_takephoto);
         iv_chatpopup_takephoto.setOnClickListener(this);
 
-        iv_chatpopup_choosephoto = (ImageView) view_popup.findViewById(R.id.iv_chatpopup_choosephoto);
+        ImageView iv_chatpopup_choosephoto = (ImageView) view_popup.findViewById(R.id.iv_chatpopup_choosephoto);
         iv_chatpopup_choosephoto.setOnClickListener(this);
 
         window = new PopupWindow(view_popup, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -546,7 +543,7 @@ public class ChatActivity extends Activity implements View.OnClickListener, Text
                 case GALLERY:
                     // 选择图片
                     Uri uri = data.getData();
-                    String path = CommonUtil.fronUriToPath(uri);
+                    String path = CommonUtil.fromUriToPath(uri);
                     if (path != null) {
                         sendImageMessage(friendName, path);
                     }
@@ -574,7 +571,7 @@ public class ChatActivity extends Activity implements View.OnClickListener, Text
                             path_camera = null;
                         }
                     } else {    //存在URI直接转换
-                        path_camera = CommonUtil.fronUriToPath(data.getData());
+                        path_camera = CommonUtil.fromUriToPath(data.getData());
                     }
                     if (path_camera != null) {  //发送图片消息
                         sendImageMessage(friendName, path_camera);
