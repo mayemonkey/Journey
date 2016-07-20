@@ -13,6 +13,10 @@ public class Journey {
 	private String nickname;
 	private int id;
 
+	//sencond
+	private JourneyDetail journeyDetail;
+
+
 	public String getName() {
 		return name;
 	}
@@ -77,4 +81,11 @@ public class Journey {
 		this.id = id;
 	}
 
+	public JourneyDetail getJourneyDetail() {
+		return journeyDetail;
+	}
+
+	public void setJourneyDetail(JourneyDetail journeyDetail) {
+		this.journeyDetail = journeyDetail;
+	}
 }
