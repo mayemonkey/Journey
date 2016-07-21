@@ -7,16 +7,16 @@ import java.util.List;
  */
 public class JourneyDetail {
 
-    private String text;
+    private String contnent;
 
     private List<String> list_url;
 
-    public String getText() {
-        return text;
+    public String getContnent() {
+        return contnent;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setContnent(String contnent) {
+        this.contnent = contnent;
     }
 
     public List<String> getList_url() {
