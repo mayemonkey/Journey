@@ -34,4 +34,7 @@ public class AppURL {
 	//删除行程
 	public static String deletejourney = HostUrl + "deletejourney";
 
+	//显示图片
+	public static String showimage = HostUrl + "showimage";
+
 }

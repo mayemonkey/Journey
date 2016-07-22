@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.easemob.chat.EMChatManager;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wipe.zc.journey.R;
 import com.wipe.zc.journey.dao.InviteDao;
 import com.wipe.zc.journey.domain.User;
@@ -36,6 +37,7 @@ import com.wipe.zc.journey.ui.fragment.HomeFragment;
 import com.wipe.zc.journey.ui.fragment.TotalFragment;
 import com.wipe.zc.journey.util.HttpUtil;
 import com.wipe.zc.journey.util.IMUtil;
+import com.wipe.zc.journey.util.ImageLoaderOption;
 import com.wipe.zc.journey.util.ToastUtil;
 import com.wipe.zc.journey.view.MonthPickerDialog;
 import com.wipe.zc.journey.view.YearPickerDialog;
@@ -108,7 +110,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
 
         initSlidingMenu();
 
@@ -248,6 +250,10 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
                 }
             }
             /*******************************************************************/
+
+            //设置头像路径并显示
+            String url = AppURL.showimage + "?nickname=" + nickname;
+            ImageLoader.getInstance().displayImage(url, civ_home_favicon, ImageLoaderOption.pager_options);
 
         }
     }
