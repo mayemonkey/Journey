@@ -133,7 +133,7 @@ public class AddJourneyActivity extends Activity implements OnClickListener {
 							journey.setEtime(tv_journey_etime.getText().toString());
 							journey.setLocation(et_journey_location.getText().toString());
 							journey.setNickname(MyApplication.getNickname());
-							String result = HttpUtil.requestByPost_Client(AppURL.addjourney, journey);
+							String result = HttpUtil.requestOkHttp(AppURL.addjourney, journey);
 							if(result != null){
 								if (result.equals("添加成功")) {
 									handler.sendEmptyMessage(0);

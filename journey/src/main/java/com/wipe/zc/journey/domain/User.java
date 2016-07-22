@@ -18,6 +18,10 @@ public class User {
 		this.email = email;
 	}
 
+	public User(String nickname){
+		this.nickname = nickname;
+	}
+
 	public String getIcon() {
 		return icon;
 	}

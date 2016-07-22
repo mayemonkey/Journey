@@ -96,8 +96,8 @@ public class LoginActivity extends Activity implements OnClickListener {
      */
     private void init() {
         // 注册
-        TextView tv_lgoin_register = (TextView) findViewById(R.id.tv_lgoin_register);
-        tv_lgoin_register.setOnClickListener(this);
+        TextView tv_login_register = (TextView) findViewById(R.id.tv_lgoin_register);
+        tv_login_register.setOnClickListener(this);
         // 登陆
         tv_login = (TextView) findViewById(R.id.tv_login);
         tv_login.setOnClickListener(this);
@@ -191,7 +191,6 @@ public class LoginActivity extends Activity implements OnClickListener {
                 }
             });
         }
-
     }
 
     /**

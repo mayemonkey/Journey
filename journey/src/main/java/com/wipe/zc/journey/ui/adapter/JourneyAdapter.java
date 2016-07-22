@@ -176,8 +176,7 @@ public class JourneyAdapter extends BaseAdapter {
                             //开启子线程执行网络请求
                             new Thread(new Runnable() {
                                 public void run() {
-                                    String result = HttpUtil.requestOkHttp(AppURL.deletejourney,
-                                            journey);
+                                    String result = HttpUtil.requestOkHttp(AppURL.deletejourney, journey);
                                     Message msg = Message.obtain();
                                     msg.arg1 = position;
                                     msg.obj = sDialog;

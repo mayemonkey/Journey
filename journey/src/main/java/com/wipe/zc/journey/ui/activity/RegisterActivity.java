@@ -37,7 +37,6 @@ import com.wipe.zc.journey.R;
 
 public class RegisterActivity extends Activity implements OnClickListener {
 
-
     private CircleImageView civ_icon;
 
     private EditText et_register_nickname;
@@ -68,18 +67,16 @@ public class RegisterActivity extends Activity implements OnClickListener {
                 case 1:
                     String result = (String) msg.obj;
                     if (result != null) {
+                        ViewUtil.recoverAnimatin(iv_register_progress, tv_register);
                         switch (result) {
                             case "注册成功":
-                                ViewUtil.recoverAnimatin(iv_register_progress, tv_register);
                                 ToastUtil.shortToast("注册成功");
                                 finish();
                                 break;
                             case "注册失败":
-                                ViewUtil.recoverAnimatin(iv_register_progress, tv_register);
                                 ToastUtil.shortToast("注册失败，请检查网络");
                                 break;
                             default:
-                                ViewUtil.recoverAnimatin(iv_register_progress, tv_register);
                                 ToastUtil.shortToast(result);
                                 break;
                         }
@@ -161,7 +158,6 @@ public class RegisterActivity extends Activity implements OnClickListener {
 
             case R.id.civ_icon_add: // 添加头像
                 Intent intent = new Intent(Intent.ACTION_PICK);
-//			intent.addCategory(Intent.CATEGORY_OPENABLE);
                 intent.setType("image/*");
                 startActivityForResult(Intent.createChooser(intent, "选择图片"), 0);
                 break;

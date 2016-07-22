@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#51d3c4"
-              android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#51d3c4"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_menu_home"
@@ -36,9 +37,9 @@
             android:id="@+id/tv_menu_friends"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="好友"
             android:textColor="#fff"
-            android:textSize="20sp"
-            android:text="好友"/>
+            android:textSize="20sp"/>
 
         <com.wipe.zc.journey.lib.CircleImageView
             android:id="@+id/civ_menu_unread_sign"
@@ -71,22 +72,6 @@
             android:visibility="invisible"/>
 
     </RelativeLayout>
-    <!--
-
-
-        <TextView
-            style="@style/menu_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="简介" />
-
-        <TextView
-            style="@style/menu_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="时间线" />
-
-            -->
 
     <TextView
         android:id="@+id/tv_menu_setting"

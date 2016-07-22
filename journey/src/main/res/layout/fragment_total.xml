@@ -44,6 +44,7 @@
         app:cpb_textError="错误"
         android:textColor="#fff"
         app:cpb_cornerRadius="16dp"
+        android:visibility="gone"
         app:cpb_iconComplete="@drawable/upload_complete"
         app:cpb_iconError="@drawable/upload_error"/>
 

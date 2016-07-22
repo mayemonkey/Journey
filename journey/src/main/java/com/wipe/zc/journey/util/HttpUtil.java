@@ -23,14 +23,14 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
+//import org.apache.http.HttpResponse;
+//import org.apache.http.NameValuePair;
+//import org.apache.http.client.HttpClient;
+//import org.apache.http.client.entity.UrlEncodedFormEntity;
+//import org.apache.http.client.methods.HttpGet;
+//import org.apache.http.client.methods.HttpPost;
+//import org.apache.http.impl.client.DefaultHttpClient;
+//import org.apache.http.message.BasicNameValuePair;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -400,57 +400,57 @@ public class HttpUtil {
     }
 
 
-    public static String requestByPost_Client(String url_path, Object obj) {
+//    public static String requestByPost_Client(String url_path, Object obj) {
+//
+//        try {
+//            HttpClient client = new DefaultHttpClient();
+//            HttpPost post = new HttpPost(url_path);
+//            post.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+//            Journey journey = (Journey) obj;
+//            List<NameValuePair> list = new ArrayList<>();
+//
+//            list.add(new BasicNameValuePair("name", journey.getName()));
+//            list.add(new BasicNameValuePair("describe", journey.getDescribe()));
+//            list.add(new BasicNameValuePair("date", journey.getDate()));
+//            list.add(new BasicNameValuePair("stime", journey.getStime()));
+//            list.add(new BasicNameValuePair("etime", journey.getEtime()));
+//            list.add(new BasicNameValuePair("location", journey.getLocation()));
+//            list.add(new BasicNameValuePair("nickname", journey.getNickname()));
+//            UrlEncodedFormEntity entity ;
+//            entity = new UrlEncodedFormEntity(list, "UTF-8");
+//            post.setEntity(entity);
+//            HttpResponse response = client.execute(post);
+//            int code = response.getStatusLine().getStatusCode();
+//            if (code == 200) {
+//                InputStream is = response.getEntity().getContent();
+//                return getResult(is);
+//            }
+//            client.getConnectionManager().shutdown();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 
-        try {
-            HttpClient client = new DefaultHttpClient();
-            HttpPost post = new HttpPost(url_path);
-            post.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
-            Journey journey = (Journey) obj;
-            List<NameValuePair> list = new ArrayList<>();
-
-            list.add(new BasicNameValuePair("name", journey.getName()));
-            list.add(new BasicNameValuePair("describe", journey.getDescribe()));
-            list.add(new BasicNameValuePair("date", journey.getDate()));
-            list.add(new BasicNameValuePair("stime", journey.getStime()));
-            list.add(new BasicNameValuePair("etime", journey.getEtime()));
-            list.add(new BasicNameValuePair("location", journey.getLocation()));
-            list.add(new BasicNameValuePair("nickname", journey.getNickname()));
-            UrlEncodedFormEntity entity ;
-            entity = new UrlEncodedFormEntity(list, "UTF-8");
-            post.setEntity(entity);
-            HttpResponse response = client.execute(post);
-            int code = response.getStatusLine().getStatusCode();
-            if (code == 200) {
-                InputStream is = response.getEntity().getContent();
-                return getResult(is);
-            }
-            client.getConnectionManager().shutdown();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static String requestByGet_Client(String username, String password) {
-        try {
-            String data = "?username=" + username + "&password=" + password;
-            // 创建Client对象
-            HttpClient client = new DefaultHttpClient();
-            // 创建get对象
-            HttpGet get = new HttpGet("http://192.168.21.42:8080/ForAndroid/servlet1" + data);
-            HttpResponse response = client.execute(get);
-            int code = response.getStatusLine().getStatusCode();
-            if (code == 200) {
-                InputStream is = response.getEntity().getContent();
-                return getResult(is);
-            }
-            client.getConnectionManager().shutdown();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+//    public static String requestByGet_Client(String username, String password) {
+//        try {
+//            String data = "?username=" + username + "&password=" + password;
+//            // 创建Client对象
+//            HttpClient client = new DefaultHttpClient();
+//            // 创建get对象
+//            HttpGet get = new HttpGet("http://192.168.21.42:8080/ForAndroid/servlet1" + data);
+//            HttpResponse response = client.execute(get);
+//            int code = response.getStatusLine().getStatusCode();
+//            if (code == 200) {
+//                InputStream is = response.getEntity().getContent();
+//                return getResult(is);
+//            }
+//            client.getConnectionManager().shutdown();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 
 	/*public static String httpPostString(String url_path, Object obj){
         HttpClient httpClient = new DefaultHttpClient();
