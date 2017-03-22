@@ -106,7 +106,7 @@ public class EditJourneyDetailActivity extends Activity implements View.OnClickL
                         //上传图片数据
                         //多文件打包上传
                         //TODO 子线程上传
-                        HttpUtil.uploadBatch("",text,  list, new TextView(this), new Callback() {
+                        HttpUtil.uploadBatch("",text,  list, new Callback() {
                             @Override
                             public void inProgress(float progress, long total, int id) {
                                 super.inProgress(progress, total, id);

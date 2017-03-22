@@ -190,7 +190,7 @@ public class HttpUtil {
      * @param url 路径
      * @param list 对象
      */
-    public static void uploadBatch(String url, String text, List<String> list, View view, Callback callback){
+    public static void uploadBatch(String url, String text, List<String> list, Callback callback){
 
         Map<String,String> headers = new HashMap<>();
 
@@ -205,7 +205,6 @@ public class HttpUtil {
             if(!file.exists()){
                 return ;
             }
-
             builder.addFile("mfile", file.getName(), file);
         }
 

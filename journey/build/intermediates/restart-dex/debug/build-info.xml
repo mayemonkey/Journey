@@ -1,27 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="armeabi-v7a,armeabi"
+    abi="x86"
     api-level="19"
-    density="xxhdpi"
-    format="7"
-    timestamp="347505488727296" >
+    density="xhdpi"
+    format="8"
+    plugin-version="2.2.2"
+    timestamp="76248943121015"
+    token="-2923456900203315075"
+    verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="2094" />
+        duration="1357" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="3080" />
+        duration="164" />
     <task
         name="verifier"
-        duration="0" />
+        duration="69" />
 
-    <build timestamp="2356926559166358" >
+    <artifact
+        location="D:\AndroidStudioProjects\Journey\journey\build\outputs\apk\journey-debug.apk"
+        type="MAIN" />
+
+    <build
+        timestamp="76248943121015"
+        verifier="COLD_SWAP_REQUESTED" >
         <artifact
-            location="D:\studiospace\Journey\journey\build\outputs\apk\journey-debug.apk"
+            location="D:\AndroidStudioProjects\Journey\journey\build\outputs\apk\journey-debug.apk"
             type="MAIN" />
     </build>
 

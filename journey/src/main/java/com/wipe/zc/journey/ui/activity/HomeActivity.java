@@ -1,13 +1,8 @@
 package com.wipe.zc.journey.ui.activity;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Calendar;
-
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.easemob.chat.EMChatManager;
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wipe.zc.journey.R;
 import com.wipe.zc.journey.dao.InviteDao;
@@ -38,9 +32,12 @@ import com.wipe.zc.journey.ui.fragment.TotalFragment;
 import com.wipe.zc.journey.util.HttpUtil;
 import com.wipe.zc.journey.util.IMUtil;
 import com.wipe.zc.journey.util.ImageLoaderOption;
-import com.wipe.zc.journey.util.ToastUtil;
 import com.wipe.zc.journey.view.MonthPickerDialog;
 import com.wipe.zc.journey.view.YearPickerDialog;
+
+import java.util.Calendar;
+
+//import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 
 public class HomeActivity extends FragmentActivity implements OnClickListener {
@@ -65,19 +62,19 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 1:
-                    tv_home_nickname.setText("");
-                    tv_home_email.setText("");
+//                    tv_home_nickname.setText("");
+//                    tv_home_email.setText("");
                     break;
 
                 case 2:
                     User user = (User) msg.obj;
-                    tv_home_nickname.setText(user.getNickname());
-                    tv_home_email.setText(user.getEmail());
+//                    tv_home_nickname.setText(user.getNickname());
+//                    tv_home_email.setText(user.getEmail());
                     break;
 
                 case 3:
                     Bitmap bm = (Bitmap) msg.obj;
-                    civ_home_favicon.setImageBitmap(bm);
+//                    civ_home_favicon.setImageBitmap(bm);
                     // iv_home_favicon.setBackground(new BitmapDrawable(bm));
                     break;
 
@@ -86,7 +83,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
             }
         }
     };
-    private SlidingMenu slidingMenu;
+//    private SlidingMenu slidingMenu;
 
     @Override
     protected void onResume() {
@@ -127,22 +124,22 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     private void initSlidingMenu() {
 
         // 配置 SlidingMenu
-        slidingMenu = new SlidingMenu(this);
-        slidingMenu.setMode(SlidingMenu.LEFT);
-        // 设置触摸屏幕的模式
-        slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-
-        // 设置滑动菜单视图的宽度
-        slidingMenu.setBehindOffsetRes(R.dimen.content_width);
-        // 设置渐入渐出效果的值
-        slidingMenu.setFadeDegree(0.35f);
-        /**
-         * SLIDING_WINDOW will include the Title/ActionBar in the content
-         * section of the SlidingMenu, while SLIDING_CONTENT does not.
-         */
-        slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-        //为侧滑菜单设置布局
-        slidingMenu.setMenu(R.layout.activity_menu);
+//        slidingMenu = new SlidingMenu(this);
+//        slidingMenu.setMode(SlidingMenu.LEFT);
+//        // 设置触摸屏幕的模式
+//        slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+//
+//        // 设置滑动菜单视图的宽度
+//        slidingMenu.setBehindOffsetRes(R.dimen.content_width);
+//        // 设置渐入渐出效果的值
+//        slidingMenu.setFadeDegree(0.35f);
+//        /**
+//         * SLIDING_WINDOW will include the Title/ActionBar in the content
+//         * section of the SlidingMenu, while SLIDING_CONTENT does not.
+//         */
+//        slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+//        //为侧滑菜单设置布局
+//        slidingMenu.setMenu(R.layout.activity_menu);
 
     }
 
@@ -158,23 +155,23 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
 
         //选项菜单栏
         LinearLayout ll_menu = (LinearLayout) findViewById(R.id.ly_menu);
-        TextView tv_menu_home = (TextView) ll_menu.findViewById(R.id.tv_menu_home);
-        TextView tv_menu_calendar = (TextView) ll_menu.findViewById(R.id.tv_menu_calendar);
-        TextView tv_menu_total = (TextView) ll_menu.findViewById(R.id.tv_menu_total);
-        TextView tv_menu_setting = (TextView) ll_menu.findViewById(R.id.tv_menu_setting);
+        TextView tv_menu_home = (TextView) findViewById(R.id.tv_menu_home);
+        TextView tv_menu_calendar = (TextView) findViewById(R.id.tv_menu_calendar);
+        TextView tv_menu_total = (TextView) findViewById(R.id.tv_menu_total);
+        TextView tv_menu_setting = (TextView) findViewById(R.id.tv_menu_setting);
 
-        TextView tv_menu_friends = (TextView) ll_menu.findViewById(R.id.tv_menu_friends);
-        civ_menu_unread_sign = (CircleImageView) ll_menu.findViewById(R.id.civ_menu_unread_sign);
+        TextView tv_menu_friends = (TextView) findViewById(R.id.tv_menu_friends);
+        civ_menu_unread_sign = (CircleImageView) findViewById(R.id.civ_menu_unread_sign);
 
-        TextView tv_menu_message = (TextView) ll_menu.findViewById(R.id.tv_menu_message);
+        TextView tv_menu_message = (TextView) findViewById(R.id.tv_menu_message);
         civ_menu_message_sign = (CircleImageView) findViewById(R.id.civ_menu_message_sign);
 
-        tv_menu_home.setOnClickListener(this);
-        tv_menu_calendar.setOnClickListener(this);
-        tv_menu_total.setOnClickListener(this);
-        tv_menu_setting.setOnClickListener(this);
-        tv_menu_friends.setOnClickListener(this);
-        tv_menu_message.setOnClickListener(this);
+//        tv_menu_home.setOnClickListener(this);
+//        tv_menu_calendar.setOnClickListener(this);
+//        tv_menu_total.setOnClickListener(this);
+//        tv_menu_setting.setOnClickListener(this);
+//        tv_menu_friends.setOnClickListener(this);
+//        tv_menu_message.setOnClickListener(this);
     }
 
     /**
@@ -223,34 +220,6 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
             msg.obj = new User(nickname, email);
             handler.sendMessage(msg);
 
-            //TODO 使用ImageLoader/Glide
-            /*******************************************************************/
-            // 查询缓存文件
-            File file = new File(getCacheDir().getAbsolutePath() + "//" + nickname + ".jpg");//
-            // 将要保存图片的路径
-            if (file.exists()) { // 存在缓存文件
-                Bitmap bm = BitmapFactory.decodeFile(file.getAbsolutePath());
-                Message msg3 = new Message();
-                msg3.what = 3;
-                msg3.obj = bm;
-                handler.sendMessage(msg3);
-            } else { // 不存在缓存文件
-                try {
-                    if (!new File(getCacheDir().getAbsolutePath()).exists()) {
-                        new File(getCacheDir().getAbsolutePath()).mkdirs();
-                    }
-                    file.createNewFile();
-                    Bitmap bm = HttpUtil.getImage(AppURL.getimage, file, nickname);
-                    Message msg3 = new Message();
-                    msg.what = 3;
-                    msg.obj = bm;
-                    handler.sendMessage(msg3);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            /*******************************************************************/
-
             //设置头像路径并显示
             String url = AppURL.showimage + "?nickname=" + nickname;
             ImageLoader.getInstance().displayImage(url, civ_home_favicon, ImageLoaderOption.pager_options);
@@ -281,21 +250,20 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
-                if (slidingMenu.isMenuShowing()) {
-                    slidingMenu.showContent(true);
-                    return true;
-                } else if (!slidingMenu.isMenuShowing()) {
-                    // 两次返回退出
-                    if (System.currentTimeMillis() - exitTime > 2000) {
-                        ToastUtil.shortToast("再按一次返回键退出");
-                        exitTime = System.currentTimeMillis();
-                    } else {
-                        android.os.Process.killProcess(android.os.Process.myPid());    //获取PID
-                        System.exit(0);
-                    }
-                    return true;
-                }
-                break;
+//                if (slidingMenu.isMenuShowing()) {
+//                    slidingMenu.showContent(true);
+//                    return true;
+//                } else  {
+//                    // 两次返回退出
+//                    if (System.currentTimeMillis() - exitTime > 2000) {
+//                        ToastUtil.shortToast("再按一次返回键退出");
+//                        exitTime = System.currentTimeMillis();
+//                    } else {
+//                        android.os.Process.killProcess(android.os.Process.myPid());    //获取PID
+//                        System.exit(0);
+//                    }
+//                    return true;
+//                }
             default:
                 break;
         }
@@ -308,10 +276,10 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_title_left:
-                if (!slidingMenu.isMenuShowing()) {
-                    // 打开菜单栏
-                    slidingMenu.showMenu(true);
-                }
+//                if (!slidingMenu.isMenuShowing()) {
+//                    // 打开菜单栏
+//                    slidingMenu.showMenu(true);
+//                }
                 break;
 
             case R.id.tv_menu_home:
@@ -320,7 +288,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
                 // 替换Fragment
                 getSupportFragmentManager().beginTransaction().replace(R.id.fl_content, FragmentFactory.createFactory(0), "home").commit();
                 // 关闭LeftMenu
-                slidingMenu.showContent(true);
+//                slidingMenu.showContent(true);
                 break;
 
             case R.id.tv_menu_calendar:
@@ -329,7 +297,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
                 // 替换Fragment
                 getSupportFragmentManager().beginTransaction().replace(R.id.fl_content, FragmentFactory.createFactory(1), "calendar").commit();
                 // 关闭LeftMenu
-                slidingMenu.showContent(true);
+//                slidingMenu.showContent(true);
                 break;
 
             case R.id.tv_menu_total:
@@ -339,7 +307,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
                 // 替换Fragment
                 getSupportFragmentManager().beginTransaction().replace(R.id.fl_content, FragmentFactory.createFactory(2), "total").commit();
                 // 关闭LeftMenu
-                slidingMenu.showContent(true);
+//                slidingMenu.showContent(true);
                 break;
 
             case R.id.tv_menu_friends:
@@ -347,7 +315,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
                 // 替换Fragment
                 getSupportFragmentManager().beginTransaction().replace(R.id.fl_content, FragmentFactory.createFactory(3), "friends").commit();
                 // 关闭LeftMenu
-                slidingMenu.showContent(true);
+//                slidingMenu.showContent(true);
                 break;
 
             case R.id.tv_menu_setting:
@@ -355,13 +323,13 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
                 // 替换Fragment
                 getSupportFragmentManager().beginTransaction().replace(R.id.fl_content, FragmentFactory.createFactory(4), "setting").commit();
                 // 关闭LeftMenu
-                slidingMenu.showContent(true);
+//                slidingMenu.showContent(true);
                 break;
 
             case R.id.tv_menu_message:
                 setTitleStyle(false, false, false);
                 startActivity(new Intent(this, MessageActivity.class));
-                slidingMenu.showContent(true);
+//                slidingMenu.showContent(true);
                 break;
 
             case R.id.tv_title_text:
@@ -437,9 +405,9 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         super.onStart();
 
         if (InviteDao.queryAllInvite().size() > 0) {
-            civ_menu_message_sign.setVisibility(View.VISIBLE);
+//            civ_menu_message_sign.setVisibility(View.VISIBLE);
         } else {
-            civ_menu_message_sign.setVisibility(View.INVISIBLE);
+//            civ_menu_message_sign.setVisibility(View.INVISIBLE);
         }
     }
 
