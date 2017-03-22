@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.wipe.zc.journey.lib.monthtab.MonthTab
+            android:id="@+id/mt_total"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"/>
+
+        <com.wipe.zc.journey.lib.viewpager.ViewPager
+            android:id="@+id/vp_total"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ListView
+            android:id="@+id/lv_total"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/total_lv_bg_shape"/>
+
+    </LinearLayout>
+
+    <com.dd.CircularProgressButton
+        android:id="@+id/cpb_total"
+        android:layout_width="80dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:background="#51d3c4"
+        android:layout_marginBottom="16dp"
+        app:cpb_textComplete="完成"
+        app:cpb_textError="错误"
+        android:textColor="#fff"
+        app:cpb_cornerRadius="16dp"
+        android:visibility="gone"
+        app:cpb_iconComplete="@drawable/upload_complete"
+        app:cpb_iconError="@drawable/upload_error"/>
+
+</RelativeLayout>

@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "D:\\AndroidStudioProjects\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_launcher.png",
+        "source": "D:\\AndroidStudioProjects\\Journey\\journey\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\AndroidStudioProjects\\Journey\\journey\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ms__menu_down.png",
+        "source": "D:\\AndroidStudioProjects\\Journey\\journey\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ms__menu_down.png"
+    }
+]
