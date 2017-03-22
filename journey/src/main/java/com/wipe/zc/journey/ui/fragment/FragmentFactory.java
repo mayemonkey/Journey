@@ -1,6 +1,6 @@
 package com.wipe.zc.journey.ui.fragment;
 
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 
 public class FragmentFactory {
 

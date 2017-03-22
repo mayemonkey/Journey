@@ -1,7 +1,5 @@
 package com.wipe.zc.journey.ui.adapter;
 
-import java.util.List;
-
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -10,16 +8,18 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
+import com.wipe.zc.journey.R;
+import com.wipe.zc.journey.domain.Journey;
+import com.wipe.zc.journey.global.MyApplication;
 import com.wipe.zc.journey.http.AppURL;
 import com.wipe.zc.journey.ui.activity.HomeActivity;
 import com.wipe.zc.journey.util.HttpUtil;
 import com.wipe.zc.journey.view.MySwipeLayout;
-import com.wipe.zc.journey.R;
-import com.wipe.zc.journey.domain.Journey;
-import com.wipe.zc.journey.global.MyApplication;
-import com.wipe.zc.journey.lib.CircleImageView;
+
+import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class JourneyAdapter extends BaseAdapter {
 

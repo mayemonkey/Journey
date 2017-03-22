@@ -1,13 +1,9 @@
 package com.wipe.zc.journey.ui.fragment;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
+import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +24,10 @@ import com.wipe.zc.journey.ui.activity.HomeActivity;
 import com.wipe.zc.journey.ui.adapter.JourneyAdapter;
 import com.wipe.zc.journey.util.HttpUtil;
 import com.wipe.zc.journey.util.JsonUtil;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class HomeFragment extends Fragment implements OnClickListener {
 
